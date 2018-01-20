@@ -8,7 +8,8 @@ public class ActionFactory {
         if (action == null || action.isEmpty()) {
             return current;
         }
-        try { CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
+        try {
+            CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
             current = currentEnum.getCurrentCommand();
         } catch (IllegalArgumentException e) {
             request.setAttribute("wrongAction", action + ": command not found or wrong! ");

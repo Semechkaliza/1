@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
     private static Logger logger=Logger.getLogger(ConnectionPool.class);
-    private  BlockingQueue<Connection> connectionQueue;
+    private static BlockingQueue<Connection> connectionQueue;
     private  LinkedList<Connection> givenAwayConQueue;
     private  static ConnectionPool instance;
     private static String driverName;
@@ -29,10 +29,14 @@ public class ConnectionPool {
 
     private ConnectionPool() {
         DBResourceManager dbResourseManager = DBResourceManager.getInstance();
-        this.driverName = dbResourseManager.getValue(DBParameter.DB_DRIVER);
-        this.url = dbResourseManager.getValue(DBParameter.DB_URL);
-        this.user = dbResourseManager.getValue(DBParameter.DB_USER);
-        this.password = dbResourseManager.getValue(DBParameter.DB_PASSWORD);
+        this.driverName = "com.mysql.jdbc.Driver";
+                //dbResourseManager.getValue(DBParameter.DB_DRIVER);
+        this.url = "jdbc:mysql://localhost:3306/HR_system";
+                //dbResourseManager.getValue(DBParameter.DB_URL);
+        this.user = "root";
+                //dbResourseManager.getValue(DBParameter.DB_USER);
+        this.password = "root";
+                //dbResourseManager.getValue(DBParameter.DB_PASSWORD);
         Locale.setDefault(Locale.ENGLISH);
         int checkCount=0;
         try {
@@ -100,22 +104,29 @@ public class ConnectionPool {
             connection = connectionQueue.take();
             givenAwayConQueue.add(connection);
         } catch (InterruptedException e) {
-            logger.log(Level.FATAL, "Error connecting to the data source.");
             throw new ConnectionPoolException("Error connecting to the data source.", e);
         }
         return connection;
     }
 
 
-    public void returnConnectionToPool(Connection con) {
+    public static void returnConnectionToPool(Connection con) {
         try {
-            con.close();
-        } catch (SQLException e) {
+            connectionQueue.put(con);
+        } catch (InterruptedException e) {
             logger.log(Level.ERROR, "Error returning connection to pool.", e);
         }
     }
 
-
+    public static void closeSt(PreparedStatement st){
+        try{
+            if(st!=null) {
+                st.close();
+            }
+        }catch (SQLException e){
+            logger.log(Level.INFO, "Error closing the connection.", e);
+        }
+    }
     private void closeConnectionsQueue(BlockingQueue<Connection> queue)
             throws SQLException, InterruptedException {
         Connection connection;

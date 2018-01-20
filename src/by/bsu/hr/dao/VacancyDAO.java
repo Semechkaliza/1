@@ -1,5 +1,7 @@
 package by.bsu.hr.dao;
 
+import by.bsu.hr.connection.ConnectionPool;
+import by.bsu.hr.connection.ConnectionPoolException;
 import by.bsu.hr.entity.Vacancy;
 
 import java.sql.*;
@@ -11,18 +13,17 @@ public class VacancyDAO {
     public static List getAllVacancies () {
         Connection cn = null;
         ResultSet rs = null;
+        Statement st = null;
         try {
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection(PropertiesManager.getDbUrl(), PropertiesManager.getDbProperties());
-            Statement st = null;
+            cn= ConnectionPool.getInstance().takeConnection();
             st = cn.createStatement();
             rs = st.executeQuery(allVacanciesQuery);
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionPoolException e) {
             e.printStackTrace();
         }
         List<Vacancy> resList2 = new ArrayList<>();
         try {
-            if(rs.next()){
+            if(rs != null && rs.next()){
                 do {
                     Vacancy vac = new Vacancy();
                     vac.setCompany(rs.getString("company"));

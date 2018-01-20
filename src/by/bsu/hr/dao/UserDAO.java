@@ -1,6 +1,9 @@
 package by.bsu.hr.dao;
 
+import by.bsu.hr.connection.ConnectionPool;
+import by.bsu.hr.connection.ConnectionPoolException;
 import by.bsu.hr.entity.User;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -8,27 +11,27 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements AbstractDAO {
+import static by.bsu.hr.connection.ConnectionPool.closeSt;
+import static by.bsu.hr.connection.ConnectionPool.returnConnectionToPool;
+
+public class UserDAO {
     private static Logger logger=Logger.getLogger(UserDAO.class);
     private static String findUserQuery="SELECT * FROM users WHERE login LIKE ? AND password=md5(?);";
     private static String checkUserQuery="SELECT * FROM users WHERE login LIKE ?;";
     private static String AddUserQuery="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
-    public static List findUser(String login, String password){
+    public static List<User> findUser(String login, String password){
         List<User> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs = null;
-        try {new PropertiesManager();
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            System.out.println(PropertiesManager.getDbUrl());
-            cn = DriverManager.getConnection(PropertiesManager.getDbUrl(), PropertiesManager.getDbProperties());
-            PreparedStatement st = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            logger.log(Level.INFO,"after getting connection");
             st = cn.prepareStatement(findUserQuery);
             st.setString(1,login);
             st.setString(2,password);
             rs=st.executeQuery();
-            try {
                 if (rs.next()) {
-                    try {
                         do {
                             User res = new User();
                             res.setLogin(rs.getString("login"));
@@ -39,18 +42,12 @@ public class UserDAO implements AbstractDAO {
                             res.setRating(rs.getInt("rating"));
                             resList.add(res);
                         } while (rs.next());
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-        }catch (IOException e){
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.log(Level.INFO,"Missing finding user");
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
         }
         return resList;
     }
@@ -58,38 +55,40 @@ public class UserDAO implements AbstractDAO {
     public static boolean checkUser(String login){
         Connection cn = null;
         ResultSet rs = null;
+        PreparedStatement st = null;
         boolean check=true;
         try {
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection(PropertiesManager.getDbUrl(), PropertiesManager.getDbProperties());
-            PreparedStatement st = null;
+            cn =ConnectionPool.getInstance().takeConnection();
             st = cn.prepareStatement(checkUserQuery);
             st.setString(1,login);
             rs=st.executeQuery();
             if(rs.next()){
                 check=false;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (ConnectionPoolException | SQLException e) {
+            logger.log(Level.INFO,"Missing check user");
+        }finally {
+            closeSt(st);
+            returnConnectionToPool(cn);
         }
         return check;
     }
     public static void add(String login, String password, String name, String sname) {
-        String url = "jdbc:mysql://localhost:3306/HR_system";
         Connection cn = null;
-        ResultSet rs = null;
+        PreparedStatement st = null;
         try {
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection(PropertiesManager.getDbUrl(), PropertiesManager.getDbProperties());
-            PreparedStatement st = null;
+            cn=ConnectionPool.getInstance().takeConnection();
             st = cn.prepareStatement(AddUserQuery);
             st.setString(1,login);
             st.setString(2,password);
             st.setString(3,name);
             st.setString(4,sname);
             st.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.log(Level.INFO,"Missing add user");
+        }finally {
+            closeSt(st);
+            returnConnectionToPool(cn);
         }
     }
 }

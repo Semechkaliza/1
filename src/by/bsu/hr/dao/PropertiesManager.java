@@ -18,7 +18,7 @@ public class PropertiesManager {
     public PropertiesManager() throws IOException{
         try{
             Properties props = new Properties();
-            props.load(new FileInputStream(new File("src/properties.properties")));
+            props.load(new FileInputStream(new File("WEB-INF/classes/db.properties")));
 
             DB_URL = props.getProperty("db.url");
         }

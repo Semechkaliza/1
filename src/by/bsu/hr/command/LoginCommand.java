@@ -7,7 +7,7 @@ public class LoginCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page= LoginLogic.logIn(request);
+        String page = LoginLogic.logIn(request);
         return page;
     }
 }
