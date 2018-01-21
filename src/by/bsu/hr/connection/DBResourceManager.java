@@ -13,7 +13,6 @@ public class DBResourceManager {
         private ResourceBundle bundle = ResourceBundle.getBundle("resources/db");
 
         public static DBResourceManager getInstance() {
-            logger.log(Level.INFO,"at getInstance");
             return instance;
         }
 

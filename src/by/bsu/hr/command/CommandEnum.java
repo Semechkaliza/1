@@ -17,7 +17,7 @@ public enum CommandEnum {
             this.command = new LoginCommand();
         }
 },
-    GETVACANCIES {
+    GET_VACANCIES {
         {
             this.command = new GetVacanciesCommand();
         }

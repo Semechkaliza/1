@@ -28,15 +28,11 @@ public class ConnectionPool {
 
 
     private ConnectionPool() {
-        DBResourceManager dbResourseManager = DBResourceManager.getInstance();
-        this.driverName = "com.mysql.jdbc.Driver";
-                //dbResourseManager.getValue(DBParameter.DB_DRIVER);
-        this.url = "jdbc:mysql://localhost:3306/HR_system";
-                //dbResourseManager.getValue(DBParameter.DB_URL);
-        this.user = "root";
-                //dbResourseManager.getValue(DBParameter.DB_USER);
-        this.password = "root";
-                //dbResourseManager.getValue(DBParameter.DB_PASSWORD);
+        DBResourceManager dbResourceManager = DBResourceManager.getInstance();
+        driverName = dbResourceManager.getValue(DBParameter.DB_DRIVER);
+        url = dbResourceManager.getValue(DBParameter.DB_URL);
+        user = dbResourceManager.getValue(DBParameter.DB_USER);
+        password =dbResourceManager.getValue(DBParameter.DB_PASSWORD);
         Locale.setDefault(Locale.ENGLISH);
         int checkCount=0;
         try {
@@ -45,7 +41,7 @@ public class ConnectionPool {
             logger.log(Level.ERROR, "Can't find properties file", e);
         }
         try {
-            this.poolSize = Integer.parseInt(dbResourseManager.getValue(DBParameter.DB_POLL_SIZE));
+            poolSize = Integer.parseInt(dbResourceManager.getValue(DBParameter.DB_POLL_SIZE));
         } catch (NumberFormatException e) {
             poolSize = 5;
             logger.log(Level.INFO,"Default poolSize",e);
@@ -91,10 +87,8 @@ public class ConnectionPool {
         try {
 
             closeConnectionsQueue(connectionQueue);
-        } catch (SQLException e) {
+        } catch (SQLException | InterruptedException e) {
              logger.log(Level.ERROR, "Error closing the connection.", e);
-        } catch (InterruptedException e) {
-            logger.log(Level.ERROR, "Error closing the connection.", e);
         }
     }
 

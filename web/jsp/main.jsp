@@ -33,7 +33,7 @@
 </table>
 
 <form method="POST" action="controller">
-    <input type="hidden" name="command" value="getvacancies" />
+    <input type="hidden" name="command" value="get_vacancies" />
     <input type="submit" value="vacancy"/>
 </form>
 <a href="controller?command=logout">Logout</a>

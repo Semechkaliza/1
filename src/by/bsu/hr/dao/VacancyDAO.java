@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VacancyDAO {
-    private static String allVacanciesQuery = "SELECT * FROM vacancy";
-    public static List getAllVacancies () {
+    private static final String ALL_VACANCIES_QUERY = "SELECT * FROM vacancy";
+    public static List<Vacancy> getAllVacancies () {
         Connection cn = null;
         ResultSet rs = null;
         Statement st = null;
         try {
             cn= ConnectionPool.getInstance().takeConnection();
             st = cn.createStatement();
-            rs = st.executeQuery(allVacanciesQuery);
+            rs = st.executeQuery(ALL_VACANCIES_QUERY);
         } catch (SQLException | ConnectionPoolException e) {
             e.printStackTrace();
         }

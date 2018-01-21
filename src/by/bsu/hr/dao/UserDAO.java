@@ -5,8 +5,6 @@ import by.bsu.hr.connection.ConnectionPoolException;
 import by.bsu.hr.entity.User;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +14,9 @@ import static by.bsu.hr.connection.ConnectionPool.returnConnectionToPool;
 
 public class UserDAO {
     private static Logger logger=Logger.getLogger(UserDAO.class);
-    private static String findUserQuery="SELECT * FROM users WHERE login LIKE ? AND password=md5(?);";
-    private static String checkUserQuery="SELECT * FROM users WHERE login LIKE ?;";
-    private static String AddUserQuery="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
+    private static final String FIND_USER_QUERY="SELECT * FROM users WHERE login LIKE ? AND password=md5(?);";
+    private static final String CHECK_USER_QUERY="SELECT * FROM users WHERE login LIKE ?;";
+    private static final String ADD_USER_QUERY="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
     public static List<User> findUser(String login, String password){
         List<User> resList = new ArrayList<>();
         Connection cn = null;
@@ -26,8 +24,7 @@ public class UserDAO {
         PreparedStatement st = null;
         try {
             cn =ConnectionPool.getInstance().takeConnection();
-            logger.log(Level.INFO,"after getting connection");
-            st = cn.prepareStatement(findUserQuery);
+            st = cn.prepareStatement(FIND_USER_QUERY);
             st.setString(1,login);
             st.setString(2,password);
             rs=st.executeQuery();
@@ -59,7 +56,7 @@ public class UserDAO {
         boolean check=true;
         try {
             cn =ConnectionPool.getInstance().takeConnection();
-            st = cn.prepareStatement(checkUserQuery);
+            st = cn.prepareStatement(CHECK_USER_QUERY);
             st.setString(1,login);
             rs=st.executeQuery();
             if(rs.next()){
@@ -78,7 +75,7 @@ public class UserDAO {
         PreparedStatement st = null;
         try {
             cn=ConnectionPool.getInstance().takeConnection();
-            st = cn.prepareStatement(AddUserQuery);
+            st = cn.prepareStatement(ADD_USER_QUERY);
             st.setString(1,login);
             st.setString(2,password);
             st.setString(3,name);
