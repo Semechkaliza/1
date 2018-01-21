@@ -44,7 +44,7 @@ public class ConnectionPool {
             poolSize = Integer.parseInt(dbResourceManager.getValue(DBParameter.DB_POLL_SIZE));
         } catch (NumberFormatException e) {
             poolSize = 5;
-            logger.log(Level.INFO,"Default poolSize",e);
+            logger.log(Level.ERROR,"Default poolSize",e);
         }
         try {
             givenAwayConQueue = new LinkedList<>();
@@ -56,11 +56,11 @@ public class ConnectionPool {
                 checkCount++;
             }
             if(!(checkCount ==5)){
-                logger.log(Level.FATAL, "Fatal error adding connections");
+                logger.log(Level.ERROR, "Error adding connections");
             }
         } catch (SQLException e) {
             // throw new ConnectionPoolException("SQLException in ConnectionPool", e);
-            logger.log(Level.FATAL, "Fatal error adding connections", e);
+            logger.log(Level.ERROR, "Error adding connections", e);
         }
     }
 

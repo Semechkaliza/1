@@ -41,7 +41,7 @@ public class UserDAO {
                         } while (rs.next());
                 }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.INFO,"Missing finding user");
+            logger.log(Level.ERROR,"Missing finding user");
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
@@ -63,7 +63,7 @@ public class UserDAO {
                 check=false;
             }
         } catch (ConnectionPoolException | SQLException e) {
-            logger.log(Level.INFO,"Missing check user");
+            logger.log(Level.ERROR,"Missing check user");
         }finally {
             closeSt(st);
             returnConnectionToPool(cn);

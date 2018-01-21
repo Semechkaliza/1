@@ -3,23 +3,26 @@ package by.bsu.hr.dao;
 import by.bsu.hr.connection.ConnectionPool;
 import by.bsu.hr.connection.ConnectionPoolException;
 import by.bsu.hr.entity.Vacancy;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VacancyDAO {
+    private static Logger logger= Logger.getLogger(VacancyDAO.class);
     private static final String ALL_VACANCIES_QUERY = "SELECT * FROM vacancy";
     public static List<Vacancy> getAllVacancies () {
         Connection cn = null;
         ResultSet rs = null;
-        Statement st = null;
+        PreparedStatement st = null;
         try {
             cn= ConnectionPool.getInstance().takeConnection();
-            st = cn.createStatement();
-            rs = st.executeQuery(ALL_VACANCIES_QUERY);
+            st = cn.prepareStatement(ALL_VACANCIES_QUERY);
+            rs = st.executeQuery();
         } catch (SQLException | ConnectionPoolException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR,"Missing db connecting");
         }
         List<Vacancy> resList2 = new ArrayList<>();
         try {
@@ -36,7 +39,10 @@ public class VacancyDAO {
                 } while (rs.next());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR,"Missing get all vacancies list");
+        }finally {
+            ConnectionPool.closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
         }
         return resList2;
     }

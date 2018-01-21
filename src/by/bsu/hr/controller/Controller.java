@@ -3,6 +3,7 @@ package by.bsu.hr.controller;
 import by.bsu.hr.command.ActionCommand;
 import by.bsu.hr.command.ActionFactory;
 import by.bsu.hr.command.PageConstant;
+import by.bsu.hr.filter.EncodingFilter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,8 +22,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
         processRequest(request, response);
 }
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
-        response.setContentType("text/html");
         String page = null;
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
