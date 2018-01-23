@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static by.bsu.hr.connection.ConnectionPool.closeSt;
 import static by.bsu.hr.connection.ConnectionPool.returnConnectionToPool;

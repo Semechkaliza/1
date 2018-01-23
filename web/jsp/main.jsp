@@ -6,19 +6,19 @@
 <html>
 <head>
     <title>
-        Welcome
+        ${requestScope.main}
     </title>
 </head>
 <body>
-<h3>Welcome</h3>
+<h3>${requestScope.welcome}</h3>
 <hr/>
 <table border="1">
     <tr>
-        <td>login</td>
-        <td>name</td>
-        <td>sname</td>
-        <td>role</td>
-        <td>rating</td>
+        <td>${requestScope.login}</td>
+        <td>${requestScope.name}</td>
+        <td>${requestScope.sname}</td>
+        <td>${requestScope.role}</td>
+        <td>${requestScope.rating}</td>
     </tr><tr>
     <c:forEach items="${requestScope.user}" var="users">
 
@@ -34,8 +34,11 @@
 
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="get_vacancies" />
-    <input type="submit" value="vacancy"/>
+    <input type="submit" value="${requestScope.vacancy}"/>
 </form>
-<a href="controller?command=logout">Logout</a>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="logout" />
+    <input type="submit" value="${requestScope.LogOut}"/>
+</form>
 </body>
 </html>

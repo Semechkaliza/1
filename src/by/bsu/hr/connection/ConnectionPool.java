@@ -33,7 +33,6 @@ public class ConnectionPool {
         url = dbResourceManager.getValue(DBParameter.DB_URL);
         user = dbResourceManager.getValue(DBParameter.DB_USER);
         password =dbResourceManager.getValue(DBParameter.DB_PASSWORD);
-        Locale.setDefault(Locale.ENGLISH);
         int checkCount=0;
         try {
             Class.forName(driverName);

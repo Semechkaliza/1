@@ -3,6 +3,7 @@ import by.bsu.hr.dao.UserDAO;
 import by.bsu.hr.entity.User;
 import org.apache.log4j.Logger;
 import java.util.List;
+import java.util.Locale;
 
 public class LoginLogic {
     private static Logger logger=Logger.getLogger(LoginLogic.class);

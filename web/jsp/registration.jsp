@@ -32,33 +32,33 @@
     <div class="registration">
 
         <div class="all_box_input_registration">
-            <div class="title_registration"><p>Регистрация</p></div>
+            <div class="title_registration"><p>${requestScope.registration}</p></div>
             <input type="hidden" name="command" value="registration" />
             <div class="block_inputs">
                 <div class="inputBlock">
-                    <input type="text" id="Login" class="registration_input" name="login" value="" placeholder="    Login"/>
-                    <span class="trueLogin">Yes</span>
-                    <span class="falseLogin">No</span>
+                    <input type="text" id="Login" class="registration_input" name="login" value="" placeholder="${requestScope.login}"/>
+                    <span class="trueLogin">${requestScope.yes}</span>
+                    <span class="falseLogin">${requestScope.no}</span>
                 </div>
                 <div class="inputBlock">
-                    <input type="password" id="Password" class="registration_input" name="password" value="" placeholder="    Password"/>
-                    <span class="truePassword">Yes</span>
-                    <span class="falsePassword">No</span>
+                    <input type="password" id="Password" class="registration_input" name="password" value="" placeholder="${requestScope.password}"/>
+                    <span class="truePassword">${requestScope.yes}</span>
+                    <span class="falsePassword">${requestScope.no}</span>
                 </div>
                 <div class="inputBlock">
-                    <input type="password" id="Password2" class="registration_input" placeholder="    Password"/>
-                    <span class="truePassword2">Yes</span>
-                    <span class="falsePassword2">No</span>
+                    <input type="password" id="Password2" class="registration_input" placeholder="${requestScope.password}"/>
+                    <span class="truePassword2">${requestScope.yes}</span>
+                    <span class="falsePassword2">${requestScope.no}</span>
                 </div>
                 <div class="inputBlock">
-                    <input type="text" id="Name" class="registration_input" name="name" value="" placeholder="    Name"/>
+                    <input type="text" id="Name" class="registration_input" name="name" value="" placeholder="${requestScope.name}"/>
                 </div>
                 <div class="inputBlock">
-                    <input type="text" id="Sname" class="registration_input" name="sname" value="" placeholder="    Surname"/>
+                    <input type="text" id="Sname" class="registration_input" name="sname" value="" placeholder="${requestScope.sname}"/>
                 </div>
             </div>
             <div class="message">${errorLoginPassMessage}</div> <br/>
-            <button type="submit" class="GetStarted_registration" value="Registration"> Регистрация</button>
+            <button type="submit" class="GetStarted_registration" value="Registration">${requestScope.registration}</button>
         </div>
     </div>
     </form>

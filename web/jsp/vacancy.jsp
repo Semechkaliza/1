@@ -6,21 +6,21 @@
 <html>
 <head>
     <title>
-        Vacancy
+        ${requestScope.vacancy}
     </title>
 </head>
 <body>
-<h3>Vacancy</h3>
+<h3>${requestScope.vacancy}</h3>
 <hr/>
 <table border="1">
     <tr>
-        <td>company</td>
-        <td>vacancy</td>
-        <td>salary</td>
-        <td>skill</td>
-        <td>other</td>
+        <td>${requestScope.company}</td>
+        <td>${requestScope.vacancy}</td>
+        <td>${requestScope.salary}</td>
+        <td>${requestScope.skill}</td>
+        <td>${requestScope.other}</td>
     </tr><tr>
-    <c:forEach items="${requestScope.vacancy}" var="vacancy">
+    <c:forEach items="${requestScope.vacanciesList}" var="vacancy">
 
         <td>${vacancy.company}</td>
         <td>${vacancy.vacancy}</td>
@@ -32,6 +32,9 @@
     </c:forEach>
 </table>
 
-<a href="controller?command=logout">Logout</a>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="logout" />
+    <input type="submit" value="${requestScope.LogOut}"/>
+</form>
 </body>
 </html>
