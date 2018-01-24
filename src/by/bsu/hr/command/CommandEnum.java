@@ -17,6 +17,16 @@ public enum CommandEnum {
             this.command = new LoginCommand();
         }
 },
+    GO_MY_PROFILE {
+        {
+            this.command = new GoMyProfileCommand();
+        }
+    },
+    RESULT {
+        {
+            this.command = new ResultCommand();
+        }
+    },
     GET_VACANCIES {
         {
             this.command = new GetVacanciesCommand();

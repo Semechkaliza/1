@@ -19,6 +19,7 @@
         <td>${requestScope.salary}</td>
         <td>${requestScope.skill}</td>
         <td>${requestScope.other}</td>
+        <td>${requestScope.active}</td>
     </tr><tr>
     <c:forEach items="${requestScope.vacanciesList}" var="vacancy">
 
@@ -27,9 +28,11 @@
         <td>${vacancy.salary}</td>
         <td>${vacancy.skill}</td>
         <td>${vacancy.other}</td>
+        <td>${vacancy.active}</td>
 </tr>
 
     </c:forEach>
+    ${emptyVacanciesList}
 </table>
 
 <form method="POST" action="controller">

@@ -6,6 +6,7 @@ public class Vacancy {
     private Integer salary;
     private String skill;
     private String other;
+    private boolean active;
 
     @Override
     public String toString() {
@@ -15,9 +16,16 @@ public class Vacancy {
                 ", salary=" + salary +
                 ", skill='" + skill + '\'' +
                 ", other='" + other + '\'' +
+                ", active='" + active + '\'' +
                 '}';
     }
+    public boolean isActive() {
+        return active;
+    }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
     public String getCompany() {
         return company;
     }

@@ -6,4 +6,13 @@ public class ConnectionPoolException extends Throwable {
     public ConnectionPoolException(String message, Exception e){
         super(message, e);
     }
+    public ConnectionPoolException(String message){
+        super(message);
+    }
+    public ConnectionPoolException(Exception e){
+        super(e);
+    }
+    public ConnectionPoolException(){
+
+    }
 }

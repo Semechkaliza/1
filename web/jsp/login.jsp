@@ -26,7 +26,6 @@
     ${wrongAction} <br/>
     ${nullPage} <br/>
     <input type="submit" value="${requestScope.LogIn}"/>
-    <a href="/jsp/registration.jsp">${requestScope.registration}</a>
 </form>
 <form method="GET" action="controller">
     <input type="hidden" name="action" value="registration" />

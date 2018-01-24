@@ -3,7 +3,8 @@ package by.bsu.hr.controller;
 import by.bsu.hr.command.ActionCommand;
 import by.bsu.hr.command.ActionFactory;
 import by.bsu.hr.command.PageConstant;
-import by.bsu.hr.filter.EncodingFilter;
+import by.bsu.hr.command.ResourseBundle;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,25 +12,34 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Locale;
-import java.util.ResourceBundle;
+
+import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.BE;
+import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.EN;
+import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.RU;
+
 
 @WebServlet("/")
 public class Controller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Locale current=Locale.getDefault();
-        System.out.println(Locale.getDefault());
-        ResourceBundle rb=ResourceBundle.getBundle("resources.text",current);
-        request.setAttribute("login",rb.getString("login"));
-        request.setAttribute("password",rb.getString("password"));
-        request.setAttribute("registration",rb.getString("registration"));
-        request.setAttribute("LogIn",rb.getString("LogIn"));
-        request.setAttribute("yes",rb.getString("yes"));
-        request.setAttribute("no",rb.getString("no"));
-        request.setAttribute("name",rb.getString("name"));
-        request.setAttribute("sname",rb.getString("sname"));
+        ResourseBundle.ResourceBundleEnum lang;
+        switch(Locale.getDefault().toString()){
+            case "ru_RU": lang=RU;
+                        break;
+            case "be_BY": lang=BE;
+                        break;
+            default:    lang=EN;
+                        break;
+        }
+        request.setAttribute("login",lang.getMessage("login"));
+        request.setAttribute("password",lang.getMessage("password"));
+        request.setAttribute("registration",lang.getMessage("registration"));
+        request.setAttribute("LogIn",lang.getMessage("LogIn"));
+        request.setAttribute("yes",lang.getMessage("yes"));
+        request.setAttribute("no",lang.getMessage("no"));
+        request.setAttribute("name",lang.getMessage("name"));
+        request.setAttribute("sname",lang.getMessage("sname"));
         String page;
         if(!(request.getParameter("action")==null)) {
             page=PageConstant.REGISTRATION_PAGE;

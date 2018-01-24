@@ -32,11 +32,15 @@ public class UserDAO {
                 if (rs.next()) {
                         do {
                             User res = new User();
+                            res.setUser_id(rs.getInt("id"));
                             res.setLogin(rs.getString("login"));
                             res.setPassword(rs.getString("password"));
                             res.setName(rs.getString("name"));
                             res.setSname(rs.getString("sname"));
                             res.setRole(rs.getString("role"));
+                            res.setPhone(rs.getString("phone"));
+                            res.setEmail(rs.getString("email"));
+                            res.setActive(rs.getBoolean("active"));
                             res.setRating(rs.getInt("rating"));
                             resList.add(res);
                         } while (rs.next());

@@ -29,9 +29,21 @@
         </div>
     </div>
     <form method="POST" action="controller">
+
     <div class="registration">
 
         <div class="all_box_input_registration">
+            <input type="hidden" value="locale"/>
+            <label>
+                <input name="locale" type="radio" value="ru">
+            </label> RU
+            <label>
+                <input name="locale" type="radio" value="en">
+            </label> EN
+            <label>
+                <input name="locale" type="radio" value="be" checked>
+            </label> BE
+            <br>
             <div class="title_registration"><p>${requestScope.registration}</p></div>
             <input type="hidden" name="command" value="registration" />
             <div class="block_inputs">

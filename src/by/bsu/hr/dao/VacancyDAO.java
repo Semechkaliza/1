@@ -34,6 +34,7 @@ public class VacancyDAO {
                     vac.setSalary(rs.getInt("salary"));
                     vac.setSkill(rs.getString("priority_skill"));
                     vac.setOther(rs.getString("other"));
+                    vac.setActive(rs.getBoolean("active"));
                     resList2.add(vac);
 
                 } while (rs.next());

@@ -1,6 +1,5 @@
 package by.bsu.hr.command;
 
-import by.bsu.hr.dao.UserDAO;
 import by.bsu.hr.entity.User;
 import by.bsu.hr.logic.RegistrationLogic;
 import by.bsu.hr.logic.Validator;
@@ -9,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Locale;
-import java.util.ResourceBundle;
+
+import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.BE;
+import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.EN;
+import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.RU;
 
 
 public class RegistrationCommand implements ActionCommand {
@@ -21,43 +23,66 @@ public class RegistrationCommand implements ActionCommand {
         String name=request.getParameter("name");
         String sname=request.getParameter("sname");
         String page;
-        Locale current=Locale.getDefault();
-        ResourceBundle rb=ResourceBundle.getBundle("resources.text",current);
+        ResourseBundle.ResourceBundleEnum rb;
+        switch(Locale.getDefault().toString()){
+            case "ru_RU": rb=RU;
+                break;
+            case "be_BY": rb=BE;
+                break;
+            default:    rb=EN;
+                break;
+        }
+      //  Locale current=Locale.getDefault();
+     //   ResourceBundle rb=ResourceBundle.getBundle("resources.text",current);
         if(Validator.registrationValid(login,password,name,sname)){
             List<User> resList=RegistrationLogic.registraton(login,password,name,sname);
             if (!(resList==null)) {
-                request.setAttribute("login",rb.getString("login"));
-                request.setAttribute("name",rb.getString("name"));
-                request.setAttribute("sname",rb.getString("sname"));
-                request.setAttribute("role",rb.getString("role"));
-                request.setAttribute("rating",rb.getString("rating"));
-                request.setAttribute("vacancy",rb.getString("vacancy"));
-                request.setAttribute("welcome",rb.getString("welcome"));
-                request.setAttribute("LogOut",rb.getString("LogOut"));
-                request.setAttribute("main",rb.getString("main"));
+                String lang=request.getParameter("locale");
+                HttpSession session=request.getSession(true);
+                Locale curr=new Locale(lang);
+                session.setAttribute("locale",curr);
+                switch(curr.toString()){
+                    case "ru": rb=RU;
+                        break;
+                    case "be": rb=BE;
+                        break;
+                    default:    rb=EN;
+                        break;
+                }
+                session.setAttribute("rb",rb);
+                request.setAttribute("login",rb.getMessage("login"));
+                request.setAttribute("name",rb.getMessage("name"));
+                request.setAttribute("sname",rb.getMessage("sname"));
+                request.setAttribute("role",rb.getMessage("role"));
+                request.setAttribute("rating",rb.getMessage("rating"));
+                request.setAttribute("vacancy",rb.getMessage("vacancy"));
+                request.setAttribute("welcome",rb.getMessage("welcome"));
+                request.setAttribute("LogOut",rb.getMessage("LogOut"));
                 request.setAttribute("user", resList);
-                page= PageConstant.MAIN_PAGE;
+                request.setAttribute("result",rb.getMessage("result"));
+                request.setAttribute("myProfile",rb.getMessage("myProfile"));
+                page= PageConstant.MY_PROFILE_PAGE;
             } else {
-                request.setAttribute("errorLoginPassMessage",rb.getString("message.RepetitiveUser"));
-                request.setAttribute("registration",rb.getString("registration"));
-                request.setAttribute("yes",rb.getString("yes"));
-                request.setAttribute("no",rb.getString("no"));
-                request.setAttribute("login",rb.getString("login"));
-                request.setAttribute("password",rb.getString("password"));
-                request.setAttribute("name",rb.getString("name"));
-                request.setAttribute("sname",rb.getString("sname"));
-                page = PageConstant.REGISTRATION_PAGE;
+                request.setAttribute("errorLoginPassMessage",rb.getMessage("message.RepetitiveUser"));
+                request.setAttribute("registration",rb.getMessage("registration"));
+                request.setAttribute("yes",rb.getMessage("yes"));
+                request.setAttribute("no",rb.getMessage("no"));
+                request.setAttribute("login",rb.getMessage("login"));
+                request.setAttribute("password",rb.getMessage("password"));
+                request.setAttribute("name",rb.getMessage("name"));
+                request.setAttribute("sname",rb.getMessage("sname"));
+                page = PageConstant.LOGIN_PAGE;
             }
         }else{
-            request.setAttribute("errorLoginPassMessage",rb.getString("message.NotAllInfo"));
-            request.setAttribute("registration",rb.getString("registration"));
-            request.setAttribute("yes",rb.getString("yes"));
-            request.setAttribute("no",rb.getString("no"));
-            request.setAttribute("login",rb.getString("login"));
-            request.setAttribute("password",rb.getString("password"));
-            request.setAttribute("name",rb.getString("name"));
-            request.setAttribute("sname",rb.getString("sname"));
-            page = PageConstant.REGISTRATION_PAGE;
+            request.setAttribute("errorLoginPassMessage",rb.getMessage("message.NotAllInfo"));
+            request.setAttribute("registration",rb.getMessage("registration"));
+            request.setAttribute("yes",rb.getMessage("yes"));
+            request.setAttribute("no",rb.getMessage("no"));
+            request.setAttribute("login",rb.getMessage("login"));
+            request.setAttribute("password",rb.getMessage("password"));
+            request.setAttribute("name",rb.getMessage("name"));
+            request.setAttribute("sname",rb.getMessage("sname"));
+            page = PageConstant.LOGIN_PAGE;
         }
         return page;
     }

@@ -6,7 +6,8 @@
           http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5">
     <display-name> FirstJspServletJsp </display-name>
-    <welcome-file-list> <welcome-file>/</welcome-file>
+    <welcome-file-list>
+        <welcome-file>/</welcome-file>
     </welcome-file-list>
     <error-page>
         <error-code>404</error-code>
