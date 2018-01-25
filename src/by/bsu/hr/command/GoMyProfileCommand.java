@@ -1,5 +1,6 @@
 package by.bsu.hr.command;
 
+import by.bsu.hr.entity.Interview;
 import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.entity.User;
 import by.bsu.hr.logic.MyProfileLogic;
@@ -20,6 +21,16 @@ public class GoMyProfileCommand implements ActionCommand {
         request.setAttribute("user",session.getAttribute("user"));
         List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getLogin());
         request.setAttribute("proposalList",proposalList);
+        List<Interview> previewList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getLogin(),"PREV");
+        List<Interview> techList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getLogin(),"TECH");
+        request.setAttribute("previewList",previewList);
+        request.setAttribute("techList",techList);
+        request.setAttribute("proposalList",proposalList);
+        request.setAttribute("futurePreview",rb.getMessage("futurePreview"));
+        request.setAttribute("futureTechInterview",rb.getMessage("futureTechInterview"));
+        request.setAttribute("date",rb.getMessage("date"));
+        request.setAttribute("time",rb.getMessage("time"));
+        request.setAttribute("place",rb.getMessage("place"));
         request.setAttribute("vacancyName",rb.getMessage("vacancyName"));
         request.setAttribute("companyName",rb.getMessage("companyName"));
         request.setAttribute("login",rb.getMessage("login"));

@@ -1,5 +1,6 @@
 package by.bsu.hr.command;
 
+import by.bsu.hr.entity.Interview;
 import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.entity.User;
 import by.bsu.hr.logic.LoginLogic;
@@ -44,7 +45,16 @@ public class LoginCommand implements ActionCommand {
             session.setAttribute("rb",rb);
             //тут пока везде ничего нет.экспериментируем с sql.
             List<Proposal> proposalList=LoginLogic.getProposals(resList.get(0).getLogin());
+            List<Interview> previewList=LoginLogic.getFutureInterview(resList.get(0).getLogin(),"PREV");
+            List<Interview> techList=LoginLogic.getFutureInterview(resList.get(0).getLogin(),"TECH");
+            request.setAttribute("previewList",previewList);
+            request.setAttribute("techList",techList);
             request.setAttribute("proposalList",proposalList);
+            request.setAttribute("futurePreview",rb.getMessage("futurePreview"));
+            request.setAttribute("futureTechInterview",rb.getMessage("futureTechInterview"));
+            request.setAttribute("date",rb.getMessage("date"));
+            request.setAttribute("time",rb.getMessage("time"));
+            request.setAttribute("place",rb.getMessage("place"));
             request.setAttribute("vacancyName",rb.getMessage("vacancyName"));
             request.setAttribute("companyName",rb.getMessage("companyName"));
             request.setAttribute("login",rb.getMessage("login"));

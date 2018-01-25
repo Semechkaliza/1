@@ -65,5 +65,47 @@ ${requestScope.myProposal}
     <input type="hidden" name="command" value="get_vacancies" />
     <input type="submit" value="${requestScope.addProposal}"/>
 </form>
+${requestScope.futurePreview}
+<table border="1">
+    <tr>
+        <td>${requestScope.login}</td>
+        <td>${requestScope.vacancyName}</td>
+        <td>${requestScope.companyName}</td>
+        <td>${requestScope.date}</td>
+        <td>${requestScope.time}</td>
+        <td>${requestScope.place}</td>
+    </tr><tr>
+    <c:forEach items="${requestScope.previewList}" var="prev">
+
+    <td>${prev.login}</td>
+    <td>${prev.vacancy}</td>
+    <td>${prev.company}</td>
+        <td>${prev.date}</td>
+        <td>${prev.time}</td>
+        <td>${prev.place}</td>
+</tr>
+    </c:forEach>
+</table>
+${requestScope.futureTechInterview}
+<table border="1">
+    <tr>
+        <td>${requestScope.login}</td>
+        <td>${requestScope.vacancyName}</td>
+        <td>${requestScope.companyName}</td>
+        <td>${requestScope.date}</td>
+        <td>${requestScope.time}</td>
+        <td>${requestScope.place}</td>
+    </tr><tr>
+    <c:forEach items="${requestScope.techList}" var="tech">
+
+        <td>${tech.login}</td>
+        <td>${tech.vacancy}</td>
+        <td>${tech.company}</td>
+        <td>${tech.date}</td>
+        <td>${tech.time}</td>
+        <td>${tech.place}</td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>
