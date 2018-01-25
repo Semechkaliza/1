@@ -44,8 +44,26 @@
     <td>${users.role}</td>
     <td>${users.rating}</td>
 </tr>
-
     </c:forEach>
 </table>
+${requestScope.myProposal}
+<table border="1">
+    <tr>
+        <td>${requestScope.login}</td>
+        <td>${requestScope.vacancyName}</td>
+        <td>${requestScope.companyName}</td>
+    </tr><tr>
+    <c:forEach items="${requestScope.proposalList}" var="prop">
+
+    <td>${prop.login}</td>
+    <td>${prop.vacancy}</td>
+    <td>${prop.company}</td>
+</tr>
+    </c:forEach>
+</table>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="get_vacancies" />
+    <input type="submit" value="${requestScope.addProposal}"/>
+</form>
 </body>
 </html>

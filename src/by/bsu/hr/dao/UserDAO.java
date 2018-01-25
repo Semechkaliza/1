@@ -2,6 +2,7 @@ package by.bsu.hr.dao;
 
 import by.bsu.hr.connection.ConnectionPool;
 import by.bsu.hr.connection.ConnectionPoolException;
+import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.entity.User;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -18,6 +19,10 @@ public class UserDAO {
     private static final String FIND_USER_QUERY="SELECT * FROM users WHERE login LIKE ? AND password=md5(?);";
     private static final String CHECK_USER_QUERY="SELECT * FROM users WHERE login LIKE ?;";
     private static final String ADD_USER_QUERY="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
+    private static final String FIND_PROPOSALS_QUERY="SELECT vacancy,company,login,interested_users.ACTIVE " +
+            "from users join interested_users join vacancy " +
+            "on users.id=interested_users.USERS_ID and interested_users.VACANCY_ID=vacancy.ID " +
+            "where vacancy.ACTIVE=1 and users.LOGIN LIKE ?;";
     public static List<User> findUser(String login, String password){
         List<User> resList = new ArrayList<>();
         Connection cn = null;
@@ -92,5 +97,33 @@ public class UserDAO {
             closeSt(st);
             returnConnectionToPool(cn);
         }
+    }
+    public static List<Proposal> findProposals(String login){
+        List<Proposal> resList = new ArrayList<>();
+        Connection cn = null;
+        ResultSet rs = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(FIND_PROPOSALS_QUERY);
+            st.setString(1,login);
+            rs=st.executeQuery();
+            if (rs.next()) {
+                do {
+                    Proposal res = new Proposal();
+                    res.setLogin(rs.getString("login"));
+                    res.setCompany(rs.getString("company"));
+                    res.setVacancy(rs.getString("vacancy"));
+                    res.setActive(rs.getBoolean("active"));
+                    resList.add(res);
+                } while (rs.next());
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.log(Level.ERROR,"Missing finding proposals");
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+        return resList;
     }
 }

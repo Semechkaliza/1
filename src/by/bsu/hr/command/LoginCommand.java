@@ -1,5 +1,6 @@
 package by.bsu.hr.command;
 
+import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.entity.User;
 import by.bsu.hr.logic.LoginLogic;
 import org.apache.log4j.Logger;
@@ -41,6 +42,11 @@ public class LoginCommand implements ActionCommand {
                     break;
             }
             session.setAttribute("rb",rb);
+            //тут пока везде ничего нет.экспериментируем с sql.
+            List<Proposal> proposalList=LoginLogic.getProposals(resList.get(0).getLogin());
+            request.setAttribute("proposalList",proposalList);
+            request.setAttribute("vacancyName",rb.getMessage("vacancyName"));
+            request.setAttribute("companyName",rb.getMessage("companyName"));
             request.setAttribute("login",rb.getMessage("login"));
             request.setAttribute("name",rb.getMessage("name"));
             request.setAttribute("sname",rb.getMessage("sname"));
@@ -52,6 +58,8 @@ public class LoginCommand implements ActionCommand {
             request.setAttribute("user", resList);
             request.setAttribute("result",rb.getMessage("result"));
             request.setAttribute("myProfile",rb.getMessage("myProfile"));
+            request.setAttribute("myProposal",rb.getMessage("myProposal"));
+            request.setAttribute("addProposal",rb.getMessage("addProposal"));
             page= PageConstant.MY_PROFILE_PAGE;
         } else {
             ResourseBundle.ResourceBundleEnum rb;
