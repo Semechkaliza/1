@@ -19,10 +19,10 @@ public class UserDAO {
     private static final String FIND_USER_QUERY="SELECT * FROM users WHERE login LIKE ? AND password=md5(?);";
     private static final String CHECK_USER_QUERY="SELECT * FROM users WHERE login LIKE ?;";
     private static final String ADD_USER_QUERY="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
-    private static final String FIND_PROPOSALS_QUERY="SELECT vacancy,company,login,interested_users.ACTIVE " +
+    private static final String FIND_PROPOSALS_QUERY="SELECT interested_users.id,vacancy,company,login,interested_users.ACTIVE " +
             "from users join interested_users join vacancy " +
             "on users.id=interested_users.USERS_ID and interested_users.VACANCY_ID=vacancy.ID " +
-            "where vacancy.ACTIVE=1 and users.LOGIN LIKE ?;";
+            "where vacancy.ACTIVE=1 and interested_users.ACTIVE=1 and users.LOGIN LIKE ?;";
     public static List<User> findUser(String login, String password){
         List<User> resList = new ArrayList<>();
         Connection cn = null;
@@ -111,6 +111,7 @@ public class UserDAO {
             if (rs.next()) {
                 do {
                     Proposal res = new Proposal();
+                    res.setId(rs.getInt("id"));
                     res.setLogin(rs.getString("login"));
                     res.setCompany(rs.getString("company"));
                     res.setVacancy(rs.getString("vacancy"));

@@ -15,7 +15,6 @@ import static by.bsu.hr.command.PageConstant.MY_PROFILE_PAGE;
 public class GoMyProfileCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        String page=MY_PROFILE_PAGE;
         HttpSession session=request.getSession(false);
         ResourseBundle.ResourceBundleEnum rb= (ResourseBundle.ResourceBundleEnum) session.getAttribute("rb");
         request.setAttribute("user",session.getAttribute("user"));
@@ -31,6 +30,7 @@ public class GoMyProfileCommand implements ActionCommand {
         request.setAttribute("date",rb.getMessage("date"));
         request.setAttribute("time",rb.getMessage("time"));
         request.setAttribute("place",rb.getMessage("place"));
+        request.setAttribute("cancel",rb.getMessage("cancel"));
         request.setAttribute("vacancyName",rb.getMessage("vacancyName"));
         request.setAttribute("companyName",rb.getMessage("companyName"));
         request.setAttribute("login",rb.getMessage("login"));
@@ -45,6 +45,6 @@ public class GoMyProfileCommand implements ActionCommand {
         request.setAttribute("myProfile",rb.getMessage("myProfile"));
         request.setAttribute("myProposal",rb.getMessage("myProposal"));
         request.setAttribute("addProposal",rb.getMessage("addProposal"));
-        return page;
+        return MY_PROFILE_PAGE;
     }
 }

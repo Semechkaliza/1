@@ -58,6 +58,10 @@ ${requestScope.myProposal}
     <td>${prop.login}</td>
     <td>${prop.vacancy}</td>
     <td>${prop.company}</td>
+    <td>  <form method="POST" action="controller">
+        <input type="hidden" name="command" value="cancel_proposal" />
+        <input type="submit" value="${requestScope.cancel}"/>
+    </form></td>
 </tr>
     </c:forEach>
 </table>

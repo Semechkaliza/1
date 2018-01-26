@@ -1,6 +1,7 @@
 package by.bsu.hr.entity;
 
 public class Proposal {
+    private int id;
     private String vacancy;
     private String company;
     private String login;
@@ -9,11 +10,20 @@ public class Proposal {
     @Override
     public String toString() {
         return "Proposal{" +
-                "vacancy='" + vacancy + '\'' +
+                "id=" + id +
+                ", vacancy='" + vacancy + '\'' +
                 ", company='" + company + '\'' +
                 ", login='" + login + '\'' +
                 ", active=" + active +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getVacancy() {

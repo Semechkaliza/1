@@ -27,6 +27,21 @@ public enum CommandEnum {
             this.command = new ResultCommand();
         }
     },
+    CANCEL_PROPOSAL{
+        {
+            this.command=new CancelProposalCommand();
+        }
+    },
+    CHANGE_INFO{
+        {
+            this.command=new ChangeInfoCommand();
+        }
+    },
+    GO_CHANGE_INFO{
+        {
+            this.command=new GoChangeInfoCommand();
+        }
+    },
     GET_VACANCIES {
         {
             this.command = new GetVacanciesCommand();

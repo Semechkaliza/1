@@ -55,6 +55,7 @@ public class LoginCommand implements ActionCommand {
             request.setAttribute("date",rb.getMessage("date"));
             request.setAttribute("time",rb.getMessage("time"));
             request.setAttribute("place",rb.getMessage("place"));
+            request.setAttribute("cancel",rb.getMessage("cancel"));
             request.setAttribute("vacancyName",rb.getMessage("vacancyName"));
             request.setAttribute("companyName",rb.getMessage("companyName"));
             request.setAttribute("login",rb.getMessage("login"));
