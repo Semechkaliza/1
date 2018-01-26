@@ -20,6 +20,7 @@ public class VacancyDAO {
             "from users join interview join vacancy " +
             "on users.id=interview.USERS_ID and interview.VACANCY_ID=vacancy.ID " +
             "where vacancy.ACTIVE=1 and type LIKE ? and users.LOGIN LIKE ? and result is NULL;";
+    private static final String CANCEL_PROPOSAL_QUERY = "update interested_users set ACTIVE=0 where ID=?;";
     public static List<Vacancy> getAllVacancies () {
         Connection cn = null;
         ResultSet rs = null;
@@ -86,5 +87,23 @@ public class VacancyDAO {
             ConnectionPool.returnConnectionToPool(cn);
         }
         return resList;
+    }
+
+    public static void cancelProposal(int id) {
+        Connection cn = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(CANCEL_PROPOSAL_QUERY);
+            System.out.println(st);
+            st.setInt(1,id);
+            System.out.println(st);
+            st.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.log(Level.ERROR,"Missing cancel proposal");
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
     }
 }

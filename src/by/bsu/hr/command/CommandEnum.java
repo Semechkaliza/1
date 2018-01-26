@@ -42,6 +42,16 @@ public enum CommandEnum {
             this.command=new GoChangeInfoCommand();
         }
     },
+    GO_LOGIN{
+        {
+            this.command=new GoLoginCommand();
+        }
+    },
+    GO_REGISTRATION{
+        {
+            this.command=new GoRegistrationCommand();
+        }
+    },
     GET_VACANCIES {
         {
             this.command = new GetVacanciesCommand();

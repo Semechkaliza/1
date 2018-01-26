@@ -60,6 +60,7 @@ ${requestScope.myProposal}
     <td>${prop.company}</td>
     <td>  <form method="POST" action="controller">
         <input type="hidden" name="command" value="cancel_proposal" />
+        <input type="hidden" name="id" value="${prop.id}" />
         <input type="submit" value="${requestScope.cancel}"/>
     </form></td>
 </tr>

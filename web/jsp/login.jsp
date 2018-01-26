@@ -27,8 +27,8 @@
     ${nullPage} <br/>
     <input type="submit" value="${requestScope.LogIn}"/>
 </form>
-<form method="GET" action="controller">
-    <input type="hidden" name="action" value="registration" />
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="go_registration" />
     <input type="submit" value="${requestScope.registration}"/>
 </form>
 <hr/>
