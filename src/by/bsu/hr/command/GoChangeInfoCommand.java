@@ -8,7 +8,12 @@ public class GoChangeInfoCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
         ResourseBundle.ResourceBundleEnum rb= (ResourseBundle.ResourceBundleEnum) session.getAttribute("rb");
-        request.setAttribute("user",session.getAttribute("user"));
+        request.setAttribute("changeInfo",rb.getMessage("changeInfo"));
+        request.setAttribute("name",rb.getMessage("name"));
+        request.setAttribute("sname",rb.getMessage("sname"));
+        request.setAttribute("phone",rb.getMessage("phone"));
+        request.setAttribute("email",rb.getMessage("email"));
+        request.setAttribute("apply",rb.getMessage("apply"));
         return PageConstant.CHANGE_INFO_PAGE;
     }
 }

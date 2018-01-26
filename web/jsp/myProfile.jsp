@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>
-        ${requestScope.main}
+        ${requestScope.myProfile}
     </title>
 </head>
 <body>
@@ -46,6 +46,10 @@
 </tr>
     </c:forEach>
 </table>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="go_change_info" />
+    <input type="submit" value="${requestScope.changeInfo}"/>
+</form>
 ${requestScope.myProposal}
 <table border="1">
     <tr>

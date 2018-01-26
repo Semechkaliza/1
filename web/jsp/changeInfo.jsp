@@ -8,9 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>${requestScope.changeInfo}</title>
 </head>
-<body>
-
+<body>${requestScope.name}
+<form method="POST" action="controller">
+<input type="hidden" name="command" value="change_info"/>
+<input type="text" name="name" value=""/><br/>
+${requestScope.sname}
+<input type="text" name="sname" value=""/><br/>
+${requestScope.phone}
+<input type="text" name="phone" value=""/><br/>
+${requestScope.email}
+<input type="text" name="email" value=""/><br/>
+<input type="submit" value="${requestScope.apply}"/>
+</form>
 </body>
 </html>

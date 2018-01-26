@@ -95,9 +95,7 @@ public class VacancyDAO {
         try {
             cn =ConnectionPool.getInstance().takeConnection();
             st = cn.prepareStatement(CANCEL_PROPOSAL_QUERY);
-            System.out.println(st);
             st.setInt(1,id);
-            System.out.println(st);
             st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             logger.log(Level.ERROR,"Missing cancel proposal");

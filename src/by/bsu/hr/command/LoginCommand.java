@@ -71,6 +71,7 @@ public class LoginCommand implements ActionCommand {
             request.setAttribute("myProfile",rb.getMessage("myProfile"));
             request.setAttribute("myProposal",rb.getMessage("myProposal"));
             request.setAttribute("addProposal",rb.getMessage("addProposal"));
+            request.setAttribute("changeInfo",rb.getMessage("changeInfo"));
             page= PageConstant.MY_PROFILE_PAGE;
         } else {
             ResourseBundle.ResourceBundleEnum rb;

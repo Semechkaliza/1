@@ -45,6 +45,7 @@ public class GoMyProfileCommand implements ActionCommand {
         request.setAttribute("myProfile",rb.getMessage("myProfile"));
         request.setAttribute("myProposal",rb.getMessage("myProposal"));
         request.setAttribute("addProposal",rb.getMessage("addProposal"));
+        request.setAttribute("changeInfo",rb.getMessage("changeInfo"));
         return MY_PROFILE_PAGE;
     }
 }

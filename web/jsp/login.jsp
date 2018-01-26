@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        Login
+        ${requestScope.login}
     </title>
 </head>
 <body>

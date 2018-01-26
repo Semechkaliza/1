@@ -19,6 +19,7 @@ public class UserDAO {
     private static final String FIND_USER_QUERY="SELECT * FROM users WHERE login LIKE ? AND password=md5(?);";
     private static final String CHECK_USER_QUERY="SELECT * FROM users WHERE login LIKE ?;";
     private static final String ADD_USER_QUERY="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
+    private static final String UPDATE_INFO_QUERY="UPDATE users SET NAME=?,SNAME=?,PHONE=?,EMAIL=? WHERE ID=?";
     private static final String FIND_PROPOSALS_QUERY="SELECT interested_users.id,vacancy,company,login,interested_users.ACTIVE " +
             "from users join interested_users join vacancy " +
             "on users.id=interested_users.USERS_ID and interested_users.VACANCY_ID=vacancy.ID " +
@@ -126,5 +127,25 @@ public class UserDAO {
             ConnectionPool.returnConnectionToPool(cn);
         }
         return resList;
+    }
+
+    public static void updateInfo(String name, String sname, String phone, String email, int id) {
+        Connection cn = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(UPDATE_INFO_QUERY);
+            st.setString(1,name);
+            st.setString(2,sname);
+            st.setString(3,phone);
+            st.setString(4,email);
+            st.setInt(5,id);
+            st.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.log(Level.ERROR,"Missing cancel proposal");
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
     }
 }
