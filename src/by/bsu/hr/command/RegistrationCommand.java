@@ -50,39 +50,18 @@ public class RegistrationCommand implements ActionCommand {
                         break;
                 }
                 session.setAttribute("rb",rb);
-                request.setAttribute("login",rb.getMessage("login"));
-                request.setAttribute("name",rb.getMessage("name"));
-                request.setAttribute("sname",rb.getMessage("sname"));
-                request.setAttribute("role",rb.getMessage("role"));
-                request.setAttribute("rating",rb.getMessage("rating"));
-                request.setAttribute("vacancy",rb.getMessage("vacancy"));
-                request.setAttribute("welcome",rb.getMessage("welcome"));
-                request.setAttribute("LogOut",rb.getMessage("LogOut"));
                 request.setAttribute("user", resList);
-                request.setAttribute("result",rb.getMessage("result"));
-                request.setAttribute("myProfile",rb.getMessage("myProfile"));
+                SetAttributes.setAttributesMyProfilePage(rb,request);
                 page= PageConstant.MY_PROFILE_PAGE;
             } else {
                 request.setAttribute("errorLoginPassMessage",rb.getMessage("message.RepetitiveUser"));
-                request.setAttribute("registration",rb.getMessage("registration"));
-                request.setAttribute("yes",rb.getMessage("yes"));
-                request.setAttribute("no",rb.getMessage("no"));
-                request.setAttribute("login",rb.getMessage("login"));
-                request.setAttribute("password",rb.getMessage("password"));
-                request.setAttribute("name",rb.getMessage("name"));
-                request.setAttribute("sname",rb.getMessage("sname"));
-                page = PageConstant.LOGIN_PAGE;
+                SetAttributes.setAttributesRegistrationPage(rb,request);
+                page = PageConstant.REGISTRATION_PAGE;
             }
         }else{
             request.setAttribute("errorLoginPassMessage",rb.getMessage("message.NotAllInfo"));
-            request.setAttribute("registration",rb.getMessage("registration"));
-            request.setAttribute("yes",rb.getMessage("yes"));
-            request.setAttribute("no",rb.getMessage("no"));
-            request.setAttribute("login",rb.getMessage("login"));
-            request.setAttribute("password",rb.getMessage("password"));
-            request.setAttribute("name",rb.getMessage("name"));
-            request.setAttribute("sname",rb.getMessage("sname"));
-            page = PageConstant.LOGIN_PAGE;
+            SetAttributes.setAttributesRegistrationPage(rb,request);
+            page = PageConstant.REGISTRATION_PAGE;
         }
         return page;
     }

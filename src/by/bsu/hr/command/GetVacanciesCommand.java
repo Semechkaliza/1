@@ -14,13 +14,7 @@ public class GetVacanciesCommand implements ActionCommand {
         HttpSession session=request.getSession(false);
         ResourseBundle.ResourceBundleEnum rb= (ResourseBundle.ResourceBundleEnum) session.getAttribute("rb");
         if (!resList.isEmpty()) {
-            request.setAttribute("vacancy",rb.getMessage("vacancy"));
-            request.setAttribute("other",rb.getMessage("other"));
-            request.setAttribute("skill",rb.getMessage("skill"));
-            request.setAttribute("salary",rb.getMessage("salary"));
-            request.setAttribute("company",rb.getMessage("company"));
-            request.setAttribute("LogOut",rb.getMessage("LogOut"));
-            request.setAttribute("active",rb.getMessage("active"));
+            SetAttributes.setAttributesVacancyPage(rb,request);
             request.setAttribute("vacanciesList", resList);
             page = PageConstant.VACANCY_PAGE;
         } else {

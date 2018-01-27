@@ -10,7 +10,24 @@
 <head>
     <title>${requestScope.changeInfo}</title>
 </head>
-<body>${requestScope.name}
+<body>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="result" />
+    <input type="submit" value="${requestScope.result}"/>
+</form>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="logout" />
+    <input type="submit" value="${requestScope.LogOut}"/>
+</form>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="go_my_profile" />
+    <input type="submit" value="${requestScope.myProfile}"/>
+</form>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="get_vacancies" />
+    <input type="submit" value="${requestScope.vacancy}"/>
+</form>
+${requestScope.name}
 <form method="POST" action="controller">
 <input type="hidden" name="command" value="change_info"/>
 <input type="text" name="name" value=""/><br/>

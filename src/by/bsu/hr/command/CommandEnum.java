@@ -32,6 +32,11 @@ public enum CommandEnum {
             this.command=new CancelProposalCommand();
         }
     },
+    ADD_PROPOSAL{
+        {
+            this.command=new AddProposalCommand();
+        }
+    },
     CHANGE_INFO{
         {
             this.command=new ChangeInfoCommand();
@@ -56,7 +61,12 @@ public enum CommandEnum {
         {
             this.command = new GetVacanciesCommand();
         }
-};
+},
+    ONE_VACANCY{
+        {
+            this.command=new OneVacancyCommand();
+        }
+    };
     ActionCommand command;
     public ActionCommand getCurrentCommand() { return command; }
 }

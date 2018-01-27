@@ -50,28 +50,8 @@ public class LoginCommand implements ActionCommand {
             request.setAttribute("previewList",previewList);
             request.setAttribute("techList",techList);
             request.setAttribute("proposalList",proposalList);
-            request.setAttribute("futurePreview",rb.getMessage("futurePreview"));
-            request.setAttribute("futureTechInterview",rb.getMessage("futureTechInterview"));
-            request.setAttribute("date",rb.getMessage("date"));
-            request.setAttribute("time",rb.getMessage("time"));
-            request.setAttribute("place",rb.getMessage("place"));
-            request.setAttribute("cancel",rb.getMessage("cancel"));
-            request.setAttribute("vacancyName",rb.getMessage("vacancyName"));
-            request.setAttribute("companyName",rb.getMessage("companyName"));
-            request.setAttribute("login",rb.getMessage("login"));
-            request.setAttribute("name",rb.getMessage("name"));
-            request.setAttribute("sname",rb.getMessage("sname"));
-            request.setAttribute("role",rb.getMessage("role"));
-            request.setAttribute("rating",rb.getMessage("rating"));
-            request.setAttribute("vacancy",rb.getMessage("vacancy"));
-            request.setAttribute("welcome",rb.getMessage("welcome"));
-            request.setAttribute("LogOut",rb.getMessage("LogOut"));
             request.setAttribute("user", resList);
-            request.setAttribute("result",rb.getMessage("result"));
-            request.setAttribute("myProfile",rb.getMessage("myProfile"));
-            request.setAttribute("myProposal",rb.getMessage("myProposal"));
-            request.setAttribute("addProposal",rb.getMessage("addProposal"));
-            request.setAttribute("changeInfo",rb.getMessage("changeInfo"));
+            SetAttributes.setAttributesMyProfilePage(rb,request);
             page= PageConstant.MY_PROFILE_PAGE;
         } else {
             ResourseBundle.ResourceBundleEnum rb;
@@ -84,10 +64,7 @@ public class LoginCommand implements ActionCommand {
                     break;
             }
             request.setAttribute("errorLoginPassMessage",rb.getMessage("message.IncorrectInfo"));
-            request.setAttribute("login",rb.getMessage("login"));
-            request.setAttribute("password",rb.getMessage("password"));
-            request.setAttribute("registration",rb.getMessage("registration"));
-            request.setAttribute("LogIn",rb.getMessage("LogIn"));
+            SetAttributes.setAttributesLoginPage(rb,request);
             page = PageConstant.LOGIN_PAGE;
         }
         return page;

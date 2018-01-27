@@ -20,14 +20,7 @@ public class GoRegistrationCommand implements ActionCommand {
             default:    lang=EN;
                 break;
         }
-        request.setAttribute("login",lang.getMessage("login"));
-        request.setAttribute("password",lang.getMessage("password"));
-        request.setAttribute("registration",lang.getMessage("registration"));
-        request.setAttribute("LogIn",lang.getMessage("LogIn"));
-        request.setAttribute("yes",lang.getMessage("yes"));
-        request.setAttribute("no",lang.getMessage("no"));
-        request.setAttribute("name",lang.getMessage("name"));
-        request.setAttribute("sname",lang.getMessage("sname"));
+        SetAttributes.setAttributesRegistrationPage(lang,request);
         return PageConstant.REGISTRATION_PAGE;
     }
 }

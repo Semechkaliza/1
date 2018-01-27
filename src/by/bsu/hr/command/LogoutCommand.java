@@ -21,10 +21,7 @@ public class LogoutCommand implements ActionCommand {
             default:    rb=EN;
                 break;
         }
-        request.setAttribute("login",rb.getMessage("login"));
-        request.setAttribute("password",rb.getMessage("password"));
-        request.setAttribute("registration",rb.getMessage("registration"));
-        request.setAttribute("LogIn",rb.getMessage("LogIn"));
+        SetAttributes.setAttributesLoginPage(rb,request);
         request.getSession().invalidate();
         return page;
     }

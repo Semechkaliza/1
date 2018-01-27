@@ -10,7 +10,7 @@ public class ResultCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
         ResourseBundle.ResourceBundleEnum rb= (ResourseBundle.ResourceBundleEnum) session.getAttribute("rb");
-        request.setAttribute("result",rb.getMessage("result"));
+        SetAttributes.setAttributesResultPage(rb,request);
         return RESULT_PAGE;
     }
 }

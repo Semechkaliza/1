@@ -26,33 +26,27 @@
     <input type="hidden" name="command" value="get_vacancies" />
     <input type="submit" value="${requestScope.vacancy}"/>
 </form>
-<h3>${requestScope.vacancy}</h3>
 <hr/>
 <table border="1">
     <tr>
         <td>${requestScope.company}</td>
         <td>${requestScope.vacancy}</td>
+        <td>${requestScope.salary}</td>
+        <td>${requestScope.other}</td>
     </tr><tr>
-    <c:forEach items="${requestScope.vacanciesList}" var="vacancy">
-
-        <td>${vacancy.company}</td>
-        <td>${vacancy.vacancy}</td>
-        <td>
+    <td>${requestScope.oneVacancy.company}</td>
+    <td>${requestScope.oneVacancy.vacancy}</td>
+    <td>${requestScope.oneVacancy.salary}</td>
+    <td>${requestScope.oneVacancy.other}</td>
+    <td>
         <form method="POST" action="controller">
-            <input type="hidden" name="command" value="one_vacancy" />
-            <input type="hidden" name="id" value="${vacancy.vacancy_id}" />
-            <input type="submit" value="${requestScope.more}"/>
+            <input type="hidden" name="command" value="add_proposal" />
+            <input type="hidden" name="id" value=${requestScope.oneVacancy.vacancy_id} />
+            <input type="submit" value="${requestScope.addProposal}"/>
         </form>
     </td>
+
 </tr>
-
-    </c:forEach>
-    ${emptyVacanciesList}
 </table>
-
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="logout" />
-    <input type="submit" value="${requestScope.LogOut}"/>
-</form>
 </body>
 </html>

@@ -24,6 +24,7 @@ public class UserDAO {
             "from users join interested_users join vacancy " +
             "on users.id=interested_users.USERS_ID and interested_users.VACANCY_ID=vacancy.ID " +
             "where vacancy.ACTIVE=1 and interested_users.ACTIVE=1 and users.LOGIN LIKE ?;";
+    private static final String ADD_PROPOSAL_QUERY="insert into interested_users(VACANCY_ID,USERS_ID) values(?,?);";
     public static List<User> findUser(String login, String password){
         List<User> resList = new ArrayList<>();
         Connection cn = null;
@@ -146,6 +147,23 @@ public class UserDAO {
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
+        }
+    }
+
+    public static void addProposal(int vacancy_id,int user_id) {
+        Connection cn = null;
+        PreparedStatement st = null;
+        try {
+            cn=ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(ADD_PROPOSAL_QUERY);
+            st.setInt(1,vacancy_id);
+            st.setInt(2,user_id);
+            st.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.log(Level.INFO,"Missing add proposal");
+        }finally {
+            closeSt(st);
+            returnConnectionToPool(cn);
         }
     }
 }

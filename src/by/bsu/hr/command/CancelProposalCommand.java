@@ -26,27 +26,7 @@ public class CancelProposalCommand implements ActionCommand{
         request.setAttribute("previewList",previewList);
         request.setAttribute("techList",techList);
         request.setAttribute("proposalList",proposalList);
-        request.setAttribute("futurePreview",rb.getMessage("futurePreview"));
-        request.setAttribute("futureTechInterview",rb.getMessage("futureTechInterview"));
-        request.setAttribute("date",rb.getMessage("date"));
-        request.setAttribute("time",rb.getMessage("time"));
-        request.setAttribute("place",rb.getMessage("place"));
-        request.setAttribute("cancel",rb.getMessage("cancel"));
-        request.setAttribute("vacancyName",rb.getMessage("vacancyName"));
-        request.setAttribute("companyName",rb.getMessage("companyName"));
-        request.setAttribute("login",rb.getMessage("login"));
-        request.setAttribute("name",rb.getMessage("name"));
-        request.setAttribute("sname",rb.getMessage("sname"));
-        request.setAttribute("role",rb.getMessage("role"));
-        request.setAttribute("rating",rb.getMessage("rating"));
-        request.setAttribute("vacancy",rb.getMessage("vacancy"));
-        request.setAttribute("welcome",rb.getMessage("welcome"));
-        request.setAttribute("LogOut",rb.getMessage("LogOut"));
-        request.setAttribute("result",rb.getMessage("result"));
-        request.setAttribute("myProfile",rb.getMessage("myProfile"));
-        request.setAttribute("myProposal",rb.getMessage("myProposal"));
-        request.setAttribute("addProposal",rb.getMessage("addProposal"));
-        request.setAttribute("changeInfo",rb.getMessage("changeInfo"));
+        SetAttributes.setAttributesMyProfilePage(rb,request);
         return MY_PROFILE_PAGE;
     }
 }

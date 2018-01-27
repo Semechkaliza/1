@@ -20,12 +20,7 @@ public class GoLoginCommand implements ActionCommand {
             default:    lang=EN;
                 break;
         }
-        request.setAttribute("login",lang.getMessage("login"));
-        request.setAttribute("password",lang.getMessage("password"));
-        request.setAttribute("registration",lang.getMessage("registration"));
-        request.setAttribute("LogIn",lang.getMessage("LogIn"));
-        request.setAttribute("name",lang.getMessage("name"));
-        request.setAttribute("sname",lang.getMessage("sname"));
+        SetAttributes.setAttributesLoginPage(lang,request);
         return PageConstant.LOGIN_PAGE;
     }
 }
