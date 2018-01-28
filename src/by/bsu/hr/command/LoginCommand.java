@@ -23,7 +23,6 @@ public class LoginCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String lang=request.getParameter("locale");
-        System.out.println(lang);
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String pass = request.getParameter(PARAM_NAME_PASSWORD);
         String page;
@@ -43,10 +42,9 @@ public class LoginCommand implements ActionCommand {
                     break;
             }
             session.setAttribute("rb",rb);
-            //тут пока везде ничего нет.экспериментируем с sql.
-            List<Proposal> proposalList=LoginLogic.getProposals(resList.get(0).getLogin());
-            List<Interview> previewList=LoginLogic.getFutureInterview(resList.get(0).getLogin(),"PREV");
-            List<Interview> techList=LoginLogic.getFutureInterview(resList.get(0).getLogin(),"TECH");
+            List<Proposal> proposalList=LoginLogic.getProposals(resList.get(0).getUserId());
+            List<Interview> previewList=LoginLogic.getFutureInterview(resList.get(0).getUserId(),"PREV");
+            List<Interview> techList=LoginLogic.getFutureInterview(resList.get(0).getUserId(),"TECH");
             request.setAttribute("previewList",previewList);
             request.setAttribute("techList",techList);
             request.setAttribute("proposalList",proposalList);

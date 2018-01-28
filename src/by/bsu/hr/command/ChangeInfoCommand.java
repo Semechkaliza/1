@@ -35,11 +35,11 @@ public class ChangeInfoCommand implements ActionCommand {
             email=request.getParameter("email");
             ((List<User>) session.getAttribute("user")).get(0).setEmail(email);
         }else email=((List<User>) session.getAttribute("user")).get(0).getEmail();
-        int id=((List<User>) session.getAttribute("user")).get(0).getUser_id();
+        int id=((List<User>) session.getAttribute("user")).get(0).getUserId();
         ChangeInfoLogic.updateInfo(name,sname,phone,email,id);
-        List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getLogin());
-        List<Interview> previewList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getLogin(),"PREV");
-        List<Interview> techList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getLogin(),"TECH");
+        List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getUserId());
+        List<Interview> previewList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"PREV");
+        List<Interview> techList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"TECH");
         request.setAttribute("proposalList",proposalList);
         request.setAttribute("previewList",previewList);
         request.setAttribute("techList",techList);

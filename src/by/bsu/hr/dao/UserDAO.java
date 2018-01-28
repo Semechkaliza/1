@@ -9,24 +9,17 @@ import org.apache.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static by.bsu.hr.connection.ConnectionPool.closeSt;
 import static by.bsu.hr.connection.ConnectionPool.returnConnectionToPool;
 
 public class UserDAO {
     private static Logger logger=Logger.getLogger(UserDAO.class);
-    private static final String FIND_USER_QUERY="SELECT * FROM users WHERE login LIKE ? AND password=md5(?);";
+    private static final String FIND_USER_QUERY="SELECT * FROM users WHERE login LIKE ? AND password=md5(?) and ACTIVE=1;";
     private static final String CHECK_USER_QUERY="SELECT * FROM users WHERE login LIKE ? and ACTIVE=1;";
     private static final String ADD_USER_QUERY="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
     private static final String UPDATE_INFO_QUERY="UPDATE users SET NAME=?,SNAME=?,PHONE=?,EMAIL=? WHERE ID=?";
-    private static final String FIND_PROPOSALS_QUERY="SELECT interested_users.id,vacancy,company,login,interested_users.ACTIVE " +
-            "from users join interested_users join vacancy " +
-            "on users.id=interested_users.USERS_ID and interested_users.VACANCY_ID=vacancy.ID " +
-            "where vacancy.ACTIVE=1 and interested_users.ACTIVE=1 and users.LOGIN LIKE ?;";
-    private static final String ADD_PROPOSAL_QUERY="insert into interested_users(VACANCY_ID,USERS_ID) values(?,?);";
-    private static final String CHECK_PROPOSAL_QUERY="SELECT * from interested_users where VACANCY_ID like ? and USERS_ID " +
-            "like ? and (ACTIVE=1 or PROCESSED=1)";
+    private static final String DELETE_USER_QUERY="UPDATE users set ACTIVE=0 WHERE ID=? and ACTIVE=1";
     public static List<User> findUser(String login, String password){
         List<User> resList = new ArrayList<>();
         Connection cn = null;
@@ -41,7 +34,7 @@ public class UserDAO {
                 if (rs.next()) {
                         do {
                             User res = new User();
-                            res.setUser_id(rs.getInt("id"));
+                            res.setUserId(rs.getInt("id"));
                             res.setLogin(rs.getString("login"));
                             res.setPassword(rs.getString("password"));
                             res.setName(rs.getString("name"));
@@ -101,35 +94,6 @@ public class UserDAO {
             returnConnectionToPool(cn);
         }
     }
-    public static List<Proposal> findProposals(String login){
-        List<Proposal> resList = new ArrayList<>();
-        Connection cn = null;
-        ResultSet rs = null;
-        PreparedStatement st = null;
-        try {
-            cn =ConnectionPool.getInstance().takeConnection();
-            st = cn.prepareStatement(FIND_PROPOSALS_QUERY);
-            st.setString(1,login);
-            rs=st.executeQuery();
-            if (rs.next()) {
-                do {
-                    Proposal res = new Proposal();
-                    res.setId(rs.getInt("id"));
-                    res.setLogin(rs.getString("login"));
-                    res.setCompany(rs.getString("company"));
-                    res.setVacancy(rs.getString("vacancy"));
-                    res.setActive(rs.getBoolean("active"));
-                    resList.add(res);
-                } while (rs.next());
-            }
-        } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing finding proposals");
-        } finally {
-            closeSt(st);
-            ConnectionPool.returnConnectionToPool(cn);
-        }
-        return resList;
-    }
 
     public static void updateInfo(String name, String sname, String phone, String email, int id) {
         Connection cn = null;
@@ -151,43 +115,20 @@ public class UserDAO {
         }
     }
 
-    public static void addProposal(int vacancy_id,int user_id) {
-        Connection cn = null;
-        PreparedStatement st = null;
-        try {
-            cn=ConnectionPool.getInstance().takeConnection();
-            st = cn.prepareStatement(ADD_PROPOSAL_QUERY);
-            st.setInt(1,vacancy_id);
-            st.setInt(2,user_id);
-            st.executeUpdate();
-        } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.INFO,"Missing add proposal");
-        }finally {
-            closeSt(st);
-            returnConnectionToPool(cn);
-        }
-    }
 
-    public static boolean checkProposal(int vacancy_id, int user_id) {
+    public static void deleteUser(int userId) {
         Connection cn = null;
-        ResultSet rs = null;
         PreparedStatement st = null;
-        boolean check=true;
         try {
             cn =ConnectionPool.getInstance().takeConnection();
-            st = cn.prepareStatement(CHECK_PROPOSAL_QUERY);
-            st.setInt(1,vacancy_id);
-            st.setInt(2,user_id);
-            rs=st.executeQuery();
-            if(rs.next()){
-                check=false;
-            }
-        } catch (ConnectionPoolException | SQLException e) {
-            logger.log(Level.ERROR,"Missing check proposal");
-        }finally {
+            st = cn.prepareStatement(DELETE_USER_QUERY);
+            st.setInt(1,userId);
+            st.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.log(Level.ERROR,"Missing delete user");
+        } finally {
             closeSt(st);
-            returnConnectionToPool(cn);
+            ConnectionPool.returnConnectionToPool(cn);
         }
-        return check;
     }
 }

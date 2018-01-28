@@ -19,10 +19,10 @@ public class CancelProposalCommand implements ActionCommand{
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         request.setAttribute("user",session.getAttribute("user"));
         CancelProposalLogic.cancelProposal(Integer.parseInt(request.getParameter("id")));
-        List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getLogin());
+        List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getUserId());
         request.setAttribute("proposalList",proposalList);
-        List<Interview> previewList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getLogin(),"PREV");
-        List<Interview> techList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getLogin(),"TECH");
+        List<Interview> previewList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"PREV");
+        List<Interview> techList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"TECH");
         request.setAttribute("previewList",previewList);
         request.setAttribute("techList",techList);
         request.setAttribute("proposalList",proposalList);

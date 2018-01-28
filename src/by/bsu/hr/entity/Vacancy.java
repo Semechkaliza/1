@@ -2,7 +2,7 @@ package by.bsu.hr.entity;
 
 public class Vacancy {
 
-    private int vacancy_id;
+    private int vacancyId;
     private String company;
     private String vacancy;
     private Integer salary;
@@ -13,7 +13,7 @@ public class Vacancy {
     @Override
     public String toString() {
         return "Vacancy{" +
-                "vacancy id='" + vacancy_id + '\'' +
+                "vacancy id='" + vacancyId + '\'' +
                 "company='" + company + '\'' +
                 ", vacancy='" + vacancy + '\'' +
                 ", salary=" + salary +
@@ -23,12 +23,12 @@ public class Vacancy {
                 '}';
     }
 
-    public int getVacancy_id() {
-        return vacancy_id;
+    public int getVacancyId() {
+        return vacancyId;
     }
 
-    public void setVacancy_id(int vacancy_id) {
-        this.vacancy_id = vacancy_id;
+    public void setVacancyId(int vacancyId) {
+        this.vacancyId = vacancyId;
     }
     public boolean isActive() {
         return active;

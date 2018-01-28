@@ -50,6 +50,7 @@ public class RegistrationCommand implements ActionCommand {
                         break;
                 }
                 session.setAttribute("rb",rb);
+                session.setAttribute("user",resList);
                 request.setAttribute("user", resList);
                 SetAttributes.setAttributesMyProfilePage(rb,request);
                 page= PageConstant.MY_PROFILE_PAGE;

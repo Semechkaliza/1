@@ -41,7 +41,7 @@
     <td>
         <form method="POST" action="controller">
             <input type="hidden" name="command" value="add_proposal" />
-            <input type="hidden" name="id" value=${requestScope.oneVacancy.vacancy_id} />
+            <input type="hidden" name="id" value=${requestScope.oneVacancy.vacancyId} />
             <input type="submit" value="${requestScope.addProposal}"/>
         </form>
     </td>

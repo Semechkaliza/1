@@ -33,6 +33,7 @@ public class SetAttributes {
         request.setAttribute("myProposal",lang.getMessage("myProposal"));
         request.setAttribute("addProposal",lang.getMessage("addProposal"));
         request.setAttribute("changeInfo",lang.getMessage("changeInfo"));
+        request.setAttribute("deleteProfile",lang.getMessage("deleteProfile"));
     }
     public static void setAttributesRegistrationPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request){
         request.setAttribute("login",lang.getMessage("login"));
@@ -61,6 +62,16 @@ public class SetAttributes {
         request.setAttribute("LogOut",lang.getMessage("LogOut"));
         request.setAttribute("result",lang.getMessage("result"));
         request.setAttribute("myProfile",lang.getMessage("myProfile"));
+        request.setAttribute("PrevResults",lang.getMessage("PrevResults"));
+        request.setAttribute("company",lang.getMessage("company"));
+        request.setAttribute("vacancy",lang.getMessage("vacancy"));
+        request.setAttribute("date",lang.getMessage("date"));
+        request.setAttribute("time",lang.getMessage("time"));
+        request.setAttribute("place",lang.getMessage("place"));
+        request.setAttribute("mark",lang.getMessage("mark"));
+        request.setAttribute("feedback",lang.getMessage("feedback"));
+        request.setAttribute("TIResults",lang.getMessage("TIResults"));
+
     }
     public static void setAttributesVacancyPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request){
         request.setAttribute("vacancy",lang.getMessage("vacancy"));

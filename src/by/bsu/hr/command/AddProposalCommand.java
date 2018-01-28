@@ -15,15 +15,15 @@ public class AddProposalCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
-        int vacancy_id= Integer.parseInt(request.getParameter("id"));
-        int user_id=((List<User>) session.getAttribute("user")).get(0).getUser_id();
-        AddProposalLogic.addProposal(vacancy_id,user_id);
+        int vacancyId= Integer.parseInt(request.getParameter("id"));
+        int userId=((List<User>) session.getAttribute("user")).get(0).getUserId();
+        AddProposalLogic.addProposal(vacancyId,userId);
         SetAttributes.setAttributesMyProfilePage(rb,request);
         request.setAttribute("user",session.getAttribute("user"));
-        List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getLogin());
+        List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getUserId());
         request.setAttribute("proposalList",proposalList);
-        List<Interview> previewList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getLogin(),"PREV");
-        List<Interview> techList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getLogin(),"TECH");
+        List<Interview> previewList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"PREV");
+        List<Interview> techList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"TECH");
         request.setAttribute("previewList",previewList);
         request.setAttribute("techList",techList);
         request.setAttribute("proposalList",proposalList);

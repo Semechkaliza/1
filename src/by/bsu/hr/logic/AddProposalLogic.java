@@ -1,11 +1,11 @@
 package by.bsu.hr.logic;
 
-import by.bsu.hr.dao.UserDAO;
+import by.bsu.hr.dao.InterviewDAO;
 
 public class AddProposalLogic {
-    public static void addProposal(int vacancy_id,int user_id) {
-        if(UserDAO.checkProposal(vacancy_id,user_id)){
-            UserDAO.addProposal(vacancy_id,user_id);
+    public static void addProposal(int vacancyId,int userId) {
+        if(InterviewDAO.checkProposal(vacancyId,userId)){
+            InterviewDAO.addProposal(vacancyId,userId);
         }
     }
 }

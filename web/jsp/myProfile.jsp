@@ -114,5 +114,9 @@ ${requestScope.futureTechInterview}
         </tr>
     </c:forEach>
 </table>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="delete_user" />
+    <input type="submit" value="${requestScope.deleteProfile}"/>
+</form>
 </body>
 </html>

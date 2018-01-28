@@ -9,19 +9,16 @@ import java.util.List;
 public class GetVacanciesCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        String page;
         List<Vacancy> resList = GetVacanciesLogic.getAllVacancies();
         HttpSession session=request.getSession(false);
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         if (!resList.isEmpty()) {
             SetAttributes.setAttributesVacancyPage(rb,request);
             request.setAttribute("vacanciesList", resList);
-            page = PageConstant.VACANCY_PAGE;
         } else {
             request.setAttribute("emptyVacanciesList",rb.getMessage("message.emptyVacanciesList"));
             request.setAttribute("LogOut",rb.getMessage("LogOut"));
-            page = PageConstant.VACANCY_PAGE;
         }
-        return page;
+        return PageConstant.VACANCY_PAGE;
     }
 }

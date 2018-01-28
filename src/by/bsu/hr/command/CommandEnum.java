@@ -22,6 +22,11 @@ public enum CommandEnum {
             this.command = new GoMyProfileCommand();
         }
     },
+    DELETE_USER {
+        {
+            this.command = new DeleteUserCommand();
+        }
+    },
     RESULT {
         {
             this.command = new ResultCommand();
