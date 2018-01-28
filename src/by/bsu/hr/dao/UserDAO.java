@@ -17,7 +17,7 @@ import static by.bsu.hr.connection.ConnectionPool.returnConnectionToPool;
 public class UserDAO {
     private static Logger logger=Logger.getLogger(UserDAO.class);
     private static final String FIND_USER_QUERY="SELECT * FROM users WHERE login LIKE ? AND password=md5(?);";
-    private static final String CHECK_USER_QUERY="SELECT * FROM users WHERE login LIKE ?;";
+    private static final String CHECK_USER_QUERY="SELECT * FROM users WHERE login LIKE ? and ACTIVE=1;";
     private static final String ADD_USER_QUERY="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
     private static final String UPDATE_INFO_QUERY="UPDATE users SET NAME=?,SNAME=?,PHONE=?,EMAIL=? WHERE ID=?";
     private static final String FIND_PROPOSALS_QUERY="SELECT interested_users.id,vacancy,company,login,interested_users.ACTIVE " +
@@ -25,6 +25,8 @@ public class UserDAO {
             "on users.id=interested_users.USERS_ID and interested_users.VACANCY_ID=vacancy.ID " +
             "where vacancy.ACTIVE=1 and interested_users.ACTIVE=1 and users.LOGIN LIKE ?;";
     private static final String ADD_PROPOSAL_QUERY="insert into interested_users(VACANCY_ID,USERS_ID) values(?,?);";
+    private static final String CHECK_PROPOSAL_QUERY="SELECT * from interested_users where VACANCY_ID like ? and USERS_ID " +
+            "like ? and (ACTIVE=1 or PROCESSED=1)";
     public static List<User> findUser(String login, String password){
         List<User> resList = new ArrayList<>();
         Connection cn = null;
@@ -48,7 +50,6 @@ public class UserDAO {
                             res.setPhone(rs.getString("phone"));
                             res.setEmail(rs.getString("email"));
                             res.setActive(rs.getBoolean("active"));
-                            res.setRating(rs.getInt("rating"));
                             resList.add(res);
                         } while (rs.next());
                 }
@@ -165,5 +166,28 @@ public class UserDAO {
             closeSt(st);
             returnConnectionToPool(cn);
         }
+    }
+
+    public static boolean checkProposal(int vacancy_id, int user_id) {
+        Connection cn = null;
+        ResultSet rs = null;
+        PreparedStatement st = null;
+        boolean check=true;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(CHECK_PROPOSAL_QUERY);
+            st.setInt(1,vacancy_id);
+            st.setInt(2,user_id);
+            rs=st.executeQuery();
+            if(rs.next()){
+                check=false;
+            }
+        } catch (ConnectionPoolException | SQLException e) {
+            logger.log(Level.ERROR,"Missing check proposal");
+        }finally {
+            closeSt(st);
+            returnConnectionToPool(cn);
+        }
+        return check;
     }
 }

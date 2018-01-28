@@ -11,9 +11,9 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Locale;
 
-import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.BE;
-import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.EN;
-import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.RU;
+import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.BE;
+import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.EN;
+import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.RU;
 
 
 public class LoginCommand implements ActionCommand {
@@ -33,7 +33,7 @@ public class LoginCommand implements ActionCommand {
             Locale current=new Locale(lang);
             session.setAttribute("locale",current);
             session.setAttribute("user",resList);
-            ResourseBundle.ResourceBundleEnum rb;
+            LocaleResourceBundle.ResourceBundleEnum rb;
             switch(current.toString()){
                 case "ru": rb=RU;
                     break;
@@ -54,7 +54,7 @@ public class LoginCommand implements ActionCommand {
             SetAttributes.setAttributesMyProfilePage(rb,request);
             page= PageConstant.MY_PROFILE_PAGE;
         } else {
-            ResourseBundle.ResourceBundleEnum rb;
+            LocaleResourceBundle.ResourceBundleEnum rb;
             switch(Locale.getDefault().toString()){
                 case "ru_RU": rb=RU;
                     break;

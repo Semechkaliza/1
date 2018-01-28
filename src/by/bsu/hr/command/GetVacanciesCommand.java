@@ -12,7 +12,7 @@ public class GetVacanciesCommand implements ActionCommand {
         String page;
         List<Vacancy> resList = GetVacanciesLogic.getAllVacancies();
         HttpSession session=request.getSession(false);
-        ResourseBundle.ResourceBundleEnum rb= (ResourseBundle.ResourceBundleEnum) session.getAttribute("rb");
+        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         if (!resList.isEmpty()) {
             SetAttributes.setAttributesVacancyPage(rb,request);
             request.setAttribute("vacanciesList", resList);

@@ -10,7 +10,6 @@ public class User {
     private String phone;
     private String email;
     private boolean active;
-    private int rating;
 
     @Override
     public String toString() {
@@ -24,7 +23,6 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", active=" + active +
-                ", rating=" + rating +
                 '}';
     }
     public int getUser_id() {
@@ -99,11 +97,4 @@ public class User {
         this.active = active;
     }
 
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
 }

@@ -34,7 +34,6 @@
         <td>${requestScope.name}</td>
         <td>${requestScope.sname}</td>
         <td>${requestScope.role}</td>
-        <td>${requestScope.rating}</td>
     </tr><tr>
     <c:forEach items="${requestScope.user}" var="users">
 
@@ -42,7 +41,6 @@
     <td>${users.name}</td>
     <td>${users.sname}</td>
     <td>${users.role}</td>
-    <td>${users.rating}</td>
 </tr>
     </c:forEach>
 </table>

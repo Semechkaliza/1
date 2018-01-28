@@ -18,7 +18,6 @@ public class RegistrationLogic {
                 res.setName(name);
                 res.setSname(sname);
                 res.setRole("USER");
-                res.setRating(0);
                 resList.add(res);
                 UserDAO.add(login,password,name,sname);
             }

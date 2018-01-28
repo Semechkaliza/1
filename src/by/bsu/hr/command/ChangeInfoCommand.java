@@ -14,7 +14,7 @@ public class ChangeInfoCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        ResourseBundle.ResourceBundleEnum rb= (ResourseBundle.ResourceBundleEnum) session.getAttribute("rb");
+        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         String name;
         if(!request.getParameter("name").isEmpty()){
             name=request.getParameter("name");

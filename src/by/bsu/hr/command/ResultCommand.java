@@ -9,7 +9,7 @@ public class ResultCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        ResourseBundle.ResourceBundleEnum rb= (ResourseBundle.ResourceBundleEnum) session.getAttribute("rb");
+        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         SetAttributes.setAttributesResultPage(rb,request);
         return RESULT_PAGE;
     }

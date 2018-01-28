@@ -2,7 +2,7 @@ package by.bsu.hr.command;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-public class ResourseBundle{
+public class LocaleResourceBundle {
     private static final String BUNDLE_CONSTANT="resources.text";
     public enum  ResourceBundleEnum {
         EN(ResourceBundle.getBundle(BUNDLE_CONSTANT,new Locale("en","EN"))),

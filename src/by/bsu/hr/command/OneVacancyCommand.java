@@ -12,7 +12,7 @@ public class OneVacancyCommand implements ActionCommand {
         int id= Integer.parseInt(request.getParameter("id"));
         Vacancy vac = OneVacancyLogic.getVacancy(id);
         HttpSession session=request.getSession(false);
-        ResourseBundle.ResourceBundleEnum rb= (ResourseBundle.ResourceBundleEnum) session.getAttribute("rb");
+        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         SetAttributes.setAttributesOneVacancyPage(rb,request);
         request.setAttribute("oneVacancy", vac);
         return PageConstant.ONE_VACANCY_PAGE;

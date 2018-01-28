@@ -14,7 +14,7 @@ public class AddProposalCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        ResourseBundle.ResourceBundleEnum rb= (ResourseBundle.ResourceBundleEnum) session.getAttribute("rb");
+        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         int vacancy_id= Integer.parseInt(request.getParameter("id"));
         int user_id=((List<User>) session.getAttribute("user")).get(0).getUser_id();
         AddProposalLogic.addProposal(vacancy_id,user_id);

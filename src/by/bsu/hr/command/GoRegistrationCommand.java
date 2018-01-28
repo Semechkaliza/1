@@ -1,17 +1,16 @@
 package by.bsu.hr.command;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
-import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.BE;
-import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.EN;
-import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.RU;
+import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.BE;
+import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.EN;
+import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.RU;
 
 public class GoRegistrationCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        ResourseBundle.ResourceBundleEnum lang;
+        LocaleResourceBundle.ResourceBundleEnum lang;
         switch(Locale.getDefault().toString()){
             case "ru_RU": lang=RU;
                 break;

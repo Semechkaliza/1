@@ -6,6 +6,7 @@ public class Proposal {
     private String company;
     private String login;
     private boolean active;
+    private boolean processed;
 
     @Override
     public String toString() {
@@ -15,6 +16,7 @@ public class Proposal {
                 ", company='" + company + '\'' +
                 ", login='" + login + '\'' +
                 ", active=" + active +
+                ", processed=" + processed +
                 '}';
     }
 
@@ -56,5 +58,13 @@ public class Proposal {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
     }
 }

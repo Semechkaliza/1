@@ -3,7 +3,7 @@ package by.bsu.hr.command;
 import javax.servlet.http.HttpServletRequest;
 
 public class SetAttributes {
-    public static void setAttributesLoginPage(ResourseBundle.ResourceBundleEnum lang, HttpServletRequest request) {
+    public static void setAttributesLoginPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request) {
         request.setAttribute("login",lang.getMessage("login"));
         request.setAttribute("password",lang.getMessage("password"));
         request.setAttribute("registration",lang.getMessage("registration"));
@@ -11,7 +11,7 @@ public class SetAttributes {
         request.setAttribute("name",lang.getMessage("name"));
         request.setAttribute("sname",lang.getMessage("sname"));
     }
-    public static void setAttributesMyProfilePage(ResourseBundle.ResourceBundleEnum lang, HttpServletRequest request){
+    public static void setAttributesMyProfilePage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request){
         request.setAttribute("futurePreview",lang.getMessage("futurePreview"));
         request.setAttribute("futureTechInterview",lang.getMessage("futureTechInterview"));
         request.setAttribute("date",lang.getMessage("date"));
@@ -34,7 +34,7 @@ public class SetAttributes {
         request.setAttribute("addProposal",lang.getMessage("addProposal"));
         request.setAttribute("changeInfo",lang.getMessage("changeInfo"));
     }
-    public static void setAttributesRegistrationPage(ResourseBundle.ResourceBundleEnum lang, HttpServletRequest request){
+    public static void setAttributesRegistrationPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request){
         request.setAttribute("login",lang.getMessage("login"));
         request.setAttribute("password",lang.getMessage("password"));
         request.setAttribute("registration",lang.getMessage("registration"));
@@ -44,7 +44,7 @@ public class SetAttributes {
         request.setAttribute("name",lang.getMessage("name"));
         request.setAttribute("sname",lang.getMessage("sname"));
     }
-    public static void setAttributesChangeInfoPage(ResourseBundle.ResourceBundleEnum lang, HttpServletRequest request){
+    public static void setAttributesChangeInfoPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request){
         request.setAttribute("changeInfo",lang.getMessage("changeInfo"));
         request.setAttribute("name",lang.getMessage("name"));
         request.setAttribute("sname",lang.getMessage("sname"));
@@ -56,13 +56,13 @@ public class SetAttributes {
         request.setAttribute("result",lang.getMessage("result"));
         request.setAttribute("myProfile",lang.getMessage("myProfile"));
     }
-    public static void setAttributesResultPage(ResourseBundle.ResourceBundleEnum lang, HttpServletRequest request){
+    public static void setAttributesResultPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request){
         request.setAttribute("vacancy",lang.getMessage("vacancy"));
         request.setAttribute("LogOut",lang.getMessage("LogOut"));
         request.setAttribute("result",lang.getMessage("result"));
         request.setAttribute("myProfile",lang.getMessage("myProfile"));
     }
-    public static void setAttributesVacancyPage(ResourseBundle.ResourceBundleEnum lang, HttpServletRequest request){
+    public static void setAttributesVacancyPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request){
         request.setAttribute("vacancy",lang.getMessage("vacancy"));
         request.setAttribute("more",lang.getMessage("more"));
         request.setAttribute("company",lang.getMessage("company"));
@@ -71,7 +71,7 @@ public class SetAttributes {
         request.setAttribute("myProfile",lang.getMessage("myProfile"));
     }
 
-    public static void setAttributesOneVacancyPage(ResourseBundle.ResourceBundleEnum lang, HttpServletRequest request) {
+    public static void setAttributesOneVacancyPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request) {
         request.setAttribute("company",lang.getMessage("company"));
         request.setAttribute("vacancy",lang.getMessage("vacancy"));
         request.setAttribute("salary",lang.getMessage("salary"));

@@ -8,6 +8,7 @@ public class Interview {
     private String time;
     private String place;
     private int mark;
+    private String feedback;
 
     @Override
     public String toString() {
@@ -19,6 +20,7 @@ public class Interview {
                 ", time='" + time + '\'' +
                 ", place='" + place + '\'' +
                 ", mark=" + mark +
+                ", feedback=" + feedback +
                 '}';
     }
 
@@ -76,5 +78,13 @@ public class Interview {
 
     public void setMark(int mark) {
         this.mark = mark;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
     }
 }

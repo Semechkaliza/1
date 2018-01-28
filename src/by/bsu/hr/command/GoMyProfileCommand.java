@@ -16,7 +16,7 @@ public class GoMyProfileCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        ResourseBundle.ResourceBundleEnum rb= (ResourseBundle.ResourceBundleEnum) session.getAttribute("rb");
+        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         request.setAttribute("user",session.getAttribute("user"));
         List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getLogin());
         request.setAttribute("proposalList",proposalList);

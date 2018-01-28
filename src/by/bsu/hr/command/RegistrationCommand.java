@@ -9,9 +9,9 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Locale;
 
-import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.BE;
-import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.EN;
-import static by.bsu.hr.command.ResourseBundle.ResourceBundleEnum.RU;
+import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.BE;
+import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.EN;
+import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.RU;
 
 
 public class RegistrationCommand implements ActionCommand {
@@ -23,7 +23,7 @@ public class RegistrationCommand implements ActionCommand {
         String name=request.getParameter("name");
         String sname=request.getParameter("sname");
         String page;
-        ResourseBundle.ResourceBundleEnum rb;
+        LocaleResourceBundle.ResourceBundleEnum rb;
         switch(Locale.getDefault().toString()){
             case "ru_RU": rb=RU;
                 break;
