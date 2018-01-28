@@ -51,13 +51,11 @@
 ${requestScope.myProposal}
 <table border="1">
     <tr>
-        <td>${requestScope.login}</td>
         <td>${requestScope.vacancyName}</td>
         <td>${requestScope.companyName}</td>
     </tr><tr>
     <c:forEach items="${requestScope.proposalList}" var="prop">
 
-    <td>${prop.login}</td>
     <td>${prop.vacancy}</td>
     <td>${prop.company}</td>
     <td>  <form method="POST" action="controller">
@@ -75,7 +73,6 @@ ${requestScope.myProposal}
 ${requestScope.futurePreview}
 <table border="1">
     <tr>
-        <td>${requestScope.login}</td>
         <td>${requestScope.vacancyName}</td>
         <td>${requestScope.companyName}</td>
         <td>${requestScope.date}</td>
@@ -84,7 +81,6 @@ ${requestScope.futurePreview}
     </tr><tr>
     <c:forEach items="${requestScope.previewList}" var="prev">
 
-    <td>${prev.login}</td>
     <td>${prev.vacancy}</td>
     <td>${prev.company}</td>
         <td>${prev.date}</td>
@@ -96,7 +92,7 @@ ${requestScope.futurePreview}
 ${requestScope.futureTechInterview}
 <table border="1">
     <tr>
-        <td>${requestScope.login}</td>
+
         <td>${requestScope.vacancyName}</td>
         <td>${requestScope.companyName}</td>
         <td>${requestScope.date}</td>
@@ -105,7 +101,6 @@ ${requestScope.futureTechInterview}
     </tr><tr>
     <c:forEach items="${requestScope.techList}" var="tech">
 
-        <td>${tech.login}</td>
         <td>${tech.vacancy}</td>
         <td>${tech.company}</td>
         <td>${tech.date}</td>

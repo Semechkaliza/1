@@ -19,7 +19,7 @@ import static by.bsu.hr.connection.ConnectionPool.returnConnectionToPool;
 
 public class InterviewDAO {
     private static Logger logger=Logger.getLogger(Interview.class);
-    private static final String FIND_PROPOSALS_QUERY="SELECT interested_users.id,vacancy,company,login,interested_users.ACTIVE " +
+    private static final String FIND_PROPOSALS_QUERY="SELECT interested_users.id,vacancy,company,interested_users.ACTIVE " +
             "from users join interested_users join vacancy " +
             "on users.id=interested_users.USERS_ID and interested_users.VACANCY_ID=vacancy.ID " +
             "where vacancy.ACTIVE=1 and interested_users.ACTIVE=1 and users.ID LIKE ?;";
@@ -35,6 +35,10 @@ public class InterviewDAO {
             " from interview join vacancy" +
             " on interview.VACANCY_ID=vacancy.ID" +
             " where USERS_ID=? and TYPE=? and RESULT is not null;";
+    private static final String HR_PROPOSALS_QUERY="SELECT interested_users.id,vacancy,company,VACANCY_ID,USERS_ID,NAME,SNAME " +
+            "from users join interested_users join vacancy " +
+            "on users.id=interested_users.USERS_ID and interested_users.VACANCY_ID=vacancy.ID " +
+            "where vacancy.ACTIVE=1 and interested_users.ACTIVE=1 and users.ACTIVE=1;";
     public static List<Proposal> findProposals(int userId){
         List<Proposal> resList = new ArrayList<>();
         Connection cn = null;
@@ -49,7 +53,6 @@ public class InterviewDAO {
                 do {
                     Proposal res = new Proposal();
                     res.setId(rs.getInt("id"));
-                    res.setLogin(rs.getString("login"));
                     res.setCompany(rs.getString("company"));
                     res.setVacancy(rs.getString("vacancy"));
                     res.setActive(rs.getBoolean("active"));
@@ -72,7 +75,8 @@ public class InterviewDAO {
             st = cn.prepareStatement(ADD_PROPOSAL_QUERY);
             st.setInt(1,vacancyId);
             st.setInt(2,userId);
-            st.executeUpdate();
+            st.execute();
+           // st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             logger.log(Level.INFO,"Missing add proposal");
         }finally {
@@ -118,7 +122,6 @@ public class InterviewDAO {
             if (rs.next()) {
                 do {
                     Interview res = new Interview();
-                    res.setLogin(rs.getString("login"));
                     res.setCompany(rs.getString("company"));
                     res.setVacancy(rs.getString("vacancy"));
                     res.setDate(rs.getString("date"));
@@ -179,6 +182,37 @@ public class InterviewDAO {
             }
         } catch (SQLException | ConnectionPoolException e) {
             logger.log(Level.ERROR,"Missing finding interview results");
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+        return resList;
+    }
+
+    public static List<Proposal> getHRProposals() {
+        List<Proposal> resList = new ArrayList<>();
+        Connection cn = null;
+        ResultSet rs = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(HR_PROPOSALS_QUERY);
+            rs=st.executeQuery();
+            if (rs.next()) {
+                do {
+                    Proposal res=new Proposal();
+                    res.setCompany(rs.getString("company"));
+                    res.setVacancy(rs.getString("vacancy"));
+                    res.setId(rs.getInt("id"));
+                    res.setVacancyId(rs.getInt("vacancy_id"));
+                    res.setUserId(rs.getInt("users_id"));
+                    res.setName(rs.getString("name"));
+                    res.setSname(rs.getString("sname"));
+                    resList.add(res);
+                } while (rs.next());
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.log(Level.ERROR,"Missing find hr proposals");
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);

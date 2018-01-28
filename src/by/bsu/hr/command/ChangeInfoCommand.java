@@ -5,6 +5,7 @@ import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.entity.User;
 import by.bsu.hr.logic.ChangeInfoLogic;
 import by.bsu.hr.logic.MyProfileLogic;
+import by.bsu.hr.logic.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -37,15 +38,21 @@ public class ChangeInfoCommand implements ActionCommand {
         }else email=((List<User>) session.getAttribute("user")).get(0).getEmail();
         int id=((List<User>) session.getAttribute("user")).get(0).getUserId();
         ChangeInfoLogic.updateInfo(name,sname,phone,email,id);
-        List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getUserId());
-        List<Interview> previewList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"PREV");
-        List<Interview> techList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"TECH");
-        request.setAttribute("proposalList",proposalList);
-        request.setAttribute("previewList",previewList);
-        request.setAttribute("techList",techList);
-        request.setAttribute("proposalList",proposalList);
-        request.setAttribute("user",session.getAttribute("user"));
-        SetAttributes.setAttributesMyProfilePage(rb,request);
-        return PageConstant.MY_PROFILE_PAGE;
+        request.setAttribute("user", session.getAttribute("user"));
+        if(Validator.isUser(session)){
+            List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getUserId());
+            List<Interview> previewList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"PREV");
+            List<Interview> techList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"TECH");
+            request.setAttribute("proposalList",proposalList);
+            request.setAttribute("previewList",previewList);
+            request.setAttribute("techList",techList);
+            request.setAttribute("proposalList",proposalList);
+            SetAttributes.setAttributesMyProfilePage(rb,request);
+            return PageConstant.MY_PROFILE_PAGE;
+        }else{
+            SetAttributes.setAttributesHRProfilePage(rb,request);
+            return PageConstant.HR_PROFILE_PAGE;
+        }
+
     }
 }

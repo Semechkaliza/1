@@ -4,6 +4,7 @@ import by.bsu.hr.entity.Interview;
 import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.entity.User;
 import by.bsu.hr.logic.LoginLogic;
+import by.bsu.hr.logic.Validator;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,15 +43,22 @@ public class LoginCommand implements ActionCommand {
                     break;
             }
             session.setAttribute("rb",rb);
-            List<Proposal> proposalList=LoginLogic.getProposals(resList.get(0).getUserId());
-            List<Interview> previewList=LoginLogic.getFutureInterview(resList.get(0).getUserId(),"PREV");
-            List<Interview> techList=LoginLogic.getFutureInterview(resList.get(0).getUserId(),"TECH");
-            request.setAttribute("previewList",previewList);
-            request.setAttribute("techList",techList);
-            request.setAttribute("proposalList",proposalList);
-            request.setAttribute("user", resList);
-            SetAttributes.setAttributesMyProfilePage(rb,request);
-            page= PageConstant.MY_PROFILE_PAGE;
+            if(Validator.isUser(session)){
+                List<Proposal> proposalList=LoginLogic.getProposals(resList.get(0).getUserId());
+                List<Interview> previewList=LoginLogic.getFutureInterview(resList.get(0).getUserId(),"PREV");
+                List<Interview> techList=LoginLogic.getFutureInterview(resList.get(0).getUserId(),"TECH");
+                request.setAttribute("previewList",previewList);
+                request.setAttribute("techList",techList);
+                request.setAttribute("proposalList",proposalList);
+                request.setAttribute("user", resList);
+                SetAttributes.setAttributesMyProfilePage(rb,request);
+                page= PageConstant.MY_PROFILE_PAGE;
+            }else{
+                request.setAttribute("user", resList);
+                SetAttributes.setAttributesHRProfilePage(rb,request);
+                page=PageConstant.HR_PROFILE_PAGE;
+            }
+
         } else {
             LocaleResourceBundle.ResourceBundleEnum rb;
             switch(Locale.getDefault().toString()){

@@ -1,22 +1,22 @@
 package by.bsu.hr.command;
 
 public enum CommandEnum {
-    REGISTRATION{
-    {
-        this.command = new RegistrationCommand();
-    }
+    REGISTRATION {
+        {
+            this.command = new RegistrationCommand();
+        }
 
-},
+    },
     LOGOUT {
-    {
-        this.command = new LogoutCommand();
-    }
-},
+        {
+            this.command = new LogoutCommand();
+        }
+    },
     LOGIN {
         {
             this.command = new LoginCommand();
         }
-},
+    },
     GO_MY_PROFILE {
         {
             this.command = new GoMyProfileCommand();
@@ -32,46 +32,91 @@ public enum CommandEnum {
             this.command = new ResultCommand();
         }
     },
-    CANCEL_PROPOSAL{
+    CANCEL_PROPOSAL {
         {
-            this.command=new CancelProposalCommand();
+            this.command = new CancelProposalCommand();
         }
     },
-    ADD_PROPOSAL{
+    ADD_PROPOSAL {
         {
-            this.command=new AddProposalCommand();
+            this.command = new AddProposalCommand();
         }
     },
-    CHANGE_INFO{
+    CHANGE_INFO {
         {
-            this.command=new ChangeInfoCommand();
+            this.command = new ChangeInfoCommand();
         }
     },
-    GO_CHANGE_INFO{
+    GO_CHANGE_INFO {
         {
-            this.command=new GoChangeInfoCommand();
+            this.command = new GoChangeInfoCommand();
         }
     },
-    GO_LOGIN{
+    GO_LOGIN {
         {
-            this.command=new GoLoginCommand();
+            this.command = new GoLoginCommand();
         }
     },
-    GO_REGISTRATION{
+    GO_REGISTRATION {
         {
-            this.command=new GoRegistrationCommand();
+            this.command = new GoRegistrationCommand();
         }
     },
     GET_VACANCIES {
         {
             this.command = new GetVacanciesCommand();
         }
-},
-    ONE_VACANCY{
+    },
+    ONE_VACANCY {
         {
-            this.command=new OneVacancyCommand();
+            this.command = new OneVacancyCommand();
         }
-    };
+    },
+    GO_WINNERS {
+        {
+            this.command = new GoWinnersCommand();
+        }
+    },
+    GO_VACANCIES_HR {
+        {
+            this.command = new GoVacanciesHRCommand();
+        }
+    },
+    GO_ADD_VACANCY {
+        {
+            this.command=new GoAddVacancyCommand();
+        }
+    },
+    ADD_VACANCY {
+        {
+            this.command=new AddVacancyCommand();
+        }
+    },
+    GO_HR_PROPOSALS {
+        {
+            this.command = new GoHRProposalsCommand();
+        }
+    },
+    GO_HR_PREVIEWS {
+        {
+            this.command = new GoHRPreviewsCommand();
+        }
+    },
+    GO_HR_TECH_INTERVIEWS {
+        {
+            this.command = new GoHRTechInterviewsCommand();
+        }
+    },
+    HANDLE_WINNER {
+        {
+            this.command = new HandleWinnerCommand();
+        }
+    },
+    GO_HR_PROFILE{
+        {
+            this.command=new GoHRProfileCommand();
+        }
+};
     ActionCommand command;
     public ActionCommand getCurrentCommand() { return command; }
 }

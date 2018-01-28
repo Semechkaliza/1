@@ -4,6 +4,7 @@ import by.bsu.hr.connection.ConnectionPool;
 import by.bsu.hr.connection.ConnectionPoolException;
 import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.entity.User;
+import by.bsu.hr.entity.Winner;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import java.sql.*;
@@ -20,6 +21,11 @@ public class UserDAO {
     private static final String ADD_USER_QUERY="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
     private static final String UPDATE_INFO_QUERY="UPDATE users SET NAME=?,SNAME=?,PHONE=?,EMAIL=? WHERE ID=?";
     private static final String DELETE_USER_QUERY="UPDATE users set ACTIVE=0 WHERE ID=? and ACTIVE=1";
+    private static final String GET_WINNERS_QUERY="select users_id,vacancy_id,name,sname,phone,email,vacancy,company " +
+            "from winners join vacancy join users " +
+            "on winners.VACANCY_ID=vacancy.ID and winners.USERS_ID=users.ID " +
+            "where winners.ACTIVE=1;";
+    private static final String HANDLE_WINNER_QUERY="UPDATE winners set active=0 where USERS_ID=? and VACANCY_ID=?";
     public static List<User> findUser(String login, String password){
         List<User> resList = new ArrayList<>();
         Connection cn = null;
@@ -126,6 +132,55 @@ public class UserDAO {
             st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             logger.log(Level.ERROR,"Missing delete user");
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+    }
+
+    public static List<Winner> getWinners() {
+        List<Winner> resList = new ArrayList<>();
+        Connection cn = null;
+        ResultSet rs = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(GET_WINNERS_QUERY);
+            rs=st.executeQuery();
+            if (rs.next()) {
+                do {
+                    Winner res=new Winner();
+                    res.setuserId(rs.getInt("users_id"));
+                    res.setvacancyId(rs.getInt("vacancy_id"));
+                    res.setName(rs.getString("name"));
+                    res.setSname(rs.getString("sname"));
+                    res.setPhone(rs.getString("phone"));
+                    res.setEmail(rs.getString("email"));
+                    res.setVacancy(rs.getString("vacancy"));
+                    res.setCompany(rs.getString("company"));
+                    resList.add(res);
+                } while (rs.next());
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.log(Level.ERROR,"Missing finding winners");
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+        return resList;
+    }
+
+    public static void handleWinner(int userId, int vacancyId) {
+        Connection cn = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(HANDLE_WINNER_QUERY);
+            st.setInt(1,userId);
+            st.setInt(2,vacancyId);
+            st.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.log(Level.ERROR,"Missing handle winner");
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);

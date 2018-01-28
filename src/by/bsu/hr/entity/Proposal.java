@@ -4,7 +4,10 @@ public class Proposal {
     private int id;
     private String vacancy;
     private String company;
-    private String login;
+    private int userId;
+    private int vacancyId;
+    private String name;
+    private String sname;
     private boolean active;
     private boolean processed;
 
@@ -14,10 +17,29 @@ public class Proposal {
                 "id=" + id +
                 ", vacancy='" + vacancy + '\'' +
                 ", company='" + company + '\'' +
-                ", login='" + login + '\'' +
+                ", userId=" + userId +
+                ", vacancyId=" + vacancyId +
+                ", name='" + name + '\'' +
+                ", sname='" + sname + '\'' +
                 ", active=" + active +
                 ", processed=" + processed +
                 '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
     }
 
     public int getId() {
@@ -44,12 +66,20 @@ public class Proposal {
         this.company = company;
     }
 
-    public String getLogin() {
-        return login;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getVacancyId() {
+        return vacancyId;
+    }
+
+    public void setVacancyId(int vacancyId) {
+        this.vacancyId = vacancyId;
     }
 
     public boolean isActive() {
