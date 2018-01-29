@@ -6,6 +6,6 @@ import java.util.List;
 
 public class GetVacanciesLogic {
     public static List<Vacancy> getAllVacancies() {
-        return VacancyDAO.getAllVacancies();
+        return VacancyDAO.findAllVacancies();
     }
 }

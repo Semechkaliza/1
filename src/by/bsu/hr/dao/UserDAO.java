@@ -21,16 +21,16 @@ public class UserDAO {
     private static final String ADD_USER_QUERY="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
     private static final String UPDATE_INFO_QUERY="UPDATE users SET NAME=?,SNAME=?,PHONE=?,EMAIL=? WHERE ID=?";
     private static final String DELETE_USER_QUERY="UPDATE users set ACTIVE=0 WHERE ID=? and ACTIVE=1";
-    private static final String GET_WINNERS_QUERY="select users_id,vacancy_id,name,sname,phone,email,vacancy,company " +
+    private static final String GET_WINNERS_QUERY="select users_id,vacancyId,name,sname,phone,email,vacancy,company " +
             "from winners join vacancy join users " +
-            "on winners.VACANCY_ID=vacancy.ID and winners.USERS_ID=users.ID " +
+            "on winners.vacancyId=vacancy.ID and winners.USERS_ID=users.ID " +
             "where winners.ACTIVE=1;";
-    private static final String HANDLE_WINNER_QUERY="UPDATE winners set active=0 where USERS_ID=? and VACANCY_ID=?";
-    public static List<User> findUser(String login, String password){
-        List<User> resList = new ArrayList<>();
+    private static final String HANDLE_WINNER_QUERY="UPDATE winners set active=0 where USERS_ID=? and vacancyId=?";
+    public static User findUser(String login, String password){
         Connection cn = null;
         ResultSet rs = null;
         PreparedStatement st = null;
+        User res = new User();
         try {
             cn =ConnectionPool.getInstance().takeConnection();
             st = cn.prepareStatement(FIND_USER_QUERY);
@@ -38,8 +38,6 @@ public class UserDAO {
             st.setString(2,password);
             rs=st.executeQuery();
                 if (rs.next()) {
-                        do {
-                            User res = new User();
                             res.setUserId(rs.getInt("id"));
                             res.setLogin(rs.getString("login"));
                             res.setPassword(rs.getString("password"));
@@ -49,8 +47,6 @@ public class UserDAO {
                             res.setPhone(rs.getString("phone"));
                             res.setEmail(rs.getString("email"));
                             res.setActive(rs.getBoolean("active"));
-                            resList.add(res);
-                        } while (rs.next());
                 }
         } catch (SQLException | ConnectionPoolException e) {
             logger.log(Level.ERROR,"Missing finding user");
@@ -58,7 +54,7 @@ public class UserDAO {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
         }
-        return resList;
+        return res;
     }
 
     public static boolean checkUser(String login){
@@ -72,7 +68,7 @@ public class UserDAO {
             st.setString(1,login);
             rs=st.executeQuery();
             if(rs.next()){
-                check=false;
+                check = false;
             }
         } catch (ConnectionPoolException | SQLException e) {
             logger.log(Level.ERROR,"Missing check user");
@@ -82,7 +78,7 @@ public class UserDAO {
         }
         return check;
     }
-    public static void add(String login, String password, String name, String sname) {
+    public static void addUser(String login, String password, String name, String sname) throws DAOException {
         Connection cn = null;
         PreparedStatement st = null;
         try {
@@ -94,7 +90,7 @@ public class UserDAO {
             st.setString(4,sname);
             st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.INFO,"Missing add user");
+            throw new DAOException("Error registration user", e);
         }finally {
             closeSt(st);
             returnConnectionToPool(cn);
@@ -105,7 +101,7 @@ public class UserDAO {
         Connection cn = null;
         PreparedStatement st = null;
         try {
-            cn =ConnectionPool.getInstance().takeConnection();
+            cn = ConnectionPool.getInstance().takeConnection();
             st = cn.prepareStatement(UPDATE_INFO_QUERY);
             st.setString(1,name);
             st.setString(2,sname);
@@ -138,7 +134,7 @@ public class UserDAO {
         }
     }
 
-    public static List<Winner> getWinners() {
+    public static List<Winner> findWinners() {
         List<Winner> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs = null;
@@ -151,7 +147,7 @@ public class UserDAO {
                 do {
                     Winner res=new Winner();
                     res.setuserId(rs.getInt("users_id"));
-                    res.setvacancyId(rs.getInt("vacancy_id"));
+                    res.setvacancyId(rs.getInt("vacancyId"));
                     res.setName(rs.getString("name"));
                     res.setSname(rs.getString("sname"));
                     res.setPhone(rs.getString("phone"));

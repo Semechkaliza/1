@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LoginLogic {
     private static Logger logger=Logger.getLogger(LoginLogic.class);
-    public static List<User> logIn(String login, String pass){
+    public static User logIn(String login, String pass){
         return UserDAO.findUser(login,pass);
     }
 

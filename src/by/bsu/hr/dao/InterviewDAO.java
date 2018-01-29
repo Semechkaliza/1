@@ -39,6 +39,10 @@ public class InterviewDAO {
             "from users join interested_users join vacancy " +
             "on users.id=interested_users.USERS_ID and interested_users.VACANCY_ID=vacancy.ID " +
             "where vacancy.ACTIVE=1 and interested_users.ACTIVE=1 and users.ACTIVE=1;";
+    private static final String FIND_INFO_TO_APPOINT_INTERVIEW_QUERY="select name,sname,vacancy,company " +
+            "from interested_users join users join vacancy " +
+            "on interested_users.USERS_ID=users.ID and interested_users.VACANCY_ID=vacancy.ID " +
+            "where USERS_ID=? and VACANCY_ID=?;";
     public static List<Proposal> findProposals(int userId){
         List<Proposal> resList = new ArrayList<>();
         Connection cn = null;
@@ -78,7 +82,7 @@ public class InterviewDAO {
             st.execute();
            // st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.INFO,"Missing add proposal");
+            logger.log(Level.INFO,"Missing addUser proposal");
         }finally {
             closeSt(st);
             returnConnectionToPool(cn);
@@ -156,7 +160,7 @@ public class InterviewDAO {
         }
     }
 
-    public static List<Interview> getInterviewResult(int userId,String type) {
+    public static List<Interview> findInterviewResult(int userId, String type) {
         List<Interview> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs = null;
@@ -189,7 +193,7 @@ public class InterviewDAO {
         return resList;
     }
 
-    public static List<Proposal> getHRProposals() {
+    public static List<Proposal> findHRProposals() {
         List<Proposal> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs = null;
@@ -218,5 +222,31 @@ public class InterviewDAO {
             ConnectionPool.returnConnectionToPool(cn);
         }
         return resList;
+    }
+
+    public static Interview findInfoToAppointPreview(int userId, int vacancyId) {
+        Connection cn = null;
+        Interview res = new Interview();
+        ResultSet rs = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(FIND_INFO_TO_APPOINT_INTERVIEW_QUERY);
+            st.setInt(1,userId);
+            st.setInt(2,vacancyId);
+            rs=st.executeQuery();
+            if (rs.next()) {
+                    res.setCompany(rs.getString("company"));
+                    res.setVacancy(rs.getString("vacancy"));
+                    res.setName(rs.getString("name"));
+                    res.setSname(rs.getString("sname"));
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.log(Level.ERROR,"Missing finding info to appoint preview");
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+        return res;
     }
 }

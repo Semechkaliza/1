@@ -12,7 +12,7 @@ public class Validator {
         else return true;
     }
     public static boolean isUser(HttpSession session){
-       if(((List<User>) session.getAttribute("user")).get(0).getRole().equalsIgnoreCase("user"))
+       if(((User)session.getAttribute("user")).getRole().equalsIgnoreCase("user"))
            return true;
            else return false;
     }

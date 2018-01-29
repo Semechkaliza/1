@@ -7,6 +7,6 @@ import java.util.List;
 
 public class HRProposalsLogic {
     public static List<Proposal> getProposals() {
-        return InterviewDAO.getHRProposals();
+        return InterviewDAO.findHRProposals();
     }
 }

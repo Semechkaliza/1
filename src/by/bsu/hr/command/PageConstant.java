@@ -5,7 +5,7 @@ public class PageConstant {
     public static final String ERROR_PAGE="/jsp/error/error.jsp";
     public static final String VACANCY_PAGE="/jsp/vacancy.jsp";
     public static final String REGISTRATION_PAGE="/jsp/registration.jsp";
-    public static final String MY_PROFILE_PAGE="/jsp/myProfile.jsp";
+    public static final String USER_PROFILE_PAGE ="/jsp/userProfile.jsp";
     public static final String RESULT_PAGE="/jsp/result.jsp";
     public static final String CHANGE_INFO_PAGE="/jsp/changeInfo.jsp";
     public static final String ONE_VACANCY_PAGE="/jsp/oneVacancy.jsp";
@@ -16,4 +16,5 @@ public class PageConstant {
     public static final String HR_TECH_INTERVIEWS_PAGE="/jsp/hrTechInterviews.jsp";
     public static final String HR_VACANCY_PAGE="/jsp/hrVacancy.jsp";
     public static final String HR_WINNERS_PAGE="/jsp/winners.jsp";
+    public static final String APPOINT_PREVIEW_PAGE="/jsp/appointPreview.jsp";
 }

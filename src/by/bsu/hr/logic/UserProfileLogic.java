@@ -7,7 +7,7 @@ import by.bsu.hr.entity.Proposal;
 
 import java.util.List;
 
-public class MyProfileLogic {
+public class UserProfileLogic {
     public static List<Proposal> getProposals(int userId) {
         return InterviewDAO.findProposals(userId);
     }

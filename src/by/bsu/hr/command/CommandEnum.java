@@ -19,7 +19,7 @@ public enum CommandEnum {
     },
     GO_MY_PROFILE {
         {
-            this.command = new GoMyProfileCommand();
+            this.command = new GoUserProfileCommand();
         }
     },
     DELETE_USER {
@@ -110,6 +110,16 @@ public enum CommandEnum {
     HANDLE_WINNER {
         {
             this.command = new HandleWinnerCommand();
+        }
+    },
+    APPOINT_PREVIEW {
+        {
+            this.command = new AppointPreviewCommand();
+        }
+    },
+    GO_APPOINT_PREVIEW {
+        {
+            this.command = new GoAppointPreviewCommand();
         }
     },
     GO_HR_PROFILE{

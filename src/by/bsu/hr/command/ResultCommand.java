@@ -16,7 +16,8 @@ public class ResultCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
-        int userId=((List<User>) session.getAttribute("user")).get(0).getUserId();
+        int userId=((User)session.getAttribute("user")).getUserId();
+      //  int userId=((List<User>) session.getAttribute("user")).get(0).getUserId();
         List<Interview> resPreview=ResultLogic.getPreviewResult(userId);
         List<Interview> resTInterview=ResultLogic.getInterviewResult(userId);
         request.setAttribute("resPrev",resPreview);

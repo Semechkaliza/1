@@ -35,14 +35,11 @@
         <td>${requestScope.sname}</td>
         <td>${requestScope.role}</td>
     </tr><tr>
-    <c:forEach items="${requestScope.user}" var="users">
-
-    <td>${users.login}</td>
-    <td>${users.name}</td>
-    <td>${users.sname}</td>
-    <td>${users.role}</td>
+    <td>${requestScope.user.login}</td>
+    <td>${requestScope.user.name}</td>
+    <td>${requestScope.user.sname}</td>
+    <td>${requestScope.user.role}</td>
 </tr>
-    </c:forEach>
 </table>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="go_change_info" />

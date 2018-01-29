@@ -16,7 +16,7 @@ public class DeleteUserCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        DeleteUserLogic.deleteUser(((List<User>) session.getAttribute("user")).get(0).getUserId());
+        DeleteUserLogic.deleteUser(((User)session.getAttribute("user")).getUserId());
         LocaleResourceBundle.ResourceBundleEnum rb;
         switch(Locale.getDefault().toString()){
             case "ru_RU": rb=RU;

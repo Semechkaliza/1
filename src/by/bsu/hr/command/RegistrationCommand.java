@@ -6,7 +6,6 @@ import by.bsu.hr.logic.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Locale;
 
 import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.BE;
@@ -35,8 +34,8 @@ public class RegistrationCommand implements ActionCommand {
       //  Locale current=Locale.getDefault();
      //   ResourceBundle rb=ResourceBundle.getBundle("resources.text",current);
         if(Validator.registrationValid(login,password,name,sname)){
-            List<User> resList=RegistrationLogic.registraton(login,password,name,sname);
-            if (!(resList==null)) {
+            User user=RegistrationLogic.registraton(login,password,name,sname);
+            if (!(user==null)) {
                 String lang=request.getParameter("locale");
                 HttpSession session=request.getSession(true);
                 Locale curr=new Locale(lang);
@@ -50,10 +49,10 @@ public class RegistrationCommand implements ActionCommand {
                         break;
                 }
                 session.setAttribute("rb",rb);
-                session.setAttribute("user",resList);
-                request.setAttribute("user", resList);
+                session.setAttribute("user",user);
+                request.setAttribute("user",user);
                 SetAttributes.setAttributesMyProfilePage(rb,request);
-                page= PageConstant.MY_PROFILE_PAGE;
+                page= PageConstant.USER_PROFILE_PAGE;
             } else {
                 request.setAttribute("errorLoginPassMessage",rb.getMessage("message.RepetitiveUser"));
                 SetAttributes.setAttributesRegistrationPage(rb,request);

@@ -4,7 +4,7 @@ import by.bsu.hr.entity.Interview;
 import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.entity.User;
 import by.bsu.hr.logic.ChangeInfoLogic;
-import by.bsu.hr.logic.MyProfileLogic;
+import by.bsu.hr.logic.UserProfileLogic;
 import by.bsu.hr.logic.Validator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,36 +19,36 @@ public class ChangeInfoCommand implements ActionCommand {
         String name;
         if(!request.getParameter("name").isEmpty()){
             name=request.getParameter("name");
-            ((List<User>) session.getAttribute("user")).get(0).setName(name);
-        }else name=((List<User>) session.getAttribute("user")).get(0).getName();
+            ((User)session.getAttribute("user")).setName(name);
+        }else name=((User)session.getAttribute("user")).getName();
         String sname;
         if(!request.getParameter("sname").isEmpty()){
             sname=request.getParameter("sname");
-            ((List<User>) session.getAttribute("user")).get(0).setSname(sname);
-        }else sname=((List<User>) session.getAttribute("user")).get(0).getSname();
+            ((User)session.getAttribute("user")).setSname(sname);
+        }else sname=((User)session.getAttribute("user")).getSname();
         String phone;
         if(!request.getParameter("phone").isEmpty()){
             phone=request.getParameter("phone");
-            ((List<User>) session.getAttribute("user")).get(0).setPhone(phone);
-        }else phone=((List<User>) session.getAttribute("user")).get(0).getPhone();
+            ((User)session.getAttribute("user")).setPhone(phone);
+        }else phone=((User)session.getAttribute("user")).getPhone();
         String email;
         if(!request.getParameter("email").isEmpty()){
             email=request.getParameter("email");
-            ((List<User>) session.getAttribute("user")).get(0).setEmail(email);
-        }else email=((List<User>) session.getAttribute("user")).get(0).getEmail();
-        int id=((List<User>) session.getAttribute("user")).get(0).getUserId();
+            ((User)session.getAttribute("user")).setEmail(email);
+        }else email=((User)session.getAttribute("user")).getEmail();
+        int id=((User)session.getAttribute("user")).getUserId();
         ChangeInfoLogic.updateInfo(name,sname,phone,email,id);
         request.setAttribute("user", session.getAttribute("user"));
         if(Validator.isUser(session)){
-            List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getUserId());
-            List<Interview> previewList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"PREV");
-            List<Interview> techList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"TECH");
+            List<Proposal> proposalList= UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
+            List<Interview> previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV");
+            List<Interview> techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH");
             request.setAttribute("proposalList",proposalList);
             request.setAttribute("previewList",previewList);
             request.setAttribute("techList",techList);
             request.setAttribute("proposalList",proposalList);
             SetAttributes.setAttributesMyProfilePage(rb,request);
-            return PageConstant.MY_PROFILE_PAGE;
+            return PageConstant.USER_PROFILE_PAGE;
         }else{
             SetAttributes.setAttributesHRProfilePage(rb,request);
             return PageConstant.HR_PROFILE_PAGE;

@@ -1,6 +1,10 @@
 package by.bsu.hr.entity;
 
 public class Interview {
+    private String name;
+    private String sname;
+    private int userId;
+    private int vacancyId;
     private String login;
     private String vacancy;
     private String company;
@@ -13,6 +17,8 @@ public class Interview {
     @Override
     public String toString() {
         return "Preview{" +
+                "name='" + name + '\'' +
+                "sname='" + sname + '\'' +
                 "login='" + login + '\'' +
                 ", vacancy='" + vacancy + '\'' +
                 ", company='" + company + '\'' +
@@ -86,5 +92,37 @@ public class Interview {
 
     public void setFeedback(String feedback) {
         this.feedback = feedback;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getVacancyId() {
+        return vacancyId;
+    }
+
+    public void setVacancyId(int vacancyId) {
+        this.vacancyId = vacancyId;
     }
 }

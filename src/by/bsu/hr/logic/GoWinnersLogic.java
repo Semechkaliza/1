@@ -7,6 +7,6 @@ import java.util.List;
 
 public class GoWinnersLogic {
     public static List<Winner> getWinners() {
-        return UserDAO.getWinners();
+        return UserDAO.findWinners();
     }
 }

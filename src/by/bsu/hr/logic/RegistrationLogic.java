@@ -1,26 +1,25 @@
 package by.bsu.hr.logic;
 
-import by.bsu.hr.command.PageConstant;
+import by.bsu.hr.dao.DAOException;
 import by.bsu.hr.dao.UserDAO;
 import by.bsu.hr.entity.User;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-
 public class RegistrationLogic {
-    public static List<User> registraton(String login,String password,String name,String sname){
-        List<User> resList=null;
+    public static User registraton(String login,String password,String name,String sname){
+        User user=new User();
             if (UserDAO.checkUser(login)) {
-                resList= UserDAO.findUser(login,password);
-                User res=new User();
-                res.setLogin(login);
-                res.setPassword(password);
-                res.setName(name);
-                res.setSname(sname);
-                res.setRole("USER");
-                resList.add(res);
-                UserDAO.add(login,password,name,sname);
+                user= UserDAO.findUser(login,password);
+                user.setLogin(login);
+                user.setPassword(password);
+                user.setName(name);
+                user.setSname(sname);
+                user.setRole("USER");
+                try {
+                    UserDAO.addUser(login,password,name,sname);
+                } catch (DAOException e) {
+                    e.printStackTrace();
+                }
             }
-        return resList;
+        return user;
     }
 }

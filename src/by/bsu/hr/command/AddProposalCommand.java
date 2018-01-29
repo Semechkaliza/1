@@ -4,7 +4,7 @@ import by.bsu.hr.entity.Interview;
 import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.entity.User;
 import by.bsu.hr.logic.AddProposalLogic;
-import by.bsu.hr.logic.MyProfileLogic;
+import by.bsu.hr.logic.UserProfileLogic;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,17 +16,17 @@ public class AddProposalCommand implements ActionCommand {
         HttpSession session=request.getSession(false);
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         int vacancyId= Integer.parseInt(request.getParameter("id"));
-        int userId=((List<User>) session.getAttribute("user")).get(0).getUserId();
+        int userId=((User)session.getAttribute("user")).getUserId();
         AddProposalLogic.addProposal(vacancyId,userId);
         SetAttributes.setAttributesMyProfilePage(rb,request);
         request.setAttribute("user",session.getAttribute("user"));
-        List<Proposal> proposalList= MyProfileLogic.getProposals(((List<User>) session.getAttribute("user")).get(0).getUserId());
+        List<Proposal> proposalList= UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
         request.setAttribute("proposalList",proposalList);
-        List<Interview> previewList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"PREV");
-        List<Interview> techList=MyProfileLogic.getFutureInterview(((List<User>) session.getAttribute("user")).get(0).getUserId(),"TECH");
+        List<Interview> previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV");
+        List<Interview> techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH");
         request.setAttribute("previewList",previewList);
         request.setAttribute("techList",techList);
         request.setAttribute("proposalList",proposalList);
-        return PageConstant.MY_PROFILE_PAGE;
+        return PageConstant.USER_PROFILE_PAGE;
     }
 }

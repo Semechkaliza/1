@@ -7,12 +7,12 @@ import java.util.List;
 
 public class ResultLogic {
     public static List<Interview> getPreviewResult(int userId) {
-        List<Interview> resList= InterviewDAO.getInterviewResult(userId,"PREV");
+        List<Interview> resList= InterviewDAO.findInterviewResult(userId,"PREV");
         return resList;
     }
 
     public static List<Interview> getInterviewResult(int userId) {
-        List<Interview> resList= InterviewDAO.getInterviewResult(userId,"TECH");
+        List<Interview> resList= InterviewDAO.findInterviewResult(userId,"TECH");
         return resList;
     }
 }

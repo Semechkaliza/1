@@ -17,7 +17,7 @@ public class VacancyDAO {
     private static Logger logger= Logger.getLogger(VacancyDAO.class);
     private static final String ALL_VACANCIES_QUERY = "SELECT id,VACANCY,COMPANY FROM vacancy where ACTIVE=1";
     private static final String FIND_VACANCY_QUERY="SELECT * FROM vacancy WHERE ID=?";
-    public static List<Vacancy> getAllVacancies () {
+    public static List<Vacancy> findAllVacancies() {
         Connection cn = null;
         ResultSet rs = null;
         PreparedStatement st = null;

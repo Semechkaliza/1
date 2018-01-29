@@ -27,12 +27,12 @@ public class LoginCommand implements ActionCommand {
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String pass = request.getParameter(PARAM_NAME_PASSWORD);
         String page;
-        List<User> resList = LoginLogic.logIn(login,pass);
-        if(!resList.isEmpty()){
+        User user = LoginLogic.logIn(login,pass);
+        if(user.getLogin()!=null){
             HttpSession session=request.getSession(true);
             Locale current=new Locale(lang);
             session.setAttribute("locale",current);
-            session.setAttribute("user",resList);
+            session.setAttribute("user",user);
             LocaleResourceBundle.ResourceBundleEnum rb;
             switch(current.toString()){
                 case "ru": rb=RU;
@@ -44,17 +44,17 @@ public class LoginCommand implements ActionCommand {
             }
             session.setAttribute("rb",rb);
             if(Validator.isUser(session)){
-                List<Proposal> proposalList=LoginLogic.getProposals(resList.get(0).getUserId());
-                List<Interview> previewList=LoginLogic.getFutureInterview(resList.get(0).getUserId(),"PREV");
-                List<Interview> techList=LoginLogic.getFutureInterview(resList.get(0).getUserId(),"TECH");
+                List<Proposal> proposalList=LoginLogic.getProposals(user.getUserId());
+                List<Interview> previewList=LoginLogic.getFutureInterview(user.getUserId(),"PREV");
+                List<Interview> techList=LoginLogic.getFutureInterview(user.getUserId(),"TECH");
                 request.setAttribute("previewList",previewList);
                 request.setAttribute("techList",techList);
                 request.setAttribute("proposalList",proposalList);
-                request.setAttribute("user", resList);
+                request.setAttribute("user", user);
                 SetAttributes.setAttributesMyProfilePage(rb,request);
-                page= PageConstant.MY_PROFILE_PAGE;
+                page= PageConstant.USER_PROFILE_PAGE;
             }else{
-                request.setAttribute("user", resList);
+                request.setAttribute("user", user);
                 SetAttributes.setAttributesHRProfilePage(rb,request);
                 page=PageConstant.HR_PROFILE_PAGE;
             }
