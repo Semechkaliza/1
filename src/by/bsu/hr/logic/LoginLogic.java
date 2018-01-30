@@ -12,11 +12,4 @@ public class LoginLogic {
     public static User logIn(String login, String pass){
         return UserDAO.findUser(login,pass);
     }
-
-    public static List<Proposal> getProposals(int userId) {
-        return InterviewDAO.findProposals(userId);
-    }
-    public static List<Interview> getFutureInterview(int userId,String type) {
-        return InterviewDAO.findFutureInterview(userId,type);
-    }
 }

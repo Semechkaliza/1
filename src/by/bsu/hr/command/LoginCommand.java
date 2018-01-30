@@ -4,6 +4,7 @@ import by.bsu.hr.entity.Interview;
 import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.entity.User;
 import by.bsu.hr.logic.LoginLogic;
+import by.bsu.hr.logic.UserProfileLogic;
 import by.bsu.hr.logic.Validator;
 import org.apache.log4j.Logger;
 
@@ -44,9 +45,9 @@ public class LoginCommand implements ActionCommand {
             }
             session.setAttribute("rb",rb);
             if(Validator.isUser(session)){
-                List<Proposal> proposalList=LoginLogic.getProposals(user.getUserId());
-                List<Interview> previewList=LoginLogic.getFutureInterview(user.getUserId(),"PREV");
-                List<Interview> techList=LoginLogic.getFutureInterview(user.getUserId(),"TECH");
+                List<Proposal> proposalList=UserProfileLogic.getProposals(user.getUserId());
+                List<Interview> previewList= UserProfileLogic.getFutureInterview(user.getUserId(),"PREV",(Locale)session.getAttribute("locale"));
+                List<Interview> techList=UserProfileLogic.getFutureInterview(user.getUserId(),"TECH",(Locale)session.getAttribute("locale"));
                 request.setAttribute("previewList",previewList);
                 request.setAttribute("techList",techList);
                 request.setAttribute("proposalList",proposalList);

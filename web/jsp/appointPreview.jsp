@@ -38,12 +38,15 @@
     <td>${requestScope.info.company}</td>
 </tr>
 </table>
-<form method="POST" action="add_preview">
-    <br/>${requestScope.date}:<input type="text" name="date" value=""/><br/>
-    <br/>${requestScope.time}:<input type="text" name="time" value=""/><br/>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="add_preview" />
+    <br/>${requestScope.date}:<input type="text" name="date" value="" placeholder="дд.мм.гг"/><br/>
+    <br/>${requestScope.time}:<input type="text" name="time" value="" placeholder="чч.мм"/><br/>
     <br/>${requestScope.place}:<input type="text" name="place" value=""/><br/>
-    <input type="hidden" name="userId" value="${requestScope.userId}" />
-    <input type="hidden" name="vacancyId" value="${requestScope.vacancyId}" />
+    ${requestScope.errorFormateMessage}
+    <input type="hidden" name="userId" value="${requestScope.info.userId}" />
+    <input type="hidden" name="vacancyId" value="${requestScope.info.vacancyId}" />
+    <input type="hidden" name="proposalId" value="${requestScope.proposalId}" />
     <input type="submit" value="${requestScope.appoint}"/>
 </form>
 </body>

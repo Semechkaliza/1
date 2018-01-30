@@ -1,5 +1,8 @@
 package by.bsu.hr.entity;
 
+import java.sql.Time;
+import java.util.Date;
+
 public class Interview {
     private String name;
     private String sname;
@@ -8,8 +11,10 @@ public class Interview {
     private String login;
     private String vacancy;
     private String company;
-    private String date;
-    private String time;
+    private Date date;
+    private Time time;
+    private String dateStr;
+    private String timeStr;
     private String place;
     private int mark;
     private String feedback;
@@ -24,6 +29,8 @@ public class Interview {
                 ", company='" + company + '\'' +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
+                ", dateStr='" + dateStr + '\'' +
+                ", timeStr='" + timeStr + '\'' +
                 ", place='" + place + '\'' +
                 ", mark=" + mark +
                 ", feedback=" + feedback +
@@ -54,20 +61,36 @@ public class Interview {
         this.company = company;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public String getTime() {
+    public Time getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Time time) {
         this.time = time;
+    }
+
+    public String getDateStr() {
+        return dateStr;
+    }
+
+    public void setDateStr(String dateStr) {
+        this.dateStr = dateStr;
+    }
+
+    public String getTimeStr() {
+        return timeStr;
+    }
+
+    public void setTimeStr(String timeStr) {
+        this.timeStr = timeStr;
     }
 
     public String getPlace() {

@@ -5,7 +5,7 @@ import by.bsu.hr.entity.Interview;
 
 public class GoAppointPreviewLogic {
 
-    public static Interview findInfoToPreview(int userId, int vacancyId) {
-        return InterviewDAO.findInfoToAppointPreview(userId,vacancyId);
+    public static Interview findInfoToPreview(int proposalId) {
+        return InterviewDAO.findInfoToAppointPreview(proposalId);
     }
 }

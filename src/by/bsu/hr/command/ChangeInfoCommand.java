@@ -10,6 +10,7 @@ import by.bsu.hr.logic.Validator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Locale;
 
 public class ChangeInfoCommand implements ActionCommand {
     @Override
@@ -41,8 +42,8 @@ public class ChangeInfoCommand implements ActionCommand {
         request.setAttribute("user", session.getAttribute("user"));
         if(Validator.isUser(session)){
             List<Proposal> proposalList= UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
-            List<Interview> previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV");
-            List<Interview> techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH");
+            List<Interview> previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV",(Locale)session.getAttribute("locale"));
+            List<Interview> techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));
             request.setAttribute("proposalList",proposalList);
             request.setAttribute("previewList",previewList);
             request.setAttribute("techList",techList);

@@ -21,11 +21,11 @@ public class UserDAO {
     private static final String ADD_USER_QUERY="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
     private static final String UPDATE_INFO_QUERY="UPDATE users SET NAME=?,SNAME=?,PHONE=?,EMAIL=? WHERE ID=?";
     private static final String DELETE_USER_QUERY="UPDATE users set ACTIVE=0 WHERE ID=? and ACTIVE=1";
-    private static final String GET_WINNERS_QUERY="select users_id,vacancyId,name,sname,phone,email,vacancy,company " +
+    private static final String GET_WINNERS_QUERY="select users_id,vacancy_id,name,sname,phone,email,vacancy,company " +
             "from winners join vacancy join users " +
-            "on winners.vacancyId=vacancy.ID and winners.USERS_ID=users.ID " +
+            "on winners.VACANCY_ID=vacancy.ID and winners.USERS_ID=users.ID " +
             "where winners.ACTIVE=1;";
-    private static final String HANDLE_WINNER_QUERY="UPDATE winners set active=0 where USERS_ID=? and vacancyId=?";
+    private static final String HANDLE_WINNER_QUERY="UPDATE winners set active=0 where USERS_ID=? and vacancy_id=?";
     public static User findUser(String login, String password){
         Connection cn = null;
         ResultSet rs = null;

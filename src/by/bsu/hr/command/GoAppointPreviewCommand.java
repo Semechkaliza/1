@@ -11,10 +11,10 @@ public class GoAppointPreviewCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
-        int userId= Integer.parseInt(request.getParameter("userId"));
-        int vacancyId = Integer.parseInt(request.getParameter("vacancyId"));
-        Interview info = GoAppointPreviewLogic.findInfoToPreview(userId,vacancyId);
+        int proposalId= Integer.parseInt(request.getParameter("proposalId"));
+        Interview info = GoAppointPreviewLogic.findInfoToPreview(proposalId);
         request.setAttribute("info",info);
+        request.setAttribute("proposalId",proposalId);
         SetAttributes.setAttributesAppointPreviewPage(rb,request);
         return PageConstant.APPOINT_PREVIEW_PAGE;
     }

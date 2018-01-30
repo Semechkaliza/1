@@ -80,8 +80,8 @@ ${requestScope.futurePreview}
 
     <td>${prev.vacancy}</td>
     <td>${prev.company}</td>
-        <td>${prev.date}</td>
-        <td>${prev.time}</td>
+        <td>${prev.dateStr}</td>
+        <td>${prev.timeStr}</td>
         <td>${prev.place}</td>
 </tr>
     </c:forEach>

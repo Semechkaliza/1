@@ -112,9 +112,9 @@ public enum CommandEnum {
             this.command = new HandleWinnerCommand();
         }
     },
-    APPOINT_PREVIEW {
+    ADD_PREVIEW {
         {
-            this.command = new AppointPreviewCommand();
+            this.command = new AddPreviewCommand();
         }
     },
     GO_APPOINT_PREVIEW {
