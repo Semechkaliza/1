@@ -26,6 +26,7 @@ public class UserDAO {
             "on winners.VACANCY_ID=vacancy.ID and winners.USERS_ID=users.ID " +
             "where winners.ACTIVE=1;";
     private static final String HANDLE_WINNER_QUERY="UPDATE winners set active=0 where USERS_ID=? and vacancy_id=?";
+    private static final String ADD_WINNER_QUERY="insert into winners (USERS_ID, VACANCY_ID) VALUE (?,?)";
     public static User findUser(String login, String password) throws DAOException {
         Connection cn = null;
         ResultSet rs = null;
@@ -177,6 +178,23 @@ public class UserDAO {
             st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DAOException("Error handle winner",e);
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+    }
+
+    public static void addWinner(int userId, int vacancyId) throws DAOException {
+        Connection cn = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(ADD_WINNER_QUERY);
+            st.setInt(2,vacancyId);
+            st.setInt(1,userId);
+            st.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DAOException("Error add winner",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);

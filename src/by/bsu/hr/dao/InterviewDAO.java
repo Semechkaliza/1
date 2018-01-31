@@ -54,11 +54,12 @@ public class InterviewDAO {
     private static final String HR_FULL_INTERVIEWS_QUERY="select users_id,vacancy_id,name,sname,vacancy,company,date,time,place,result,feedback from " +
             "vacancy join interview join users " +
             "on vacancy.ID=interview.vacancy_ID and users.ID=interview.users_ID " +
-            "where type=? and interview.RESULT is not null and feedback is not null;";
+            "where type=? and interview.RESULT is not null and feedback is not null and interview.active=1;";
     private static final String FIND_INFO_TO_APPOINT_TECH_INTERVIEW_QUERY="select name,sname,vacancy,company " +
             "from interested_users join users join vacancy " +
             "on interested_users.USERS_ID=users.ID and interested_users.VACANCY_ID=vacancy.ID " +
             "where vacancy.ID=? and users.ID=?;";
+    private static final String CLOSE_INTERVIEW_QUERY="update interview set ACTIVE=0  where users_id=? and vacancy_id=? and TYPE=?;";
     public static List<Proposal> findProposals(int userId) throws DAOException {
         List<Proposal> resList = new ArrayList<>();
         Connection cn = null;
@@ -96,6 +97,7 @@ public class InterviewDAO {
             st.setInt(1,vacancyId);
             st.setInt(2,userId);
             st.execute();
+            System.out.println(st);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DAOException("Error add proposals",e);
         }finally {
@@ -454,5 +456,23 @@ public class InterviewDAO {
             ConnectionPool.returnConnectionToPool(cn);
         }
         return res;
+    }
+
+    public static void closeInterview(int userId, int vacancyId, String type) throws DAOException {
+        Connection cn = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(CLOSE_INTERVIEW_QUERY);
+            st.setInt(1,userId);
+            st.setInt(2,vacancyId);
+            st.setString(3,type);
+            st.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DAOException("Error close interview",e);
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
     }
 }

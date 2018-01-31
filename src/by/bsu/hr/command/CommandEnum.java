@@ -112,6 +112,21 @@ public enum CommandEnum {
             this.command = new GoHRTechInterviewsCommand();
         }
     },
+    GO_HR_TECH_INTERVIEWS_FULL {
+        {
+            this.command = new GoHRTechInterviewsFullCommand();
+        }
+    },
+    CLOSE_INTERVIEW {
+        {
+            this.command = new CloseInterviewCommand();
+        }
+    },
+    ADD_WINNER {
+        {
+            this.command = new AddWinnerCommand();
+        }
+    },
     HANDLE_WINNER {
         {
             this.command = new HandleWinnerCommand();

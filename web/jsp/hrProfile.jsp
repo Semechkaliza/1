@@ -58,6 +58,10 @@
     <input type="submit" value="${requestScope.techInterviews}"/>
 </form>
 <form method="POST" action="controller">
+    <input type="hidden" name="command" value="go_hr_tech_interviews_full" />
+    <input type="submit" value="FullTI"/>
+</form>
+<form method="POST" action="controller">
     <input type="hidden" name="command" value="go_change_info" />
     <input type="submit" value="${requestScope.changeInfo}"/>
 </form>

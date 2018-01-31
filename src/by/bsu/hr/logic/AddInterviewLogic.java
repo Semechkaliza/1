@@ -24,6 +24,7 @@ public class AddInterviewLogic {
         try {
             InterviewDAO.addInterview(userId,vacancyId,dateSQL,timeSQL,place,type);
             if(type.equalsIgnoreCase("prev")) InterviewDAO.processProposal(userId,vacancyId);
+            else InterviewDAO.closeInterview(userId,vacancyId,"PREV");
         } catch (DAOException e) {
             throw new LogicException("Error add interview",e);
         }
