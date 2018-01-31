@@ -35,6 +35,8 @@
         <td>${requestScope.date}</td>
         <td>${requestScope.time}</td>
         <td>${requestScope.place}</td>
+        <td>${requestScope.mark}</td>
+        <td>${requestScope.feedback}</td>
     </tr><tr>
     <c:forEach items="${requestScope.prevList}" var="prev">
 
@@ -42,15 +44,31 @@
     <td>${prev.sname}</td>
     <td>${prev.vacancy}</td>
     <td>${prev.company}</td>
-        <td>${prev.date}</td>
-        <td>${prev.time}</td>
-        <td>${prev.place}</td>
+    <td>${prev.date}</td>
+    <td>${prev.time}</td>
+    <td>${prev.place}</td>
+        <td>${prev.mark}</td>
+        <td>${prev.feedback}</td>
+    <td>  <form method="POST" action="controller">
+        <input type="hidden" name="command" value="close_interview" />
+        <input type="hidden" name="userId" value="${prev.userId}" />
+        <input type="hidden" name="vacancyId" value="${prev.vacancyId}" />
+        <input type="hidden" name="type" value="PREV" />
+        <input type="submit" value="Close"/>
+    </form></td>
         <td>  <form method="POST" action="controller">
-            <input type="hidden" name="command" value="go_add_preview_result" />
+            <input type="hidden" name="command" value="go_appoint_preview" />
+            <input type="hidden" name="userId" value="${prev.userId}" />
+            <input type="hidden" name="vacancyId" value="${prev.vacancyId}" />
+            <input type="hidden" name="type" value="TECH" />
+            <input type="submit" value="TI"/>
+        </form></td>
+        <td>  <form method="POST" action="controller">
+            <input type="hidden" name="command" value="add_winner" />
             <input type="hidden" name="userId" value="${prev.userId}" />
             <input type="hidden" name="vacancyId" value="${prev.vacancyId}" />
             <input type="hidden" name="type" value="PREV" />
-            <input type="submit" value="${requestScope.appoint}"/>
+            <input type="submit" value="Win"/>
         </form></td>
 </tr>
     </c:forEach>

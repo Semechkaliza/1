@@ -17,4 +17,8 @@ public class PageConstant {
     public static final String HR_VACANCY_PAGE="/jsp/hrVacancy.jsp";
     public static final String HR_WINNERS_PAGE="/jsp/winners.jsp";
     public static final String APPOINT_PREVIEW_PAGE="/jsp/appointPreview.jsp";
+    public static final String ADD_INTERVIEW_RESULT_PAGE="/jsp/addInterviewResult.jsp";
+    public static final String HR_PREVIEW_FULL_PAGE="/jsp/hrPreviewFull.jsp";
+    public static final String HR_TECH_INTERVIEW_FULL_PAGE="/jsp/hrTechInterviewFull.jsp";
+
 }

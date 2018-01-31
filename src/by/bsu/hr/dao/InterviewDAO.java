@@ -41,10 +41,25 @@ public class InterviewDAO {
             "on interested_users.USERS_ID=users.ID and interested_users.VACANCY_ID=vacancy.ID " +
             "where interested_users.ID=?;";
     private static final String ADD_INTERVIEW_QUERY="insert into interview (vacancy_id,users_id,type,date,time,place) values (?,?,?,?,?,?);";
-    private static final String PROCESS_PROPOSAL_QUERY = "update interested_users set ACTIVE=0 and processed=1 where ID=?;";
-    private static final String CHECK_PROCESSED_PROPOSAL_QUERY="SELECT * from interested_users where USERS_ID like ? and VACANCY_ID " +
-            "like ? and ACTIVE=1 and PROCESSED=1";
-    public static List<Proposal> findProposals(int userId){
+    private static final String PROCESS_PROPOSAL_QUERY = "update interested_users set ACTIVE=0,PROCESSED=1  where users_id=? and vacancy_id=?;";
+    private static final String HR_INTERVIEWS_QUERY="select users_id,vacancy_id,name,sname,vacancy,company,date,time,place from " +
+            "vacancy join interview join users " +
+            "on vacancy.ID=interview.vacancy_ID and users.ID=interview.users_ID " +
+            "where type=? and interview.RESULT is null and feedback is null;";
+    private static final String HR_FIND_INTERVIEW_QUERY="select users_id,vacancy_id,name,sname,vacancy,company,date,time,place,type from " +
+            "vacancy join interview join users " +
+            "on vacancy.ID=interview.vacancy_ID and users.ID=interview.users_ID " +
+            "where users_id=? and vacancy_id=? and TYPE=?;";
+    private static final String ADD_INTERVIEW_RESULT_QUERY="update interview set FEEDBACK=? , result=? where VACANCY_ID=? and USERS_ID=? and TYPE=?;";
+    private static final String HR_FULL_INTERVIEWS_QUERY="select users_id,vacancy_id,name,sname,vacancy,company,date,time,place,result,feedback from " +
+            "vacancy join interview join users " +
+            "on vacancy.ID=interview.vacancy_ID and users.ID=interview.users_ID " +
+            "where type=? and interview.RESULT is not null and feedback is not null;";
+    private static final String FIND_INFO_TO_APPOINT_TECH_INTERVIEW_QUERY="select name,sname,vacancy,company " +
+            "from interested_users join users join vacancy " +
+            "on interested_users.USERS_ID=users.ID and interested_users.VACANCY_ID=vacancy.ID " +
+            "where vacancy.ID=? and users.ID=?;";
+    public static List<Proposal> findProposals(int userId) throws DAOException {
         List<Proposal> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs;
@@ -65,14 +80,14 @@ public class InterviewDAO {
                 } while (rs.next());
             }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing finding proposals");
+            throw new DAOException("Error finding proposals",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
         }
         return resList;
     }
-    public static void addProposal(int vacancyId,int userId) {
+    public static void addProposal(int vacancyId,int userId) throws DAOException {
         Connection cn = null;
         PreparedStatement st = null;
         try {
@@ -82,14 +97,14 @@ public class InterviewDAO {
             st.setInt(2,userId);
             st.execute();
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.INFO,"Missing add proposal");
+            throw new DAOException("Error add proposals",e);
         }finally {
             closeSt(st);
             returnConnectionToPool(cn);
         }
     }
 
-    public static boolean checkProposal(int vacancyId, int userId) {
+    public static boolean checkProposal(int vacancyId, int userId) throws DAOException {
         Connection cn = null;
         ResultSet rs;
         PreparedStatement st = null;
@@ -104,7 +119,7 @@ public class InterviewDAO {
                 check=false;
             }
         } catch (ConnectionPoolException | SQLException e) {
-            logger.log(Level.ERROR,"Missing check proposal");
+            throw new DAOException("Error check proposal",e);
         }finally {
             closeSt(st);
             returnConnectionToPool(cn);
@@ -112,7 +127,7 @@ public class InterviewDAO {
         return check;
     }
 
-    public static List<Interview> findFutureInterview(int userId,String type){
+    public static List<Interview> findFutureInterview(int userId,String type) throws DAOException {
         List<Interview> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs;
@@ -136,7 +151,7 @@ public class InterviewDAO {
                 } while (rs.next());
             }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing finding future interview");
+            throw new DAOException("Error find future interview",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
@@ -160,7 +175,7 @@ public class InterviewDAO {
         }
     }
 
-    public static List<Interview> findInterviewResult(int userId, String type) {
+    public static List<Interview> findInterviewResult(int userId, String type) throws DAOException {
         List<Interview> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs;
@@ -185,7 +200,7 @@ public class InterviewDAO {
                 } while (rs.next());
             }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing finding interview results");
+            throw new DAOException("Error find results of interview",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
@@ -193,7 +208,7 @@ public class InterviewDAO {
         return resList;
     }
 
-    public static List<Proposal> findHRProposals() {
+    public static List<Proposal> findHRProposals() throws DAOException {
         List<Proposal> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs;
@@ -216,7 +231,7 @@ public class InterviewDAO {
                 } while (rs.next());
             }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing find hr proposals");
+            throw new DAOException("Error find proposals",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
@@ -224,7 +239,7 @@ public class InterviewDAO {
         return resList;
     }
 
-    public static Interview findInfoToAppointPreview(int proposalId) {
+    public static Interview findInfoToAppointPreview(int proposalId) throws DAOException {
         Connection cn = null;
         Interview res = new Interview();
         ResultSet rs;
@@ -243,7 +258,7 @@ public class InterviewDAO {
                     res.setVacancyId(rs.getInt("vacancy_id"));
             }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing finding info to appoint preview");
+            throw new DAOException("Error find info to appointing interview",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
@@ -266,49 +281,178 @@ public class InterviewDAO {
             st.execute();
 
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DAOException("Error adding preview",e);
+            throw new DAOException("Error adding interview",e);
         } finally {
             closeSt(st);
             returnConnectionToPool(cn);
         }
     }
 
-    public static void processProposal(int proposalId) {
+    public static void processProposal(int userId,int vacancyId) throws DAOException {
         Connection cn = null;
         PreparedStatement st = null;
         try {
             cn =ConnectionPool.getInstance().takeConnection();
             st = cn.prepareStatement(PROCESS_PROPOSAL_QUERY);
-            st.setInt(1,proposalId);
-            st.executeUpdate();
+            st.setInt(1,userId);
+            st.setInt(2,vacancyId);
+            st.execute();
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing process proposal");
+            throw new DAOException("Error process proposal",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
         }
     }
 
-    public static boolean checkIfProposalProcessed(int vacancyId, int userId) {
+    public static List<Interview> findHRInterviews(String type) throws DAOException {
+        List<Interview> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs;
         PreparedStatement st = null;
-        boolean check=false;
         try {
             cn =ConnectionPool.getInstance().takeConnection();
-            st = cn.prepareStatement(CHECK_PROCESSED_PROPOSAL_QUERY);
+            st = cn.prepareStatement(HR_INTERVIEWS_QUERY);
+            st.setString(1,type);
+            rs=st.executeQuery();
+            if (rs.next()) {
+                do {
+                    Interview res=new Interview();
+                    res.setCompany(rs.getString("company"));
+                    res.setVacancy(rs.getString("vacancy"));
+                    res.setVacancyId(rs.getInt("vacancy_id"));
+                    res.setUserId(rs.getInt("users_id"));
+                    res.setName(rs.getString("name"));
+                    res.setSname(rs.getString("sname"));
+                    res.setTime(rs.getTime("time"));
+                    res.setDate(rs.getDate("date"));
+                    res.setPlace(rs.getString("place"));
+                    resList.add(res);
+                } while (rs.next());
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DAOException("Error find interviews",e);
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+        return resList;
+    }
+
+    public static Interview findInfoToFinishInterview(int userId, int vacancyId, String type) throws DAOException {
+        Interview res=new Interview();
+        Connection cn = null;
+        ResultSet rs;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(HR_FIND_INTERVIEW_QUERY);
             st.setInt(1,userId);
             st.setInt(2,vacancyId);
+            st.setString(3,type);
             rs=st.executeQuery();
-            if(!rs.next()){
-                check=true;
+            if (rs.next()) {
+                    res.setCompany(rs.getString("company"));
+                    res.setVacancy(rs.getString("vacancy"));
+                    res.setVacancyId(rs.getInt("vacancy_id"));
+                    res.setUserId(rs.getInt("users_id"));
+                    res.setName(rs.getString("name"));
+                    res.setSname(rs.getString("sname"));
+                    res.setTime(rs.getTime("time"));
+                    res.setDate(rs.getDate("date"));
+                    res.setPlace(rs.getString("place"));
+                    res.setType(rs.getString("type"));
             }
-        } catch (ConnectionPoolException | SQLException e) {
-            logger.log(Level.ERROR,"Missing check processed proposal");
-        }finally {
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DAOException("Error find interviews",e);
+        } finally {
             closeSt(st);
-            returnConnectionToPool(cn);
+            ConnectionPool.returnConnectionToPool(cn);
         }
-        return check;
+        return res;
+    }
+
+    public static void addIntrviewResult(int userId, int vacancyId, String type, int mark, String feedback) throws DAOException {
+        Connection cn = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(ADD_INTERVIEW_RESULT_QUERY);
+            st.setInt(4,userId);
+            st.setInt(3,vacancyId);
+            st.setString(5,type);
+            st.setInt(2,mark);
+            st.setString(1,feedback);
+            st.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DAOException("Error add interview result",e);
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+    }
+
+    public static List<Interview> findHRFullInterviews(String type) throws DAOException {
+        List<Interview> resList = new ArrayList<>();
+        Connection cn = null;
+        ResultSet rs;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(HR_FULL_INTERVIEWS_QUERY);
+            st.setString(1,type);
+            rs=st.executeQuery();
+            if (rs.next()) {
+                do {
+                    Interview res=new Interview();
+                    res.setCompany(rs.getString("company"));
+                    res.setVacancy(rs.getString("vacancy"));
+                    res.setVacancyId(rs.getInt("vacancy_id"));
+                    res.setUserId(rs.getInt("users_id"));
+                    res.setName(rs.getString("name"));
+                    res.setSname(rs.getString("sname"));
+                    res.setTime(rs.getTime("time"));
+                    res.setDate(rs.getDate("date"));
+                    res.setPlace(rs.getString("place"));
+                    res.setMark(rs.getInt("result"));
+                    res.setFeedback(rs.getString("feedback"));
+                    resList.add(res);
+                } while (rs.next());
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DAOException("Error find full interviews",e);
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+        return resList;
+    }
+
+    public static Interview findInfoToAppointInterview(int vacancyId, int userId) throws DAOException {
+        Connection cn = null;
+        Interview res = new Interview();
+        ResultSet rs;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(FIND_INFO_TO_APPOINT_TECH_INTERVIEW_QUERY);
+            st.setInt(1,vacancyId);
+            st.setInt(2,userId);
+            rs=st.executeQuery();
+            if (rs.next()) {
+                res.setCompany(rs.getString("company"));
+                res.setVacancy(rs.getString("vacancy"));
+                res.setName(rs.getString("name"));
+                res.setSname(rs.getString("sname"));
+                res.setUserId(userId);
+                res.setVacancyId(vacancyId);
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DAOException("Error find info to appointing interview",e);
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+        return res;
     }
 }

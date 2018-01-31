@@ -3,6 +3,7 @@ package by.bsu.hr.command;
 import by.bsu.hr.entity.Winner;
 import by.bsu.hr.logic.GoWinnersLogic;
 import by.bsu.hr.logic.HandleWinnerLogic;
+import by.bsu.hr.logic.LogicException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,8 +16,14 @@ public class HandleWinnerCommand implements ActionCommand {
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         int user= Integer.parseInt(request.getParameter("user"));
         int vacancy= Integer.parseInt(request.getParameter("vacancy"));
-        HandleWinnerLogic.handleWinner(user,vacancy);
-        List<Winner> resList= GoWinnersLogic.getWinners();
+        List<Winner> resList=null;
+        try {
+            HandleWinnerLogic.handleWinner(user,vacancy);
+            resList= GoWinnersLogic.getWinners();
+        } catch (LogicException e) {
+            e.printStackTrace();
+        }
+
         request.setAttribute("winList",resList);
         SetAttributes.setAttributesHRWinnersPage(rb,request);
         return PageConstant.HR_WINNERS_PAGE;

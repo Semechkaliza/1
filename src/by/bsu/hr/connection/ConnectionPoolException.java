@@ -1,6 +1,6 @@
 package by.bsu.hr.connection;
 
-public class ConnectionPoolException extends Throwable {
+public class ConnectionPoolException extends Exception {
     private static final long serialVersionUID = 1L;
 
     public ConnectionPoolException(String message, Exception e){
@@ -12,7 +12,6 @@ public class ConnectionPoolException extends Throwable {
     public ConnectionPoolException(Exception e){
         super(e);
     }
-    public ConnectionPoolException(){
-
+    public ConnectionPoolException(){ super();
     }
 }

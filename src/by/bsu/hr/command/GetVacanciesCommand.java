@@ -2,6 +2,8 @@ package by.bsu.hr.command;
 
 import by.bsu.hr.entity.Vacancy;
 import by.bsu.hr.logic.GetVacanciesLogic;
+import by.bsu.hr.logic.LogicException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -9,7 +11,12 @@ import java.util.List;
 public class GetVacanciesCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        List<Vacancy> resList = GetVacanciesLogic.getAllVacancies();
+        List<Vacancy> resList = null;
+        try {
+            resList = GetVacanciesLogic.getAllVacancies();
+        } catch (LogicException e) {
+            e.printStackTrace();
+        }
         HttpSession session=request.getSession(false);
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         if (!resList.isEmpty()) {

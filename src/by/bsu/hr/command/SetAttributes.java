@@ -148,4 +148,56 @@ public class SetAttributes {
         request.setAttribute("place",lang.getMessage("place"));
         request.setAttribute("appoint",lang.getMessage("appoint"));
     }
+
+    public static void setAttributesHRPreviewsPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request) {
+        request.setAttribute("name",lang.getMessage("name"));
+        request.setAttribute("sname",lang.getMessage("sname"));
+        request.setAttribute("LogOut",lang.getMessage("LogOut"));
+        request.setAttribute("winners",lang.getMessage("winners"));
+        request.setAttribute("vacancy",lang.getMessage("vacancy"));
+        request.setAttribute("myProfile",lang.getMessage("myProfile"));
+        request.setAttribute("vacancyName",lang.getMessage("vacancyName"));
+        request.setAttribute("companyName",lang.getMessage("companyName"));
+        request.setAttribute("previews",lang.getMessage("previews"));
+        request.setAttribute("date",lang.getMessage("date"));
+        request.setAttribute("time",lang.getMessage("time"));
+        request.setAttribute("place",lang.getMessage("place"));
+        request.setAttribute("appoint",lang.getMessage("appoint"));
+    }
+
+    public static void setAttributesAddInterviewResultPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request) {
+        request.setAttribute("name",lang.getMessage("name"));
+        request.setAttribute("sname",lang.getMessage("sname"));
+        request.setAttribute("LogOut",lang.getMessage("LogOut"));
+        request.setAttribute("winners",lang.getMessage("winners"));
+        request.setAttribute("vacancy",lang.getMessage("vacancy"));
+        request.setAttribute("myProfile",lang.getMessage("myProfile"));
+        request.setAttribute("vacancyName",lang.getMessage("vacancyName"));
+        request.setAttribute("companyName",lang.getMessage("companyName"));
+        request.setAttribute("previews",lang.getMessage("previews"));
+        request.setAttribute("date",lang.getMessage("date"));
+        request.setAttribute("time",lang.getMessage("time"));
+        request.setAttribute("place",lang.getMessage("place"));
+        request.setAttribute("apply",lang.getMessage("apply"));
+        request.setAttribute("mark",lang.getMessage("mark"));
+        request.setAttribute("feedback",lang.getMessage("feedback"));
+    }
+
+    public static void setAttributesHRPreviewsFullPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request) {
+        request.setAttribute("name",lang.getMessage("name"));
+        request.setAttribute("sname",lang.getMessage("sname"));
+        request.setAttribute("LogOut",lang.getMessage("LogOut"));
+        request.setAttribute("winners",lang.getMessage("winners"));
+        request.setAttribute("vacancy",lang.getMessage("vacancy"));
+        request.setAttribute("myProfile",lang.getMessage("myProfile"));
+        request.setAttribute("vacancyName",lang.getMessage("vacancyName"));
+        request.setAttribute("companyName",lang.getMessage("companyName"));
+        request.setAttribute("previews",lang.getMessage("previews"));
+        request.setAttribute("date",lang.getMessage("date"));
+        request.setAttribute("time",lang.getMessage("time"));
+        request.setAttribute("place",lang.getMessage("place"));
+        request.setAttribute("mark",lang.getMessage("mark"));
+        request.setAttribute("feedback",lang.getMessage("feedback"));
+        request.setAttribute("appoint",lang.getMessage("appoint"));
+    }
 }

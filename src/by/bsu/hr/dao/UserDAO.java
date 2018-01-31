@@ -26,7 +26,7 @@ public class UserDAO {
             "on winners.VACANCY_ID=vacancy.ID and winners.USERS_ID=users.ID " +
             "where winners.ACTIVE=1;";
     private static final String HANDLE_WINNER_QUERY="UPDATE winners set active=0 where USERS_ID=? and vacancy_id=?";
-    public static User findUser(String login, String password){
+    public static User findUser(String login, String password) throws DAOException {
         Connection cn = null;
         ResultSet rs = null;
         PreparedStatement st = null;
@@ -49,7 +49,7 @@ public class UserDAO {
                             res.setActive(rs.getBoolean("active"));
                 }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing finding user");
+           throw new DAOException("Finding user error",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
@@ -97,7 +97,7 @@ public class UserDAO {
         }
     }
 
-    public static void updateInfo(String name, String sname, String phone, String email, int id) {
+    public static void updateInfo(String name, String sname, String phone, String email, int id) throws DAOException {
         Connection cn = null;
         PreparedStatement st = null;
         try {
@@ -110,7 +110,7 @@ public class UserDAO {
             st.setInt(5,id);
             st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing cancel proposal");
+            throw new DAOException("Missing cancel proposal",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
@@ -118,7 +118,7 @@ public class UserDAO {
     }
 
 
-    public static void deleteUser(int userId) {
+    public static void deleteUser(int userId) throws DAOException {
         Connection cn = null;
         PreparedStatement st = null;
         try {
@@ -127,14 +127,14 @@ public class UserDAO {
             st.setInt(1,userId);
             st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing delete user");
+            throw new DAOException("Error delete user",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
         }
     }
 
-    public static List<Winner> findWinners() {
+    public static List<Winner> findWinners() throws DAOException {
         List<Winner> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs = null;
@@ -147,7 +147,7 @@ public class UserDAO {
                 do {
                     Winner res=new Winner();
                     res.setuserId(rs.getInt("users_id"));
-                    res.setvacancyId(rs.getInt("vacancyId"));
+                    res.setvacancyId(rs.getInt("vacancy_id"));
                     res.setName(rs.getString("name"));
                     res.setSname(rs.getString("sname"));
                     res.setPhone(rs.getString("phone"));
@@ -158,7 +158,7 @@ public class UserDAO {
                 } while (rs.next());
             }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing finding winners");
+            throw new DAOException("Finding winners error",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
@@ -166,7 +166,7 @@ public class UserDAO {
         return resList;
     }
 
-    public static void handleWinner(int userId, int vacancyId) {
+    public static void handleWinner(int userId, int vacancyId) throws DAOException {
         Connection cn = null;
         PreparedStatement st = null;
         try {
@@ -176,7 +176,7 @@ public class UserDAO {
             st.setInt(2,vacancyId);
             st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing handle winner");
+            throw new DAOException("Error handle winner",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);

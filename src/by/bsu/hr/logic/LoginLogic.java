@@ -1,4 +1,5 @@
 package by.bsu.hr.logic;
+import by.bsu.hr.dao.DAOException;
 import by.bsu.hr.dao.InterviewDAO;
 import by.bsu.hr.dao.UserDAO;
 import by.bsu.hr.entity.Interview;
@@ -9,7 +10,11 @@ import java.util.List;
 
 public class LoginLogic {
     private static Logger logger=Logger.getLogger(LoginLogic.class);
-    public static User logIn(String login, String pass){
-        return UserDAO.findUser(login,pass);
+    public static User logIn(String login, String pass) throws LogicException {
+        try {
+            return UserDAO.findUser(login,pass);
+        } catch (DAOException e) {
+            throw new LogicException("Error find user",e);
+        }
     }
 }

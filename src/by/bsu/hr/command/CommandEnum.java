@@ -102,6 +102,11 @@ public enum CommandEnum {
             this.command = new GoHRPreviewsCommand();
         }
     },
+    GO_HR_PREVIEWS_FULL {
+        {
+            this.command = new GoHRPreviewsFullCommand();
+        }
+    },
     GO_HR_TECH_INTERVIEWS {
         {
             this.command = new GoHRTechInterviewsCommand();
@@ -120,6 +125,21 @@ public enum CommandEnum {
     GO_APPOINT_PREVIEW {
         {
             this.command = new GoAppointPreviewCommand();
+        }
+    },
+    GO_APPOINT_TECH_INTERVIEW {
+        {
+            this.command = new GoAppointTechInterviewCommand();
+        }
+    },
+    GO_ADD_PREVIEW_RESULT{
+        {
+            this.command = new GoAddPreviewResultCommand();
+        }
+    },
+    ADD_INTERVIEW_RESULT{
+        {
+            this.command = new AddInterviewResultCommand();
         }
     },
     GO_HR_PROFILE{

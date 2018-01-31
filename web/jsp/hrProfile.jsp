@@ -50,6 +50,10 @@
     <input type="submit" value="${requestScope.previews}"/>
 </form>
 <form method="POST" action="controller">
+    <input type="hidden" name="command" value="go_hr_previews_full" />
+    <input type="submit" value="FullPreview"/>
+</form>
+<form method="POST" action="controller">
     <input type="hidden" name="command" value="go_hr_tech_interviews" />
     <input type="submit" value="${requestScope.techInterviews}"/>
 </form>

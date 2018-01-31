@@ -36,24 +36,25 @@
         <td>${requestScope.time}</td>
         <td>${requestScope.place}</td>
     </tr><tr>
-    <c:forEach items="${requestScope.prevList}" var="prev">
 
-    <td>${prev.name}</td>
-    <td>${prev.sname}</td>
-    <td>${prev.vacancy}</td>
-    <td>${prev.company}</td>
-        <td>${prev.date}</td>
-        <td>${prev.time}</td>
-        <td>${prev.place}</td>
-        <td>  <form method="POST" action="controller">
-            <input type="hidden" name="command" value="go_add_preview_result" />
-            <input type="hidden" name="userId" value="${prev.userId}" />
-            <input type="hidden" name="vacancyId" value="${prev.vacancyId}" />
-            <input type="hidden" name="type" value="PREV" />
-            <input type="submit" value="${requestScope.appoint}"/>
-        </form></td>
+    <td>${requestScope.info.name}</td>
+    <td>${requestScope.info.sname}</td>
+    <td>${requestScope.info.vacancy}</td>
+    <td>${requestScope.info.company}</td>
+    <td>${requestScope.info.date}</td>
+    <td>${requestScope.info.time}</td>
+    <td>${requestScope.info.place}</td>
+
 </tr>
-    </c:forEach>
-</table>
+</table><form method="POST" action="controller">
+    <input type="hidden" name="command" value="add_interview_result" />
+    <br/>${requestScope.mark}:<input type="number" name="mark" min="-1" max="10"/><br/>
+    <br/>${requestScope.feedback}:<textarea name="feedback" value="" placeholder="feedback"></textarea><br/>
+    ${requestScope.errorFormateMessage}
+    <input type="hidden" name="userId" value="${requestScope.info.userId}" />
+    <input type="hidden" name="vacancyId" value="${requestScope.info.vacancyId}" />
+    <input type="hidden" name="type" value="${requestScope.info.type}" />
+    <input type="submit" value="${requestScope.apply}"/>
+</form>
 </body>
 </html>

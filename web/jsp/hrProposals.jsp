@@ -41,7 +41,9 @@
     <td>${prop.company}</td>
     <td>  <form method="POST" action="controller">
         <input type="hidden" name="command" value="go_appoint_preview" />
-        <input type="hidden" name="proposalId" value="${prop.id}" />
+        <input type="hidden" name="userId" value="${prop.userId}" />
+        <input type="hidden" name="vacancyId" value="${prop.vacancyId}" />
+        <input type="hidden" name="type" value="PREV" />
         <input type="submit" value="${requestScope.appoint}"/>
     </form></td>
 </tr>

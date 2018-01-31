@@ -17,7 +17,8 @@ public class VacancyDAO {
     private static Logger logger= Logger.getLogger(VacancyDAO.class);
     private static final String ALL_VACANCIES_QUERY = "SELECT id,VACANCY,COMPANY FROM vacancy where ACTIVE=1";
     private static final String FIND_VACANCY_QUERY="SELECT * FROM vacancy WHERE ID=?";
-    public static List<Vacancy> findAllVacancies() {
+    public static List<Vacancy> findAllVacancies() throws DAOException {
+        List<Vacancy> resList2 = new ArrayList<>();
         Connection cn = null;
         ResultSet rs = null;
         PreparedStatement st = null;
@@ -25,11 +26,7 @@ public class VacancyDAO {
             cn= ConnectionPool.getInstance().takeConnection();
             st = cn.prepareStatement(ALL_VACANCIES_QUERY);
             rs = st.executeQuery();
-        } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing db connecting");
-        }
-        List<Vacancy> resList2 = new ArrayList<>();
-        try {
+
             if(rs != null && rs.next()){
                 do {
                     Vacancy vac = new Vacancy();
@@ -39,16 +36,17 @@ public class VacancyDAO {
                     resList2.add(vac);
                 } while (rs.next());
             }
-        } catch (SQLException e) {
-            logger.log(Level.ERROR,"Missing get all vacancies list");
-        }finally {
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DAOException("Error finding all vacancies",e);
+        }
+         finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
         }
         return resList2;
     }
 
-    public static Vacancy findVacancy(int id) {
+    public static Vacancy findVacancy(int id) throws DAOException {
         Vacancy vacancy = new Vacancy();
         Connection cn = null;
         ResultSet rs = null;
@@ -66,7 +64,7 @@ public class VacancyDAO {
                     vacancy.setOther(rs.getString("other"));
             }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.log(Level.ERROR,"Missing finding vacancy");
+            throw new DAOException("Error finding vacancy",e);
         } finally {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);

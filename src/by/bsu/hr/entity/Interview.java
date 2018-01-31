@@ -18,6 +18,7 @@ public class Interview {
     private String place;
     private int mark;
     private String feedback;
+    private String type;
 
     @Override
     public String toString() {
@@ -34,6 +35,7 @@ public class Interview {
                 ", place='" + place + '\'' +
                 ", mark=" + mark +
                 ", feedback=" + feedback +
+                ", type=" + type +
                 '}';
     }
 
@@ -147,5 +149,13 @@ public class Interview {
 
     public void setVacancyId(int vacancyId) {
         this.vacancyId = vacancyId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

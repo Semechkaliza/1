@@ -1,6 +1,7 @@
 package by.bsu.hr.command;
 
 import by.bsu.hr.entity.User;
+import by.bsu.hr.logic.LogicException;
 import by.bsu.hr.logic.RegistrationLogic;
 import by.bsu.hr.logic.Validator;
 
@@ -21,7 +22,7 @@ public class RegistrationCommand implements ActionCommand {
         String password=request.getParameter("password");
         String name=request.getParameter("name");
         String sname=request.getParameter("sname");
-        String page;
+        String page = null;
         LocaleResourceBundle.ResourceBundleEnum rb;
         switch(Locale.getDefault().toString()){
             case "ru_RU": rb=RU;
@@ -31,10 +32,13 @@ public class RegistrationCommand implements ActionCommand {
             default:    rb=EN;
                 break;
         }
-      //  Locale current=Locale.getDefault();
-     //   ResourceBundle rb=ResourceBundle.getBundle("resources.text",current);
         if(Validator.registrationValid(login,password,name,sname)){
-            User user=RegistrationLogic.registraton(login,password,name,sname);
+            User user= null;
+            try {
+                user = RegistrationLogic.registraton(login,password,name,sname);
+            } catch (LogicException e) {
+                e.printStackTrace();
+            }
             if (!(user==null)) {
                 String lang=request.getParameter("locale");
                 HttpSession session=request.getSession(true);
@@ -55,8 +59,7 @@ public class RegistrationCommand implements ActionCommand {
                 page= PageConstant.USER_PROFILE_PAGE;
             } else {
                 request.setAttribute("errorLoginPassMessage",rb.getMessage("message.RepetitiveUser"));
-                SetAttributes.setAttributesRegistrationPage(rb,request);
-                page = PageConstant.REGISTRATION_PAGE;
+
             }
         }else{
             request.setAttribute("errorLoginPassMessage",rb.getMessage("message.NotAllInfo"));

@@ -3,6 +3,7 @@ package by.bsu.hr.command;
 import by.bsu.hr.entity.Interview;
 import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.entity.User;
+import by.bsu.hr.logic.LogicException;
 import by.bsu.hr.logic.LoginLogic;
 import by.bsu.hr.logic.UserProfileLogic;
 import by.bsu.hr.logic.Validator;
@@ -28,7 +29,12 @@ public class LoginCommand implements ActionCommand {
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String pass = request.getParameter(PARAM_NAME_PASSWORD);
         String page;
-        User user = LoginLogic.logIn(login,pass);
+        User user = null;
+        try {
+            user = LoginLogic.logIn(login,pass);
+        } catch (LogicException e) {
+            e.printStackTrace();
+        }
         if(user.getLogin()!=null){
             HttpSession session=request.getSession(true);
             Locale current=new Locale(lang);
@@ -45,10 +51,18 @@ public class LoginCommand implements ActionCommand {
             }
             session.setAttribute("rb",rb);
             if(Validator.isUser(session)){
-                List<Proposal> proposalList=UserProfileLogic.getProposals(user.getUserId());
-                List<Interview> previewList= UserProfileLogic.getFutureInterview(user.getUserId(),"PREV",(Locale)session.getAttribute("locale"));
-                List<Interview> techList=UserProfileLogic.getFutureInterview(user.getUserId(),"TECH",(Locale)session.getAttribute("locale"));
-                request.setAttribute("previewList",previewList);
+                List<Proposal> proposalList= null;
+                List<Interview> previewList=null;
+                List<Interview> techList=null;
+                try {
+                    proposalList = UserProfileLogic.getProposals(user.getUserId());
+                    previewList= UserProfileLogic.getFutureInterview(user.getUserId(),"PREV",(Locale)session.getAttribute("locale"));
+                    techList=UserProfileLogic.getFutureInterview(user.getUserId(),"TECH",(Locale)session.getAttribute("locale"));
+
+                } catch (LogicException e) {
+                    e.printStackTrace();
+                }
+               request.setAttribute("previewList",previewList);
                 request.setAttribute("techList",techList);
                 request.setAttribute("proposalList",proposalList);
                 request.setAttribute("user", user);

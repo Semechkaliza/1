@@ -46,7 +46,7 @@
     ${requestScope.errorFormateMessage}
     <input type="hidden" name="userId" value="${requestScope.info.userId}" />
     <input type="hidden" name="vacancyId" value="${requestScope.info.vacancyId}" />
-    <input type="hidden" name="proposalId" value="${requestScope.proposalId}" />
+    <input type="hidden" name="type" value="${requestScope.info.type}" />
     <input type="submit" value="${requestScope.appoint}"/>
 </form>
 </body>
