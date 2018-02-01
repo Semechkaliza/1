@@ -51,7 +51,7 @@
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="go_hr_previews_full" />
-    <input type="submit" value="FullPreview"/>
+    <input type="submit" value="${requestScope.fullPreview}"/>
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="go_hr_tech_interviews" />
@@ -59,7 +59,12 @@
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="go_hr_tech_interviews_full" />
-    <input type="submit" value="FullTI"/>
+    <input type="submit" value="${requestScope.fullTI}"/>
+</form>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="add_admin" />
+    <br/>${requestScope.login}:<input type="text" name="login"/><br/>
+    <input type="submit" value="${requestScope.addAdmin}"/>
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="go_change_info" />

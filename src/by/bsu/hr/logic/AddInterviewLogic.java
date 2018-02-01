@@ -11,10 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+
 
 public class AddInterviewLogic {
     public static void addInterview(int userId, int vacancyId, String date, String timeStr, String place,

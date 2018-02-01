@@ -15,10 +15,12 @@ import static by.bsu.hr.connection.ConnectionPool.closeSt;
 
 public class VacancyDAO {
     private static Logger logger= Logger.getLogger(VacancyDAO.class);
-    private static final String ALL_VACANCIES_QUERY = "SELECT id,VACANCY,COMPANY FROM vacancy where ACTIVE=1";
-    private static final String FIND_VACANCY_QUERY="SELECT * FROM vacancy WHERE ID=?";
+    private static final String ALL_VACANCIES_QUERY = "SELECT id,VACANCY,COMPANY,SALARY,OTHER FROM vacancy where ACTIVE=1;";
+    private static final String FIND_VACANCY_QUERY="SELECT * FROM vacancy WHERE ID=?;";
+    private static final String CLOSE_VACANCY_QUERY="UPDATE vacancy set ACTIVE=0 WHERE id=?;";
+    private static final String ADD_VACANCY_QUERY="insert into vacancy (COMPANY, VACANCY, SALARY, OTHER) VALUE (?,?,?,?)";
     public static List<Vacancy> findAllVacancies() throws DAOException {
-        List<Vacancy> resList2 = new ArrayList<>();
+        List<Vacancy> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs = null;
         PreparedStatement st = null;
@@ -33,7 +35,9 @@ public class VacancyDAO {
                     vac.setCompany(rs.getString("company"));
                     vac.setVacancy(rs.getString("vacancy"));
                     vac.setVacancyId(rs.getInt("id"));
-                    resList2.add(vac);
+                    vac.setSalary(rs.getInt("salary"));
+                    vac.setOther(rs.getString("other"));
+                    resList.add(vac);
                 } while (rs.next());
             }
         } catch (SQLException | ConnectionPoolException e) {
@@ -43,7 +47,7 @@ public class VacancyDAO {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
         }
-        return resList2;
+        return resList;
     }
 
     public static Vacancy findVacancy(int id) throws DAOException {
@@ -70,5 +74,40 @@ public class VacancyDAO {
             ConnectionPool.returnConnectionToPool(cn);
         }
         return vacancy;
+    }
+
+    public static void closeVacancy(int vacancyId) throws DAOException {
+        Connection cn = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(CLOSE_VACANCY_QUERY);
+            st.setInt(1,vacancyId);
+            st.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DAOException("Error close vacancy",e);
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+    }
+
+    public static void addVacancy(String vacancy, String company, int salary, String other) throws DAOException {
+        Connection cn = null;
+        PreparedStatement st = null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(ADD_VACANCY_QUERY);
+            st.setString(1,company);
+            st.setString(2,vacancy);
+            st.setInt(3,salary);
+            st.setString(4,other);
+            st.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DAOException("Error add vacancy",e);
+        } finally {
+            closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
     }
 }

@@ -82,6 +82,11 @@ public enum CommandEnum {
             this.command = new GoVacanciesHRCommand();
         }
     },
+    ADD_ADMIN {
+        {
+            this.command=new AddAdminCommand();
+        }
+    },
     GO_ADD_VACANCY {
         {
             this.command=new GoAddVacancyCommand();
@@ -90,6 +95,11 @@ public enum CommandEnum {
     ADD_VACANCY {
         {
             this.command=new AddVacancyCommand();
+        }
+    },
+    CLOSE_VACANCY {
+        {
+            this.command=new CloseVacancyCommand();
         }
     },
     GO_HR_PROPOSALS {

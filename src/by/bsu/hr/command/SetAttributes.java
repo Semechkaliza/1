@@ -106,6 +106,11 @@ public class SetAttributes {
         request.setAttribute("proposals",lang.getMessage("proposals"));
         request.setAttribute("previews",lang.getMessage("previews"));
         request.setAttribute("techInterviews",lang.getMessage("techInterviews"));
+        request.setAttribute("addAdmin",lang.getMessage("addAdmin"));
+        request.setAttribute("fullTI",lang.getMessage("fullTI"));
+        request.setAttribute("fullPreview",lang.getMessage("fullPreview"));
+        request.setAttribute("login",lang.getMessage("login"));
+
     }
     public static void setAttributesHRWinnersPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request) {
         request.setAttribute("name",lang.getMessage("name"));
@@ -188,5 +193,31 @@ public class SetAttributes {
         request.setAttribute("appointTI",lang.getMessage("appointTI"));
         request.setAttribute("addWinner",lang.getMessage("addWinner"));
         request.setAttribute("close",lang.getMessage("close"));
+    }
+
+    public static void setAttributesHRVacancyPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request) {
+        request.setAttribute("company",lang.getMessage("company"));
+        request.setAttribute("vacancy",lang.getMessage("vacancy"));
+        request.setAttribute("salary",lang.getMessage("salary"));
+        request.setAttribute("other",lang.getMessage("other"));
+        request.setAttribute("addVacancy",lang.getMessage("addVacancy"));
+        request.setAttribute("LogOut",lang.getMessage("LogOut"));
+        request.setAttribute("winners",lang.getMessage("winners"));
+        request.setAttribute("vacancy",lang.getMessage("vacancy"));
+        request.setAttribute("myProfile",lang.getMessage("myProfile"));
+        request.setAttribute("closeVacancy",lang.getMessage("closeVacancy"));
+    }
+
+    public static void setAttributesAddVacancyPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request) {
+        request.setAttribute("addVacancy",lang.getMessage("addVacancy"));
+        request.setAttribute("LogOut",lang.getMessage("LogOut"));
+        request.setAttribute("winners",lang.getMessage("winners"));
+        request.setAttribute("vacancy",lang.getMessage("vacancy"));
+        request.setAttribute("myProfile",lang.getMessage("myProfile"));
+        request.setAttribute("companyName",lang.getMessage("companyName"));
+        request.setAttribute("vacancyName",lang.getMessage("vacancyName"));
+        request.setAttribute("salary",lang.getMessage("salary"));
+        request.setAttribute("other",lang.getMessage("other"));
+
     }
 }

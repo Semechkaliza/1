@@ -26,7 +26,7 @@ public class InterviewDAO {
     private static final String FIND_FUTURE_INTERVIEW_QUERY="SELECT vacancy,company,login,date,time,place,RESULT " +
             "from users join interview join vacancy " +
             "on users.id=interview.USERS_ID and interview.VACANCY_ID=vacancy.ID " +
-            "where vacancy.ACTIVE=1 and type LIKE ? and users.ID LIKE ? and result is NULL;";
+            "where vacancy.ACTIVE=1 and interview.active=1 and type LIKE ? and users.ID LIKE ? and result is NULL;";
     private static final String CANCEL_PROPOSAL_QUERY = "update interested_users set ACTIVE=0 where ID=?;";
     private static final String FIND_INTERVIEW_RESULT_QUERY="select vacancy,company,type,date,time,place,result,feedback" +
             " from interview join vacancy" +

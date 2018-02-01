@@ -27,6 +27,9 @@ public class UserDAO {
             "where winners.ACTIVE=1;";
     private static final String HANDLE_WINNER_QUERY="UPDATE winners set active=0 where USERS_ID=? and vacancy_id=?";
     private static final String ADD_WINNER_QUERY="insert into winners (USERS_ID, VACANCY_ID) VALUE (?,?)";
+    private static final String ADD_ADMIN_QUERY="UPDATE users set ROLE='ADMIN' where LOGIN=? and ACTIVE=1;";
+    private static final String DELETE_INTERVIEWS_QUERY="update interview set ACTIVE=0 where users_id=(select id from users where LOGIN=? and active=1);";
+    private static final String DELETE_PROPOSALS_QUERY="update interested_users set ACTIVE=0 where users_id=(select id from users where LOGIN=? and active=1);";
     public static User findUser(String login, String password) throws DAOException {
         Connection cn = null;
         ResultSet rs = null;
@@ -192,11 +195,37 @@ public class UserDAO {
             st = cn.prepareStatement(ADD_WINNER_QUERY);
             st.setInt(2,vacancyId);
             st.setInt(1,userId);
-            st.execute();
+            st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DAOException("Error add winner",e);
         } finally {
             closeSt(st);
+            ConnectionPool.returnConnectionToPool(cn);
+        }
+    }
+
+    public static void addAdmin(String login) throws DAOException {
+        Connection cn = null;
+        PreparedStatement st1 = null;
+        PreparedStatement st2 = null;
+        PreparedStatement st3=null;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st1 = cn.prepareStatement(ADD_ADMIN_QUERY);
+            st2 = cn.prepareStatement(DELETE_INTERVIEWS_QUERY);
+            st3 = cn.prepareStatement(DELETE_PROPOSALS_QUERY);
+           st1.setString(1,login);
+            st2.setString(1,login);
+            st3.setString(1,login);
+            st1.executeUpdate();
+            st2.executeUpdate();
+            st3.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DAOException("Error add admin",e);
+        } finally {
+            closeSt(st1);
+            closeSt(st2);
+            closeSt(st3);
             ConnectionPool.returnConnectionToPool(cn);
         }
     }

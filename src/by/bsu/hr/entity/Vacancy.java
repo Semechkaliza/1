@@ -5,7 +5,7 @@ public class Vacancy {
     private int vacancyId;
     private String company;
     private String vacancy;
-    private Integer salary;
+    private int salary;
     private String skill;
     private String other;
     private boolean active;

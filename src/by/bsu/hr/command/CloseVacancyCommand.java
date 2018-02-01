@@ -1,37 +1,36 @@
 package by.bsu.hr.command;
 
 import by.bsu.hr.entity.Interview;
+import by.bsu.hr.entity.User;
 import by.bsu.hr.entity.Vacancy;
-import by.bsu.hr.logic.AddVacancyLogic;
+import by.bsu.hr.logic.CloseVacancyLogic;
 import by.bsu.hr.logic.GetVacanciesLogic;
 import by.bsu.hr.logic.LogicException;
+import by.bsu.hr.logic.ResultLogic;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class AddVacancyCommand implements ActionCommand {
+import static by.bsu.hr.command.PageConstant.RESULT_PAGE;
+
+public class CloseVacancyCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
+        int vacancyId= Integer.parseInt(request.getParameter("id"));
         List<Vacancy> resList = null;
-        String vacancy=request.getParameter("vacancy");
-        String company=request.getParameter("company");
-        int salary= Integer.parseInt(request.getParameter("salary"));
-        String other=request.getParameter("other");
         try {
-            AddVacancyLogic.addVacancy(vacancy,company,salary,other);
+            CloseVacancyLogic.closeVacancy(vacancyId);
             resList = GetVacanciesLogic.getAllVacancies();
         } catch (LogicException e) {
             e.printStackTrace();
         }
-
         if (!resList.isEmpty()) {
             request.setAttribute("vacanciesList", resList);
         } else {
             request.setAttribute("emptyVacanciesList",rb.getMessage("message.emptyVacanciesList"));
-            request.setAttribute("LogOut",rb.getMessage("LogOut"));
         }
         SetAttributes.setAttributesHRVacancyPage(rb,request);
         return PageConstant.HR_VACANCY_PAGE;
