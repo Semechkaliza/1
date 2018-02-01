@@ -20,7 +20,7 @@ public class GoHRTechInterviewsCommand implements ActionCommand {
             e.printStackTrace();
         }
         request.setAttribute("prevList",resList);
-        SetAttributes.setAttributesHRPreviewsPage(rb,request);
+        SetAttributes.setAttributesHRInterviewsPage(rb,request);
         return PageConstant.HR_TECH_INTERVIEWS_PAGE;
     }
 }

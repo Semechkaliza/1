@@ -132,24 +132,19 @@ public enum CommandEnum {
             this.command = new HandleWinnerCommand();
         }
     },
-    ADD_PREVIEW {
+    ADD_INTERVIEW {
         {
-            this.command = new AddPreviewCommand();
+            this.command = new AddInterviewCommand();
         }
     },
-    GO_APPOINT_PREVIEW {
+    GO_APPOINT_INTERVIEW {
         {
-            this.command = new GoAppointPreviewCommand();
+            this.command = new GoAppointInterviewCommand();
         }
     },
-    GO_APPOINT_TECH_INTERVIEW {
+    GO_ADD_INTERVIEW_RESULT{
         {
-            this.command = new GoAppointTechInterviewCommand();
-        }
-    },
-    GO_ADD_PREVIEW_RESULT{
-        {
-            this.command = new GoAddPreviewResultCommand();
+            this.command = new GoAddInterviewResultCommand();
         }
     },
     ADD_INTERVIEW_RESULT{

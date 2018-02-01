@@ -5,7 +5,9 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>${requestScope.previews}</title>
+    <title>
+        ${requestScope.previews}
+    </title>
 </head>
 <body>
 <form method="POST" action="controller">
@@ -30,24 +32,28 @@
         <td>${requestScope.sname}</td>
         <td>${requestScope.vacancyName}</td>
         <td>${requestScope.companyName}</td>
+        <td>${requestScope.date}</td>
+        <td>${requestScope.time}</td>
+        <td>${requestScope.place}</td>
     </tr><tr>
+    <c:forEach items="${requestScope.prevList}" var="prev">
 
-    <td>${requestScope.info.name}</td>
-    <td>${requestScope.info.sname}</td>
-    <td>${requestScope.info.vacancy}</td>
-    <td>${requestScope.info.company}</td>
+    <td>${prev.name}</td>
+    <td>${prev.sname}</td>
+    <td>${prev.vacancy}</td>
+    <td>${prev.company}</td>
+        <td>${prev.date}</td>
+        <td>${prev.time}</td>
+        <td>${prev.place}</td>
+        <td>  <form method="POST" action="controller">
+            <input type="hidden" name="command" value="go_add_interview_result" />
+            <input type="hidden" name="userId" value="${prev.userId}" />
+            <input type="hidden" name="vacancyId" value="${prev.vacancyId}" />
+            <input type="hidden" name="type" value="PREV" />
+            <input type="submit" value="${requestScope.appoint}"/>
+        </form></td>
 </tr>
+    </c:forEach>
 </table>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="add_preview" />
-    <br/>${requestScope.date}:<input type="text" name="date" value="" placeholder="дд.мм.гг"/><br/>
-    <br/>${requestScope.time}:<input type="text" name="time" value="" placeholder="чч.мм"/><br/>
-    <br/>${requestScope.place}:<input type="text" name="place" value=""/><br/>
-    ${requestScope.errorFormateMessage}
-    <input type="hidden" name="userId" value="${requestScope.info.userId}" />
-    <input type="hidden" name="vacancyId" value="${requestScope.info.vacancyId}" />
-    <input type="hidden" name="type" value="${requestScope.info.type}" />
-    <input type="submit" value="${requestScope.appoint}"/>
-</form>
 </body>
 </html>

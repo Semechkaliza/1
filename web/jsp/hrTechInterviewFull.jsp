@@ -54,14 +54,14 @@
         <input type="hidden" name="userId" value="${prev.userId}" />
         <input type="hidden" name="vacancyId" value="${prev.vacancyId}" />
         <input type="hidden" name="type" value="TECH" />
-        <input type="submit" value="Close"/>
+        <input type="submit" value="${requestScope.close}"/>
     </form></td>
     <td>  <form method="POST" action="controller">
         <input type="hidden" name="command" value="add_winner" />
         <input type="hidden" name="userId" value="${prev.userId}" />
         <input type="hidden" name="vacancyId" value="${prev.vacancyId}" />
         <input type="hidden" name="type" value="TECH" />
-        <input type="submit" value="Win"/>
+        <input type="submit" value="${requestScope.addWinner}"/>
     </form></td>
 </tr>
     </c:forEach>

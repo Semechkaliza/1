@@ -1,13 +1,13 @@
 package by.bsu.hr.command;
 
 import by.bsu.hr.entity.Interview;
-import by.bsu.hr.logic.GoAddInterviewResultLogic;
+import by.bsu.hr.logic.GoAppointPreviewLogic;
 import by.bsu.hr.logic.LogicException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class GoAddPreviewResultCommand implements ActionCommand {
+public class GoAppointInterviewCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
@@ -17,12 +17,13 @@ public class GoAddPreviewResultCommand implements ActionCommand {
         String type=request.getParameter("type");
         Interview info = null;
         try {
-            info = GoAddInterviewResultLogic.findInterviewInfo(userId,vacancyId,type);
+            info = GoAppointPreviewLogic.findInfoToInterview(vacancyId,userId);
+            info.setType(type);
         } catch (LogicException e) {
             e.printStackTrace();
         }
         request.setAttribute("info",info);
-        SetAttributes.setAttributesAddInterviewResultPage(rb,request);
-        return PageConstant.ADD_INTERVIEW_RESULT_PAGE;
+        SetAttributes.setAttributesHRInterviewsPage(rb,request);
+        return PageConstant.APPOINT_PREVIEW_PAGE;
     }
 }

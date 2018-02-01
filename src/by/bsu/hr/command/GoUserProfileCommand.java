@@ -28,7 +28,7 @@ public class GoUserProfileCommand implements ActionCommand {
             techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));
             proposalList = UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
         } catch (LogicException e) {
-            e.printStackTrace();
+            //message
         }
        request.setAttribute("proposalList",proposalList);
         request.setAttribute("previewList",previewList);

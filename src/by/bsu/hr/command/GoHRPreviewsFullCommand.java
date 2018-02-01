@@ -20,7 +20,7 @@ public class GoHRPreviewsFullCommand implements ActionCommand {
             e.printStackTrace();
         }
         request.setAttribute("prevList",resList);
-        SetAttributes.setAttributesHRPreviewsFullPage(rb,request);
+        SetAttributes.setAttributesHRInterviewsFullPage(rb,request);
         return PageConstant.HR_PREVIEW_FULL_PAGE;
     }
 }

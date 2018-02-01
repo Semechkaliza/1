@@ -46,7 +46,7 @@
     <td>${prev.time}</td>
     <td>${prev.place}</td>
     <td>  <form method="POST" action="controller">
-        <input type="hidden" name="command" value="go_add_preview_result" />
+        <input type="hidden" name="command" value="go_add_interview_result" />
         <input type="hidden" name="userId" value="${prev.userId}" />
         <input type="hidden" name="vacancyId" value="${prev.vacancyId}" />
         <input type="hidden" name="type" value="TECH" />

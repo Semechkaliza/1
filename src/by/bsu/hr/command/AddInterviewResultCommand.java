@@ -1,7 +1,6 @@
 package by.bsu.hr.command;
 
 import by.bsu.hr.entity.Interview;
-import by.bsu.hr.logic.AddInterviewLogic;
 import by.bsu.hr.logic.AddInterviewResultLogic;
 import by.bsu.hr.logic.HRPreviewLogic;
 import by.bsu.hr.logic.LogicException;
@@ -28,7 +27,7 @@ public class AddInterviewResultCommand implements ActionCommand {
             e.printStackTrace();//message & return appointPreview
         }
         request.setAttribute("prevList",resList);
-        SetAttributes.setAttributesHRPreviewsPage(rb,request);
+        SetAttributes.setAttributesHRInterviewsPage(rb,request);
         if(type.equalsIgnoreCase("PREV")) return PageConstant.HR_PREVIEWS_PAGE;
         else return PageConstant.HR_TECH_INTERVIEWS_PAGE;
     }
