@@ -16,12 +16,13 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ConnectionPool {
     private static Logger logger=Logger.getLogger(ConnectionPool.class);
     private static BlockingQueue<Connection> connectionQueue;
-    private  LinkedList<Connection> givenAwayConQueue;
+    private static LinkedList<Connection> givenAwayConQueue;
     private  static ConnectionPool instance;
     private static String driverName;
     private static String url;
     private static String user;
     private static String password;
+    private static String useSSL;
     private static int poolSize;
     private static ReentrantLock lock = new ReentrantLock();
     private static  AtomicBoolean checkFinish=new AtomicBoolean(true);
@@ -33,6 +34,7 @@ public class ConnectionPool {
         url = dbResourceManager.getValue(DBParameter.DB_URL);
         user = dbResourceManager.getValue(DBParameter.DB_USER);
         password =dbResourceManager.getValue(DBParameter.DB_PASSWORD);
+        useSSL=dbResourceManager.getValue(DBParameter.DB_SSL);
         int checkCount=0;
         try {
             Class.forName(driverName);
@@ -58,7 +60,6 @@ public class ConnectionPool {
                 logger.log(Level.ERROR, "Error adding connections");
             }
         } catch (SQLException e) {
-            // throw new ConnectionPoolException("SQLException in ConnectionPool", e);
             logger.log(Level.ERROR, "Error adding connections", e);
         }
     }
@@ -105,6 +106,7 @@ public class ConnectionPool {
 
     public static void returnConnectionToPool(Connection con) {
         try {
+            givenAwayConQueue.remove(con);
             connectionQueue.put(con);
         } catch (InterruptedException e) {
             logger.log(Level.ERROR, "Error returning connection to pool.", e);
