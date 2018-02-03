@@ -24,6 +24,8 @@
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="get_vacancies" />
+    <input type="hidden" name="page" value="1" />
+    <input type="hidden" name="direction" value="" />
     <input type="submit" value="${requestScope.vacancy}"/>
 </form>
 <hr/>

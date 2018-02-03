@@ -77,11 +77,6 @@ public enum CommandEnum {
             this.command = new GoWinnersCommand();
         }
     },
-    GO_VACANCIES_HR {
-        {
-            this.command = new GoVacanciesHRCommand();
-        }
-    },
     ADD_ADMIN {
         {
             this.command=new AddAdminCommand();

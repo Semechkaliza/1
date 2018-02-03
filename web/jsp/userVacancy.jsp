@@ -24,6 +24,8 @@
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="get_vacancies" />
+    <input type="hidden" name="page" value="1" />
+    <input type="hidden" name="direction" value="next" />
     <input type="submit" value="${requestScope.vacancy}"/>
 </form>
 <h3>${requestScope.vacancy}</h3>
@@ -49,5 +51,17 @@
     </c:forEach>
     ${emptyVacanciesList}
 </table>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="get_vacancies" />
+    <input type="hidden" name="page" value="${requestScope.page}" />
+    <input type="hidden" name="direction" value="prev" />
+    <input type="submit" value="<<"/>
+</form>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="get_vacancies" />
+    <input type="hidden" name="page" value="${requestScope.page}" />
+    <input type="hidden" name="direction" value="next" />
+    <input type="submit" value=">>"/>
+</form>
 </body>
 </html>

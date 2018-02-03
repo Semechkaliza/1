@@ -15,11 +15,11 @@ import static by.bsu.hr.connection.ConnectionPool.closeSt;
 
 public class VacancyDAO {
     private static Logger logger= Logger.getLogger(VacancyDAO.class);
-    private static final String ALL_VACANCIES_QUERY = "SELECT id,VACANCY,COMPANY,SALARY,OTHER FROM vacancy where ACTIVE=1;";
+    private static final String ALL_VACANCIES_QUERY = "SELECT id,VACANCY,COMPANY,SALARY,OTHER FROM vacancy where ACTIVE=1 order by id desc limit ?,?";
     private static final String FIND_VACANCY_QUERY="SELECT * FROM vacancy WHERE ID=?;";
     private static final String CLOSE_VACANCY_QUERY="UPDATE vacancy set ACTIVE=0 WHERE id=?;";
     private static final String ADD_VACANCY_QUERY="insert into vacancy (COMPANY, VACANCY, SALARY, OTHER) VALUE (?,?,?,?)";
-    public static List<Vacancy> findAllVacancies() throws DAOException {
+    public static List<Vacancy> findAllVacancies(int fromId,int size) throws DAOException {
         List<Vacancy> resList = new ArrayList<>();
         Connection cn = null;
         ResultSet rs = null;
@@ -27,8 +27,9 @@ public class VacancyDAO {
         try {
             cn= ConnectionPool.getInstance().takeConnection();
             st = cn.prepareStatement(ALL_VACANCIES_QUERY);
+            st.setInt(1,fromId);
+            st.setInt(2,size);
             rs = st.executeQuery();
-
             if(rs != null && rs.next()){
                 do {
                     Vacancy vac = new Vacancy();

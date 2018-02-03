@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static by.bsu.hr.command.GetVacanciesCommand.PAGE_SIZE;
+
 public class AddVacancyCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
@@ -22,7 +24,8 @@ public class AddVacancyCommand implements ActionCommand {
         String other=request.getParameter("other");
         try {
             AddVacancyLogic.addVacancy(vacancy,company,salary,other);
-            resList = GetVacanciesLogic.getAllVacancies();
+            resList = GetVacanciesLogic.getAllVacancies(0,PAGE_SIZE);
+            request.setAttribute("page",1);
         } catch (LogicException e) {
             return PageConstant.ERROR_PAGE;
         }

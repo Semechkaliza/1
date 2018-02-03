@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static by.bsu.hr.command.GetVacanciesCommand.PAGE_SIZE;
 import static by.bsu.hr.command.PageConstant.RESULT_PAGE;
 
 public class CloseVacancyCommand implements ActionCommand {
@@ -23,7 +24,8 @@ public class CloseVacancyCommand implements ActionCommand {
         List<Vacancy> resList = null;
         try {
             CloseVacancyLogic.closeVacancy(vacancyId);
-            resList = GetVacanciesLogic.getAllVacancies();
+            resList = GetVacanciesLogic.getAllVacancies(0,PAGE_SIZE);
+            request.setAttribute("page",1);
         } catch (LogicException e) {
             return PageConstant.ERROR_PAGE;
         }
