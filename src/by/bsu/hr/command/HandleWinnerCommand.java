@@ -16,12 +16,12 @@ public class HandleWinnerCommand implements ActionCommand {
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         int user= Integer.parseInt(request.getParameter("user"));
         int vacancy= Integer.parseInt(request.getParameter("vacancy"));
-        List<Winner> resList=null;
+        List<Winner> resList;
         try {
             HandleWinnerLogic.handleWinner(user,vacancy);
             resList= GoWinnersLogic.getWinners();
         } catch (LogicException e) {
-            e.printStackTrace();
+            return PageConstant.ERROR_PAGE;
         }
 
         request.setAttribute("winList",resList);

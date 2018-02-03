@@ -5,8 +5,7 @@ public class Vacancy {
     private int vacancyId;
     private String company;
     private String vacancy;
-    private int salary;
-    private String skill;
+    private String salary;
     private String other;
     private boolean active;
 
@@ -17,7 +16,6 @@ public class Vacancy {
                 "company='" + company + '\'' +
                 ", vacancy='" + vacancy + '\'' +
                 ", salary=" + salary +
-                ", skill='" + skill + '\'' +
                 ", other='" + other + '\'' +
                 ", active='" + active + '\'' +
                 '}';
@@ -53,20 +51,12 @@ public class Vacancy {
         this.vacancy = vacancy;
     }
 
-    public Integer getSalary() {
+    public String getSalary() {
         return salary;
     }
 
-    public void setSalary(Integer salary) {
+    public void setSalary(String salary) {
         this.salary = salary;
-    }
-
-    public String getSkill() {
-        return skill;
-    }
-
-    public void setSkill(String skill) {
-        this.skill = skill;
     }
 
     public String getOther() {

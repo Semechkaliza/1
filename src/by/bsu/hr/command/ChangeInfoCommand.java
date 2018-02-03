@@ -54,8 +54,9 @@ public class ChangeInfoCommand implements ActionCommand {
                 techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));
                 proposalList = UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
             } catch (LogicException e) {
-                e.printStackTrace();
-            }request.setAttribute("proposalList",proposalList);
+                return PageConstant.ERROR_PAGE;
+            }
+            request.setAttribute("proposalList",proposalList);
             request.setAttribute("previewList",previewList);
             request.setAttribute("techList",techList);
             request.setAttribute("proposalList",proposalList);

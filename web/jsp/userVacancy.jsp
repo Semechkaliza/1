@@ -49,10 +49,5 @@
     </c:forEach>
     ${emptyVacanciesList}
 </table>
-
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="logout" />
-    <input type="submit" value="${requestScope.LogOut}"/>
-</form>
 </body>
 </html>

@@ -29,11 +29,11 @@ public class LoginCommand implements ActionCommand {
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String pass = request.getParameter(PARAM_NAME_PASSWORD);
         String page;
-        User user = null;
+        User user;
         try {
             user = LoginLogic.logIn(login,pass);
         } catch (LogicException e) {
-            e.printStackTrace();
+            return PageConstant.ERROR_PAGE;
         }
         if(user.getLogin()!=null){
             HttpSession session=request.getSession(true);
@@ -58,11 +58,10 @@ public class LoginCommand implements ActionCommand {
                     proposalList = UserProfileLogic.getProposals(user.getUserId());
                     previewList= UserProfileLogic.getFutureInterview(user.getUserId(),"PREV",(Locale)session.getAttribute("locale"));
                     techList=UserProfileLogic.getFutureInterview(user.getUserId(),"TECH",(Locale)session.getAttribute("locale"));
-
                 } catch (LogicException e) {
-                    e.printStackTrace();
+                   return PageConstant.ERROR_PAGE;
                 }
-               request.setAttribute("previewList",previewList);
+                request.setAttribute("previewList",previewList);
                 request.setAttribute("techList",techList);
                 request.setAttribute("proposalList",proposalList);
                 request.setAttribute("user", user);
@@ -73,7 +72,6 @@ public class LoginCommand implements ActionCommand {
                 SetAttributes.setAttributesHRProfilePage(rb,request);
                 page=PageConstant.HR_PROFILE_PAGE;
             }
-
         } else {
             LocaleResourceBundle.ResourceBundleEnum rb;
             switch(Locale.getDefault().toString()){

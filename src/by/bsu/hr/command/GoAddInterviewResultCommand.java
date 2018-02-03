@@ -19,7 +19,7 @@ public class GoAddInterviewResultCommand implements ActionCommand {
         try {
             info = GoAddInterviewResultLogic.findInterviewInfo(userId,vacancyId,type);
         } catch (LogicException e) {
-            e.printStackTrace();
+           return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("info",info);
         SetAttributes.setAttributesAddInterviewResultPage(rb,request);

@@ -20,7 +20,7 @@ public class GoAppointInterviewCommand implements ActionCommand {
             info = GoAppointPreviewLogic.findInfoToInterview(vacancyId,userId);
             info.setType(type);
         } catch (LogicException e) {
-            e.printStackTrace();
+            return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("info",info);
         SetAttributes.setAttributesHRInterviewsPage(rb,request);

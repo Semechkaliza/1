@@ -18,20 +18,18 @@ public class AddVacancyCommand implements ActionCommand {
         List<Vacancy> resList = null;
         String vacancy=request.getParameter("vacancy");
         String company=request.getParameter("company");
-        int salary= Integer.parseInt(request.getParameter("salary"));
+        String salary= request.getParameter("salary");
         String other=request.getParameter("other");
         try {
             AddVacancyLogic.addVacancy(vacancy,company,salary,other);
             resList = GetVacanciesLogic.getAllVacancies();
         } catch (LogicException e) {
-            e.printStackTrace();
+            return PageConstant.ERROR_PAGE;
         }
-
         if (!resList.isEmpty()) {
             request.setAttribute("vacanciesList", resList);
         } else {
             request.setAttribute("emptyVacanciesList",rb.getMessage("message.emptyVacanciesList"));
-            request.setAttribute("LogOut",rb.getMessage("LogOut"));
         }
         SetAttributes.setAttributesHRVacancyPage(rb,request);
         return PageConstant.HR_VACANCY_PAGE;

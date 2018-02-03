@@ -97,7 +97,6 @@ public class InterviewDAO {
             st.setInt(1,vacancyId);
             st.setInt(2,userId);
             st.execute();
-            System.out.println(st);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DAOException("Error add proposals",e);
         }finally {
@@ -298,7 +297,7 @@ public class InterviewDAO {
             st = cn.prepareStatement(PROCESS_PROPOSAL_QUERY);
             st.setInt(1,userId);
             st.setInt(2,vacancyId);
-            st.execute();
+            st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DAOException("Error process proposal",e);
         } finally {

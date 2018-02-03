@@ -15,7 +15,7 @@ public class OneVacancyCommand implements ActionCommand {
         try {
             vac = OneVacancyLogic.getVacancy(id);
         } catch (LogicException e) {
-            e.printStackTrace();
+            return PageConstant.ERROR_PAGE;
         }
         HttpSession session=request.getSession(false);
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");

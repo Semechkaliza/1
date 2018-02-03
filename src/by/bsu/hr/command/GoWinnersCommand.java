@@ -17,7 +17,7 @@ public class GoWinnersCommand implements ActionCommand {
         try {
             resList = GoWinnersLogic.getWinners();
         } catch (LogicException e) {
-            e.printStackTrace();
+            return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("winList",resList);
         SetAttributes.setAttributesHRWinnersPage(rb,request);

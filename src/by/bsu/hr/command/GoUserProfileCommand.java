@@ -24,11 +24,11 @@ public class GoUserProfileCommand implements ActionCommand {
         List<Interview> previewList=null;
         List<Interview> techList=null;
         try {
+            proposalList = UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
             previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV", (Locale) session.getAttribute("locale"));
             techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));
-            proposalList = UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
         } catch (LogicException e) {
-            //message
+            return PageConstant.ERROR_PAGE;
         }
        request.setAttribute("proposalList",proposalList);
         request.setAttribute("previewList",previewList);

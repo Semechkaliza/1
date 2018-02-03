@@ -20,7 +20,7 @@ public class DeleteUserCommand implements ActionCommand {
         try {
             DeleteUserLogic.deleteUser(((User)session.getAttribute("user")).getUserId());
         } catch (LogicException e) {
-            e.printStackTrace();
+            return PageConstant.ERROR_PAGE;
         }
         LocaleResourceBundle.ResourceBundleEnum rb;
         switch(Locale.getDefault().toString()){

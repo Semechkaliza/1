@@ -6,8 +6,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class Validator {
-    public static boolean registrationValid(String login,String pass,String name,String sname){
-        if(login.isEmpty()||pass.isEmpty()||name.isEmpty()||sname.isEmpty())
+    public static boolean registrationValid(String login, String pass, String name, String sname, String phone, String email){
+        if(login.isEmpty()||pass.isEmpty()||name.isEmpty()||sname.isEmpty()||phone.isEmpty()||email.isEmpty())
             return false;
         else return true;
     }

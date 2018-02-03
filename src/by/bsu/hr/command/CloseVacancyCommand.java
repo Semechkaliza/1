@@ -25,7 +25,7 @@ public class CloseVacancyCommand implements ActionCommand {
             CloseVacancyLogic.closeVacancy(vacancyId);
             resList = GetVacanciesLogic.getAllVacancies();
         } catch (LogicException e) {
-            e.printStackTrace();
+            return PageConstant.ERROR_PAGE;
         }
         if (!resList.isEmpty()) {
             request.setAttribute("vacanciesList", resList);

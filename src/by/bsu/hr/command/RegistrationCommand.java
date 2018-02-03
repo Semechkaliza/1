@@ -22,6 +22,8 @@ public class RegistrationCommand implements ActionCommand {
         String password=request.getParameter("password");
         String name=request.getParameter("name");
         String sname=request.getParameter("sname");
+        String phone=request.getParameter("phone");
+        String email=request.getParameter("email");
         String page = null;
         LocaleResourceBundle.ResourceBundleEnum rb;
         switch(Locale.getDefault().toString()){
@@ -32,12 +34,12 @@ public class RegistrationCommand implements ActionCommand {
             default:    rb=EN;
                 break;
         }
-        if(Validator.registrationValid(login,password,name,sname)){
+        if(Validator.registrationValid(login,password,name,sname,phone,email)){
             User user= null;
             try {
-                user = RegistrationLogic.registraton(login,password,name,sname);
+                user = RegistrationLogic.registraton(login,password,name,sname,phone,email);
             } catch (LogicException e) {
-                e.printStackTrace();
+               return PageConstant.ERROR_PAGE;
             }
             if (!(user==null)) {
                 String lang=request.getParameter("locale");

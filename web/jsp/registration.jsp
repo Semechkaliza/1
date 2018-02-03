@@ -63,6 +63,12 @@
                     <span class="falsePassword2">${requestScope.no}</span>
                 </div>
                 <div class="inputBlock">
+                    <input type="text" id="Email" class="registration_input" name="email" value="" placeholder="${requestScope.email}"/>
+                </div>
+                <div class="inputBlock">
+                    <input type="text" id="Phone" class="registration_input" name="phone" value="" placeholder="${requestScope.phone}"/>
+                </div>
+                <div class="inputBlock">
                     <input type="text" id="Name" class="registration_input" name="name" value="" placeholder="${requestScope.name}"/>
                 </div>
                 <div class="inputBlock">

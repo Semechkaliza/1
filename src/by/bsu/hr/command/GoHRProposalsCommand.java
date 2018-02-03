@@ -17,7 +17,7 @@ public class GoHRProposalsCommand implements ActionCommand {
         try {
             resList = HRProposalsLogic.getProposals();
         } catch (LogicException e) {
-            e.printStackTrace();
+           return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("propList",resList);
         SetAttributes.setAttributesHRProposalsPage(rb,request);

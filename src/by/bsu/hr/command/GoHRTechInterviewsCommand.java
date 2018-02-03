@@ -1,7 +1,7 @@
 package by.bsu.hr.command;
 
 import by.bsu.hr.entity.Interview;
-import by.bsu.hr.logic.HRPreviewLogic;
+import by.bsu.hr.logic.HRInterviewLogic;
 import by.bsu.hr.logic.LogicException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +15,9 @@ public class GoHRTechInterviewsCommand implements ActionCommand {
         LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         List<Interview> resList= null;
         try {
-            resList = HRPreviewLogic.findPreviews("TECH");
+            resList = HRInterviewLogic.findInterviews("TECH");
         } catch (LogicException e) {
-            e.printStackTrace();
+           return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("prevList",resList);
         SetAttributes.setAttributesHRInterviewsPage(rb,request);

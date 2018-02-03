@@ -11,21 +11,21 @@ import java.util.List;
 public class GetVacanciesCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        List<Vacancy> resList = null;
+        HttpSession session=request.getSession(false);
+        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
+        List<Vacancy> resList;
         try {
             resList = GetVacanciesLogic.getAllVacancies();
         } catch (LogicException e) {
-            e.printStackTrace();
+           return PageConstant.ERROR_PAGE;
         }
-        HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
+
         if (!resList.isEmpty()) {
-            SetAttributes.setAttributesVacancyPage(rb,request);
             request.setAttribute("vacanciesList", resList);
         } else {
             request.setAttribute("emptyVacanciesList",rb.getMessage("message.emptyVacanciesList"));
-            request.setAttribute("LogOut",rb.getMessage("LogOut"));
         }
+        SetAttributes.setAttributesVacancyPage(rb,request);
         return PageConstant.VACANCY_PAGE;
     }
 }

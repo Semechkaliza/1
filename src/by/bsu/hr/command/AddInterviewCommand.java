@@ -3,13 +3,18 @@ package by.bsu.hr.command;
 import by.bsu.hr.entity.Interview;
 import by.bsu.hr.entity.Proposal;
 import by.bsu.hr.logic.*;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
+import java.sql.Time;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class AddInterviewCommand implements ActionCommand {
+    private static Logger logger=Logger.getLogger(AddInterviewCommand.class);
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
@@ -23,40 +28,43 @@ public class AddInterviewCommand implements ActionCommand {
         List<Proposal> resList;
         List<Interview> prevList;
         Interview info=null;
-        try {
-            AddInterviewLogic.addInterview(userId, vacancyId, date, time, place, type);
-        } catch (DateTimeParseException | LogicException e) {
-            System.out.println("catch");
-            e.printStackTrace();//message & return appointPreview
+        Date dateSQL;
+        Time timeSQL;
+        try{
+           dateSQL=AddInterviewLogic.getDateSQL(date);
+           timeSQL=AddInterviewLogic.getTimeSQL(time);
+        }catch (DateTimeParseException e){
             try {
                 info = GoAppointPreviewLogic.findInfoToInterview(vacancyId,userId);
             } catch (LogicException e1) {
-                e1.printStackTrace();
+                return PageConstant.ERROR_PAGE;
             }
             info.setType(type);
             request.setAttribute("info",info);
+            request.setAttribute("errorParse",rb.getMessage("errorParse"));
             SetAttributes.setAttributesHRInterviewsPage(rb,request);
             return PageConstant.APPOINT_PREVIEW_PAGE;
         }
         try {
+            AddInterviewLogic.addInterview(userId, vacancyId, dateSQL, timeSQL, place, type);
+        } catch (LogicException e) {
+            logger.log(Level.ERROR,"Error add interview");
+            return PageConstant.ERROR_PAGE;
+        }
+        try {
             if (type.equalsIgnoreCase("PREV")) {
-                System.out.println("at prev");
                 resList = HRProposalsLogic.getProposals();
                 request.setAttribute("propList", resList);
                 SetAttributes.setAttributesHRProposalsPage(rb, request);
                 return PageConstant.HR_PROPOSALS_PAGE;
             } else {
-                System.out.println("at tech");
-                prevList = HRPreviewLogic.findFullPreviews("PREV");
+                prevList = HRInterviewLogic.findFullInterviews("PREV");
                 request.setAttribute("prevList", prevList);
                 SetAttributes.setAttributesHRInterviewsFullPage(rb, request);
                 return PageConstant.HR_PREVIEW_FULL_PAGE;
             }
         }catch (LogicException e){
-            //
+            return PageConstant.ERROR_PAGE;
         }
-
-        SetAttributes.setAttributesHRProposalsPage(rb, request);
-        return PageConstant.HR_PROPOSALS_PAGE;
     }
 }

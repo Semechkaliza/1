@@ -35,7 +35,7 @@ public class VacancyDAO {
                     vac.setCompany(rs.getString("company"));
                     vac.setVacancy(rs.getString("vacancy"));
                     vac.setVacancyId(rs.getInt("id"));
-                    vac.setSalary(rs.getInt("salary"));
+                    vac.setSalary(rs.getString("salary"));
                     vac.setOther(rs.getString("other"));
                     resList.add(vac);
                 } while (rs.next());
@@ -64,7 +64,7 @@ public class VacancyDAO {
                     vacancy.setVacancyId(rs.getInt("id"));
                     vacancy.setCompany(rs.getString("company"));
                     vacancy.setVacancy(rs.getString("vacancy"));
-                    vacancy.setSalary(rs.getInt("salary"));
+                    vacancy.setSalary(rs.getString("salary"));
                     vacancy.setOther(rs.getString("other"));
             }
         } catch (SQLException | ConnectionPoolException e) {
@@ -92,7 +92,7 @@ public class VacancyDAO {
         }
     }
 
-    public static void addVacancy(String vacancy, String company, int salary, String other) throws DAOException {
+    public static void addVacancy(String vacancy, String company, String salary, String other) throws DAOException {
         Connection cn = null;
         PreparedStatement st = null;
         try {
@@ -100,7 +100,7 @@ public class VacancyDAO {
             st = cn.prepareStatement(ADD_VACANCY_QUERY);
             st.setString(1,company);
             st.setString(2,vacancy);
-            st.setInt(3,salary);
+            st.setString(3,salary);
             st.setString(4,other);
             st.execute();
         } catch (SQLException | ConnectionPoolException e) {

@@ -24,8 +24,9 @@ public class ResultCommand implements ActionCommand {
             request.setAttribute("resPrev",resPreview);
             request.setAttribute("resTI",resTInterview);
         } catch (LogicException e) {
-            e.printStackTrace();
-        }SetAttributes.setAttributesResultPage(rb,request);
+           return PageConstant.ERROR_PAGE;
+        }
+        SetAttributes.setAttributesResultPage(rb,request);
         return RESULT_PAGE;
     }
 }

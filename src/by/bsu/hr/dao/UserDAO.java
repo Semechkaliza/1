@@ -18,7 +18,7 @@ public class UserDAO {
     private static Logger logger=Logger.getLogger(UserDAO.class);
     private static final String FIND_USER_QUERY="SELECT * FROM users WHERE login LIKE ? AND password=md5(?) and ACTIVE=1;";
     private static final String CHECK_USER_QUERY="SELECT * FROM users WHERE login LIKE ? and ACTIVE=1;";
-    private static final String ADD_USER_QUERY="insert into users(login,password,name,sname) values(?,md5(?),?,?);";
+    private static final String ADD_USER_QUERY="insert into users(login,password,name,sname,phone,email) values(?,md5(?),?,?,?,?);";
     private static final String UPDATE_INFO_QUERY="UPDATE users SET NAME=?,SNAME=?,PHONE=?,EMAIL=? WHERE ID=?";
     private static final String DELETE_USER_QUERY="UPDATE users set ACTIVE=0 WHERE ID=? and ACTIVE=1";
     private static final String GET_WINNERS_QUERY="select users_id,vacancy_id,name,sname,phone,email,vacancy,company " +
@@ -82,7 +82,7 @@ public class UserDAO {
         }
         return check;
     }
-    public static void addUser(String login, String password, String name, String sname) throws DAOException {
+    public static void addUser(String login, String password, String name, String sname,String phone,String email) throws DAOException {
         Connection cn = null;
         PreparedStatement st = null;
         try {
@@ -92,6 +92,8 @@ public class UserDAO {
             st.setString(2,password);
             st.setString(3,name);
             st.setString(4,sname);
+            st.setString(5,phone);
+            st.setString(6,email);
             st.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DAOException("Error registration user", e);
@@ -172,17 +174,17 @@ public class UserDAO {
 
     public static void handleWinner(int userId, int vacancyId) throws DAOException {
         Connection cn = null;
-        PreparedStatement st = null;
+        PreparedStatement statement = null;
         try {
             cn =ConnectionPool.getInstance().takeConnection();
-            st = cn.prepareStatement(HANDLE_WINNER_QUERY);
-            st.setInt(1,userId);
-            st.setInt(2,vacancyId);
-            st.executeUpdate();
+            statement = cn.prepareStatement(HANDLE_WINNER_QUERY);
+            statement.setInt(1,userId);
+            statement.setInt(2,vacancyId);
+            statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DAOException("Error handle winner",e);
         } finally {
-            closeSt(st);
+            closeSt(statement);
             ConnectionPool.returnConnectionToPool(cn);
         }
     }

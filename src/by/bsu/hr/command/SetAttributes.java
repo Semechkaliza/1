@@ -43,6 +43,8 @@ public class SetAttributes {
         request.setAttribute("no",lang.getMessage("no"));
         request.setAttribute("name",lang.getMessage("name"));
         request.setAttribute("sname",lang.getMessage("sname"));
+        request.setAttribute("phone",lang.getMessage("phone"));
+        request.setAttribute("email",lang.getMessage("email"));
     }
     public static void setAttributesChangeInfoPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request){
         request.setAttribute("changeInfo",lang.getMessage("changeInfo"));
@@ -109,7 +111,6 @@ public class SetAttributes {
         request.setAttribute("addAdmin",lang.getMessage("addAdmin"));
         request.setAttribute("fullTI",lang.getMessage("fullTI"));
         request.setAttribute("fullPreview",lang.getMessage("fullPreview"));
-        request.setAttribute("login",lang.getMessage("login"));
 
     }
     public static void setAttributesHRWinnersPage(LocaleResourceBundle.ResourceBundleEnum lang, HttpServletRequest request) {

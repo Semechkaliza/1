@@ -30,7 +30,7 @@
     <input type="hidden" name="command" value="add_vacancy" />
     <br/>${requestScope.vacancyName}:<input type="text" name="vacancy"/><br/>
     <br/>${requestScope.companyName}:<input type="text" name="company"/><br/>
-    <br/>${requestScope.salary}:<input type="number" name="salary"/><br/>
+    <br/>${requestScope.salary}:<input type="text" name="salary"/><br/>
     <br/>${requestScope.other}:<textarea name="other"></textarea><br/>
     ${requestScope.errorFormateMessage}
     <input type="submit" value="${requestScope.addVacancy}"/>
