@@ -65,11 +65,11 @@ public class LoginCommand implements ActionCommand {
                 request.setAttribute("techList",techList);
                 request.setAttribute("proposalList",proposalList);
                 request.setAttribute("user", user);
-                SetAttributes.setAttributesMyProfilePage(rb,request);
+                request.setAttribute("lang",session.getAttribute("locale"));
                 page= PageConstant.USER_PROFILE_PAGE;
             }else{
                 request.setAttribute("user", user);
-                SetAttributes.setAttributesHRProfilePage(rb,request);
+                request.setAttribute("lang",session.getAttribute("locale"));
                 page=PageConstant.HR_PROFILE_PAGE;
             }
         } else {
@@ -83,7 +83,7 @@ public class LoginCommand implements ActionCommand {
                     break;
             }
             request.setAttribute("errorLoginPassMessage",rb.getMessage("message.IncorrectInfo"));
-            SetAttributes.setAttributesLoginPage(rb,request);
+            request.setAttribute("lang",Locale.getDefault());
             page = PageConstant.LOGIN_PAGE;
         }
         return page;

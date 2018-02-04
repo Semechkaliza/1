@@ -45,6 +45,7 @@ public class ChangeInfoCommand implements ActionCommand {
             e.printStackTrace();
         }
         request.setAttribute("user", session.getAttribute("user"));
+        request.setAttribute("lang",session.getAttribute("locale"));
         if(Validator.isUser(session)){
             List<Proposal> proposalList= null;
             List<Interview> previewList=null;
@@ -60,10 +61,8 @@ public class ChangeInfoCommand implements ActionCommand {
             request.setAttribute("previewList",previewList);
             request.setAttribute("techList",techList);
             request.setAttribute("proposalList",proposalList);
-            SetAttributes.setAttributesMyProfilePage(rb,request);
             return PageConstant.USER_PROFILE_PAGE;
         }else{
-            SetAttributes.setAttributesHRProfilePage(rb,request);
             return PageConstant.HR_PROFILE_PAGE;
         }
 

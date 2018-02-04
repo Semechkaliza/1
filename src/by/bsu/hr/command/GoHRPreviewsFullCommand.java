@@ -12,7 +12,6 @@ public class GoHRPreviewsFullCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         List<Interview> resList= null;
         try {
             resList = HRInterviewLogic.findFullInterviews("PREV");
@@ -20,7 +19,6 @@ public class GoHRPreviewsFullCommand implements ActionCommand {
            return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("prevList",resList);
-        SetAttributes.setAttributesHRInterviewsFullPage(rb,request);
         return PageConstant.HR_PREVIEW_FULL_PAGE;
     }
 }

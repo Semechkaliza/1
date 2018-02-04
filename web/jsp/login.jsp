@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${requestScope.lang}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="resources.text"/>
+<!DOCTYPE html>
+<html lang="${language}">
 
 <head>
     <title>
-        ${requestScope.login}
+        <fmt:message key="login"/>
     </title>
 </head>
 <body>
@@ -19,17 +25,17 @@
         <input name="locale" type="radio" value="be" checked>
     </label> BE
     <br>
-    <input type="hidden" name="command" value="login" />${requestScope.login}:<br/>
-    <input type="text" name="login" value=""/><br/>${requestScope.password}:<br/>
+    <input type="hidden" name="command" value="login" /><fmt:message key="login"/>:<br/>
+    <input type="text" name="login" value=""/><br/><fmt:message key="password"/>:<br/>
     <input type="password" name="password" value=""/><br/>
     ${errorLoginPassMessage} <br/>
     ${wrongAction} <br/>
     ${nullPage} <br/>
-    <input type="submit" value="${requestScope.LogIn}"/>
+    <input type="submit" value="<fmt:message key="LogIn"/>"/>
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="go_registration" />
-    <input type="submit" value="${requestScope.registration}"/>
+    <input type="submit" value="<fmt:message key="registration"/>"/>
 </form>
 <hr/>
 </body>

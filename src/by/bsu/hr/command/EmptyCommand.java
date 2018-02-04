@@ -9,16 +9,7 @@ import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.RU;
 
 public class EmptyCommand implements ActionCommand {
     @Override public String execute(HttpServletRequest request) {
-        LocaleResourceBundle.ResourceBundleEnum rb;
-        switch(Locale.getDefault().toString()){
-            case "ru_RU": rb=RU;
-                break;
-            case "be_BY": rb=BE;
-                break;
-            default:    rb=EN;
-                break;
-        }
-        SetAttributes.setAttributesLoginPage(rb,request);
+        request.setAttribute("lang",Locale.getDefault());
         String page = PageConstant.LOGIN_PAGE;
         return page;
     }

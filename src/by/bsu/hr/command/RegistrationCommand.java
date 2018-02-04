@@ -46,26 +46,19 @@ public class RegistrationCommand implements ActionCommand {
                 HttpSession session=request.getSession(true);
                 Locale curr=new Locale(lang);
                 session.setAttribute("locale",curr);
-                switch(curr.toString()){
-                    case "ru": rb=RU;
-                        break;
-                    case "be": rb=BE;
-                        break;
-                    default:    rb=EN;
-                        break;
-                }
                 session.setAttribute("rb",rb);
                 session.setAttribute("user",user);
                 request.setAttribute("user",user);
-                SetAttributes.setAttributesMyProfilePage(rb,request);
+                request.setAttribute("lang",session.getAttribute("locale"));
                 page= PageConstant.USER_PROFILE_PAGE;
             } else {
                 request.setAttribute("errorLoginPassMessage",rb.getMessage("message.RepetitiveUser"));
-
+                request.setAttribute("lang",Locale.getDefault());
+                page = PageConstant.REGISTRATION_PAGE;
             }
         }else{
             request.setAttribute("errorLoginPassMessage",rb.getMessage("message.NotAllInfo"));
-            SetAttributes.setAttributesRegistrationPage(rb,request);
+            request.setAttribute("lang",Locale.getDefault());
             page = PageConstant.REGISTRATION_PAGE;
         }
         return page;

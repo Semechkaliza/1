@@ -12,7 +12,6 @@ public class GoHRTechInterviewsFullCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         List<Interview> resList= null;
         try {
             resList = HRInterviewLogic.findFullInterviews("TECH");
@@ -20,7 +19,7 @@ public class GoHRTechInterviewsFullCommand implements ActionCommand {
            return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("prevList",resList);
-        SetAttributes.setAttributesHRInterviewsFullPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.HR_TECH_INTERVIEW_FULL_PAGE;
     }
 }

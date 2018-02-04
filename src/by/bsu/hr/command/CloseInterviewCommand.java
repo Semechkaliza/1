@@ -25,7 +25,7 @@ public class CloseInterviewCommand implements ActionCommand {
            return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("prevList",resList);
-        SetAttributes.setAttributesHRInterviewsFullPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         if(type.equalsIgnoreCase("TECH")) {
             return PageConstant.HR_TECH_INTERVIEW_FULL_PAGE;
         }else {

@@ -1,45 +1,49 @@
 <%@ page language ="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${requestScope.lang}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="resources.text"/>
+<!DOCTYPE html>
+<html lang="${language}">
+
 <head>
     <title>
-        ${requestScope.vacancy}
+        <fmt:message key="vacancy"/>
     </title>
 </head>
 <body>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="go_winners" />
-    <input type="submit" value="${requestScope.winners}"/>
+    <input type="submit" value="<fmt:message key="winners"/>"/>
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="logout" />
-    <input type="submit" value="${requestScope.LogOut}"/>
+    <input type="submit" value="<fmt:message key="LogOut"/>"/>
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="go_hr_profile" />
-    <input type="submit" value="${requestScope.myProfile}"/>
+    <input type="submit" value="<fmt:message key="myProfile"/>"/>
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="get_vacancies" />
     <input type="hidden" name="page" value="1" />
     <input type="hidden" name="direction" value="" />
-    <input type="submit" value="${requestScope.vacancy}"/>
+    <input type="submit" value="<fmt:message key="vacancy"/>"/>
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="go_add_vacancy" />
-    <input type="submit" value="${requestScope.addVacancy}"/>
+    <input type="submit" value="<fmt:message key="addVacancy"/>"/>
 </form>
-<h3>${requestScope.vacancy}</h3>
+<h3><fmt:message key="vacancy"/></h3>
 <hr/>
 <table border="1">
     <tr>
-        <td>${requestScope.company}</td>
-        <td>${requestScope.vacancy}</td>
-        <td>${requestScope.salary}</td>
-        <td>${requestScope.other}</td>
+        <td><fmt:message key="companyName"/></td>
+        <td><fmt:message key="vacancyName"/></td>
+        <td><fmt:message key="salary"/></td>
+        <td><fmt:message key="other"/></td>
     </tr><tr>
     <c:forEach items="${requestScope.vacanciesList}" var="vacancy">
 
@@ -51,7 +55,7 @@
         <form method="POST" action="controller">
             <input type="hidden" name="command" value="close_vacancy" />
             <input type="hidden" name="id" value="${vacancy.vacancyId}" />
-            <input type="submit" value="${requestScope.closeVacancy}"/>
+            <input type="submit" value="<fmt:message key="closeVacancy"/>"/>
         </form>
     </td>
 </tr>

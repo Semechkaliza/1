@@ -10,7 +10,6 @@ public class AddAdminCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         String login=request.getParameter("login");
         try {
             AddAdminLogic.addAdmin(login);
@@ -18,7 +17,7 @@ public class AddAdminCommand implements ActionCommand {
             e.printStackTrace();
         }
         request.setAttribute("user",session.getAttribute("user"));
-        SetAttributes.setAttributesHRProfilePage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.HR_PROFILE_PAGE;
     }
 }

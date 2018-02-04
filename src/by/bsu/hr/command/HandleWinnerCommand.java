@@ -13,7 +13,6 @@ public class HandleWinnerCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         int user= Integer.parseInt(request.getParameter("user"));
         int vacancy= Integer.parseInt(request.getParameter("vacancy"));
         List<Winner> resList;
@@ -25,7 +24,7 @@ public class HandleWinnerCommand implements ActionCommand {
         }
 
         request.setAttribute("winList",resList);
-        SetAttributes.setAttributesHRWinnersPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.HR_WINNERS_PAGE;
     }
 }

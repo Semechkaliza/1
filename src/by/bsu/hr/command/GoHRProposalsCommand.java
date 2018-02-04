@@ -12,7 +12,6 @@ public class GoHRProposalsCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         List<Proposal> resList= null;
         try {
             resList = HRProposalsLogic.getProposals();
@@ -20,7 +19,7 @@ public class GoHRProposalsCommand implements ActionCommand {
            return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("propList",resList);
-        SetAttributes.setAttributesHRProposalsPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.HR_PROPOSALS_PAGE;
     }
 }

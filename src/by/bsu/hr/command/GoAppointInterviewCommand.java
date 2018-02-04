@@ -11,7 +11,6 @@ public class GoAppointInterviewCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         int userId= Integer.parseInt(request.getParameter("userId"));
         int vacancyId= Integer.parseInt(request.getParameter("vacancyId"));
         String type=request.getParameter("type");
@@ -23,7 +22,7 @@ public class GoAppointInterviewCommand implements ActionCommand {
             return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("info",info);
-        SetAttributes.setAttributesHRInterviewsPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.APPOINT_PREVIEW_PAGE;
     }
 }

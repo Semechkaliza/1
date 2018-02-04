@@ -1,45 +1,45 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: lgris
-  Date: 26.01.2018
-  Time: 3:04
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${requestScope.lang}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="resources.text"/>
+<!DOCTYPE html>
+<html lang="${language}">
+
 <head>
-    <title>${requestScope.changeInfo}</title>
+    <title><fmt:message key="changeInfo"/></title>
 </head>
 <body>
 <form method="POST" action="controller">
-    <input type="hidden" name="command" value="result" />
-    <input type="submit" value="${requestScope.result}"/>
+    <input type="hidden" name="command" value="go_winners" />
+    <input type="submit" value="<fmt:message key="winners"/>"/>
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="logout" />
-    <input type="submit" value="${requestScope.LogOut}"/>
+    <input type="submit" value="<fmt:message key="LogOut"/>"/>
 </form>
 <form method="POST" action="controller">
-    <input type="hidden" name="command" value="go_my_profile" />
-    <input type="submit" value="${requestScope.myProfile}"/>
+    <input type="hidden" name="command" value="go_hr_profile" />
+    <input type="submit" value="<fmt:message key="myProfile"/>"/>
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="get_vacancies" />
     <input type="hidden" name="page" value="1" />
     <input type="hidden" name="direction" value="" />
-    <input type="submit" value="${requestScope.vacancy}"/>
+    <input type="submit" value="<fmt:message key="vacancy"/>"/>
 </form>
-${requestScope.name}
+<fmt:message key="name"/>
 <form method="POST" action="controller">
 <input type="hidden" name="command" value="change_info"/>
 <input type="text" name="name" value=""/><br/>
-${requestScope.sname}
+    <fmt:message key="sname"/>
 <input type="text" name="sname" value=""/><br/>
-${requestScope.phone}
+    <fmt:message key="phone"/>
 <input type="text" name="phone" value=""/><br/>
-${requestScope.email}
+    <fmt:message key="email"/>
 <input type="text" name="email" value=""/><br/>
-<input type="submit" value="${requestScope.apply}"/>
+<input type="submit" value="<fmt:message key="apply"/>"/>
 </form>
 </body>
 </html>

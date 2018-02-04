@@ -18,7 +18,6 @@ public class GoUserProfileCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         request.setAttribute("user",session.getAttribute("user"));
         List<Proposal> proposalList= null;
         List<Interview> previewList=null;
@@ -34,7 +33,7 @@ public class GoUserProfileCommand implements ActionCommand {
         request.setAttribute("previewList",previewList);
         request.setAttribute("techList",techList);
         request.setAttribute("proposalList",proposalList);
-        SetAttributes.setAttributesMyProfilePage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return USER_PROFILE_PAGE;
     }
 }

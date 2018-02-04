@@ -12,16 +12,7 @@ public class LogoutCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String  page= PageConstant.LOGIN_PAGE;
-        LocaleResourceBundle.ResourceBundleEnum rb;
-        switch(Locale.getDefault().toString()){
-            case "ru_RU": rb=RU;
-                break;
-            case "be_BY": rb=BE;
-                break;
-            default:    rb=EN;
-                break;
-        }
-        SetAttributes.setAttributesLoginPage(rb,request);
+        request.setAttribute("lang",Locale.getDefault());
         request.getSession().invalidate();
         return page;
     }

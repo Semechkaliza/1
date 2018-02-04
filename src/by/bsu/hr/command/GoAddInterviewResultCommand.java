@@ -22,7 +22,7 @@ public class GoAddInterviewResultCommand implements ActionCommand {
            return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("info",info);
-        SetAttributes.setAttributesAddInterviewResultPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.ADD_INTERVIEW_RESULT_PAGE;
     }
 }

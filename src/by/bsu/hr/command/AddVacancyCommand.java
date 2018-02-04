@@ -34,7 +34,7 @@ public class AddVacancyCommand implements ActionCommand {
         } else {
             request.setAttribute("emptyVacanciesList",rb.getMessage("message.emptyVacanciesList"));
         }
-        SetAttributes.setAttributesHRVacancyPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.HR_VACANCY_PAGE;
     }
 }

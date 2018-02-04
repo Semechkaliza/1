@@ -50,11 +50,10 @@ public class GetVacanciesCommand implements ActionCommand {
         }
         request.setAttribute("page",page);
         User user= (User) session.getAttribute("user");
+        request.setAttribute("lang",session.getAttribute("locale"));
         if(user.getRole().equalsIgnoreCase("ADMIN")){
-            SetAttributes.setAttributesHRVacancyPage(rb,request);
             return PageConstant.HR_VACANCY_PAGE;
         }else {
-            SetAttributes.setAttributesVacancyPage(rb, request);
             return PageConstant.VACANCY_PAGE;
         }
     }

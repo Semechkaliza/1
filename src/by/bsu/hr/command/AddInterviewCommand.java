@@ -42,7 +42,7 @@ public class AddInterviewCommand implements ActionCommand {
             info.setType(type);
             request.setAttribute("info",info);
             request.setAttribute("errorParse",rb.getMessage("errorParse"));
-            SetAttributes.setAttributesHRInterviewsPage(rb,request);
+            request.setAttribute("lang",session.getAttribute("locale"));
             return PageConstant.APPOINT_PREVIEW_PAGE;
         }
         try {
@@ -55,12 +55,12 @@ public class AddInterviewCommand implements ActionCommand {
             if (type.equalsIgnoreCase("PREV")) {
                 resList = HRProposalsLogic.getProposals();
                 request.setAttribute("propList", resList);
-                SetAttributes.setAttributesHRProposalsPage(rb, request);
+                request.setAttribute("lang",session.getAttribute("locale"));
                 return PageConstant.HR_PROPOSALS_PAGE;
             } else {
                 prevList = HRInterviewLogic.findFullInterviews("PREV");
                 request.setAttribute("prevList", prevList);
-                SetAttributes.setAttributesHRInterviewsFullPage(rb, request);
+                request.setAttribute("lang",session.getAttribute("locale"));
                 return PageConstant.HR_PREVIEW_FULL_PAGE;
             }
         }catch (LogicException e){

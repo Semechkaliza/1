@@ -12,7 +12,6 @@ public class GoHRPreviewsCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         List<Interview> resList= null;
         try {
             resList = HRInterviewLogic.findInterviews("PREV");
@@ -20,7 +19,7 @@ public class GoHRPreviewsCommand implements ActionCommand {
             return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("prevList",resList);
-        SetAttributes.setAttributesHRInterviewsPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.HR_PREVIEWS_PAGE;
     }
 }

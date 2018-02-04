@@ -7,8 +7,7 @@ public class GoAddVacancyCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
-        SetAttributes.setAttributesAddVacancyPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.ADD_VACANCY_PAGE;
     }
 }

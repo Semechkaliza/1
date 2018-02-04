@@ -27,7 +27,7 @@ public class AddInterviewResultCommand implements ActionCommand {
             return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("prevList",resList);
-        SetAttributes.setAttributesHRInterviewsPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         if(type.equalsIgnoreCase("PREV")) return PageConstant.HR_PREVIEWS_PAGE;
         else return PageConstant.HR_TECH_INTERVIEWS_PAGE;
     }

@@ -22,16 +22,7 @@ public class DeleteUserCommand implements ActionCommand {
         } catch (LogicException e) {
             return PageConstant.ERROR_PAGE;
         }
-        LocaleResourceBundle.ResourceBundleEnum rb;
-        switch(Locale.getDefault().toString()){
-            case "ru_RU": rb=RU;
-                break;
-            case "be_BY": rb=BE;
-                break;
-            default:    rb=EN;
-                break;
-        }
-        SetAttributes.setAttributesLoginPage(rb,request);
+        request.setAttribute("lang",Locale.getDefault());
         session.invalidate();
         return PageConstant.LOGIN_PAGE;
     }

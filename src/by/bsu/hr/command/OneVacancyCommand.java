@@ -18,8 +18,7 @@ public class OneVacancyCommand implements ActionCommand {
             return PageConstant.ERROR_PAGE;
         }
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
-        SetAttributes.setAttributesOneVacancyPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         request.setAttribute("oneVacancy", vac);
         return PageConstant.ONE_VACANCY_PAGE;
     }

@@ -7,8 +7,7 @@ public class GoChangeInfoCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
-        SetAttributes.setAttributesChangeInfoPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.CHANGE_INFO_PAGE;
     }
 }

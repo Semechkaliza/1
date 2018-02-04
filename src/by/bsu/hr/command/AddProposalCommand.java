@@ -35,7 +35,7 @@ public class AddProposalCommand implements ActionCommand {
         request.setAttribute("previewList",previewList);
         request.setAttribute("techList",techList);
         request.setAttribute("proposalList",proposalList);
-        SetAttributes.setAttributesMyProfilePage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.USER_PROFILE_PAGE;
     }
 }

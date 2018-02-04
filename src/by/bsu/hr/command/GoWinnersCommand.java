@@ -12,7 +12,6 @@ public class GoWinnersCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         List<Winner> resList= null;
         try {
             resList = GoWinnersLogic.getWinners();
@@ -20,7 +19,7 @@ public class GoWinnersCommand implements ActionCommand {
             return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("winList",resList);
-        SetAttributes.setAttributesHRWinnersPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.HR_WINNERS_PAGE;
     }
 }

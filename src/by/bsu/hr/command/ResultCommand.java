@@ -16,7 +16,6 @@ public class ResultCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
         int userId=((User)session.getAttribute("user")).getUserId();
         try {
             List<Interview> resPreview = ResultLogic.getPreviewResult(userId);
@@ -26,7 +25,7 @@ public class ResultCommand implements ActionCommand {
         } catch (LogicException e) {
            return PageConstant.ERROR_PAGE;
         }
-        SetAttributes.setAttributesResultPage(rb,request);
+        request.setAttribute("lang",session.getAttribute("locale"));
         return RESULT_PAGE;
     }
 }
