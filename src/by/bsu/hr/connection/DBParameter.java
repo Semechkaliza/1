@@ -9,7 +9,6 @@ public class DBParameter {
     public static final String DB_PASSWORD = "db.password";
     public static final String DB_POLL_SIZE = "db.poolsize";
     public static final String DB_SSL="db.ssl";
-    public static final String DB_AUTOREC="db.autorec";
 
 
 }

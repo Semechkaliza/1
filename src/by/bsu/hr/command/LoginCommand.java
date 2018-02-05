@@ -7,6 +7,7 @@ import by.bsu.hr.logic.LogicException;
 import by.bsu.hr.logic.LoginLogic;
 import by.bsu.hr.logic.UserProfileLogic;
 import by.bsu.hr.logic.Validator;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,11 +29,11 @@ public class LoginCommand implements ActionCommand {
         String lang=request.getParameter("locale");
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String pass = request.getParameter(PARAM_NAME_PASSWORD);
-        String page;
         User user;
         try {
             user = LoginLogic.logIn(login,pass);
         } catch (LogicException e) {
+            logger.log(Level.INFO,"Error login");
             return PageConstant.ERROR_PAGE;
         }
         if(user.getLogin()!=null){
@@ -51,14 +52,15 @@ public class LoginCommand implements ActionCommand {
             }
             session.setAttribute("rb",rb);
             if(Validator.isUser(session)){
-                List<Proposal> proposalList= null;
-                List<Interview> previewList=null;
-                List<Interview> techList=null;
+                List<Proposal> proposalList;
+                List<Interview> previewList;
+                List<Interview> techList;
                 try {
                     proposalList = UserProfileLogic.getProposals(user.getUserId());
                     previewList= UserProfileLogic.getFutureInterview(user.getUserId(),"PREV",(Locale)session.getAttribute("locale"));
                     techList=UserProfileLogic.getFutureInterview(user.getUserId(),"TECH",(Locale)session.getAttribute("locale"));
                 } catch (LogicException e) {
+                    logger.log(Level.INFO,"Error find info for user profile");
                    return PageConstant.ERROR_PAGE;
                 }
                 request.setAttribute("previewList",previewList);
@@ -66,11 +68,11 @@ public class LoginCommand implements ActionCommand {
                 request.setAttribute("proposalList",proposalList);
                 request.setAttribute("user", user);
                 request.setAttribute("lang",session.getAttribute("locale"));
-                page= PageConstant.USER_PROFILE_PAGE;
+                return PageConstant.USER_PROFILE_PAGE;
             }else{
                 request.setAttribute("user", user);
                 request.setAttribute("lang",session.getAttribute("locale"));
-                page=PageConstant.HR_PROFILE_PAGE;
+                return PageConstant.HR_PROFILE_PAGE;
             }
         } else {
             LocaleResourceBundle.ResourceBundleEnum rb;
@@ -84,8 +86,7 @@ public class LoginCommand implements ActionCommand {
             }
             request.setAttribute("errorLoginPassMessage",rb.getMessage("message.IncorrectInfo"));
             request.setAttribute("lang",Locale.getDefault());
-            page = PageConstant.LOGIN_PAGE;
+            return PageConstant.LOGIN_PAGE;
         }
-        return page;
     }
 }

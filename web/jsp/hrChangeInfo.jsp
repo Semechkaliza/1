@@ -12,21 +12,21 @@
 </head>
 <body>
 <form method="POST" action="controller">
-    <input type="hidden" name="command" value="result" />
-    <input type="submit" value="<fmt:message key="result"/>"/>
+    <input type="hidden" name="command" value="go_winners" />
+    <input type="submit" value="<fmt:message key="winners"/>"/>
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="logout" />
     <input type="submit" value="<fmt:message key="LogOut"/>"/>
 </form>
 <form method="POST" action="controller">
-    <input type="hidden" name="command" value="go_my_profile" />
+    <input type="hidden" name="command" value="go_hr_profile" />
     <input type="submit" value="<fmt:message key="myProfile"/>"/>
 </form>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="get_vacancies" />
     <input type="hidden" name="page" value="1" />
-    <input type="hidden" name="direction" value="next" />
+    <input type="hidden" name="direction" value="" />
     <input type="submit" value="<fmt:message key="vacancy"/>"/>
 </form>
 <fmt:message key="name"/>

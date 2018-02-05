@@ -11,9 +11,8 @@ public class LogoutCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String  page= PageConstant.LOGIN_PAGE;
         request.setAttribute("lang",Locale.getDefault());
         request.getSession().invalidate();
-        return page;
+        return PageConstant.LOGIN_PAGE;
     }
 }

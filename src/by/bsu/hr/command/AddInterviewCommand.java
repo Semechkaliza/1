@@ -27,7 +27,7 @@ public class AddInterviewCommand implements ActionCommand {
         String place = request.getParameter("place");
         List<Proposal> resList;
         List<Interview> prevList;
-        Interview info=null;
+        Interview info;
         Date dateSQL;
         Time timeSQL;
         try{
@@ -37,6 +37,7 @@ public class AddInterviewCommand implements ActionCommand {
             try {
                 info = GoAppointPreviewLogic.findInfoToInterview(vacancyId,userId);
             } catch (LogicException e1) {
+                logger.log(Level.INFO,"Error find info about interview");
                 return PageConstant.ERROR_PAGE;
             }
             info.setType(type);
@@ -48,7 +49,7 @@ public class AddInterviewCommand implements ActionCommand {
         try {
             AddInterviewLogic.addInterview(userId, vacancyId, dateSQL, timeSQL, place, type);
         } catch (LogicException e) {
-            logger.log(Level.ERROR,"Error add interview");
+            logger.log(Level.INFO,"Error add interview");
             return PageConstant.ERROR_PAGE;
         }
         try {
@@ -64,6 +65,7 @@ public class AddInterviewCommand implements ActionCommand {
                 return PageConstant.HR_PREVIEW_FULL_PAGE;
             }
         }catch (LogicException e){
+            logger.log(Level.INFO,"Error find all interviews");
             return PageConstant.ERROR_PAGE;
         }
     }

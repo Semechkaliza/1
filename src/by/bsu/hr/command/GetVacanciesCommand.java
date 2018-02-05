@@ -4,13 +4,16 @@ import by.bsu.hr.entity.User;
 import by.bsu.hr.entity.Vacancy;
 import by.bsu.hr.logic.GetVacanciesLogic;
 import by.bsu.hr.logic.LogicException;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class GetVacanciesCommand implements ActionCommand {
-    public static final int PAGE_SIZE=2;
+    private static Logger logger=Logger.getLogger(CancelProposalCommand.class);
+    static final int PAGE_SIZE=2;
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
@@ -46,6 +49,7 @@ public class GetVacanciesCommand implements ActionCommand {
                 request.setAttribute("vacanciesList", resList);
             }
         } catch (LogicException e) {
+            logger.log(Level.INFO,"Error get vacancies");
            return PageConstant.ERROR_PAGE;
         }
         request.setAttribute("page",page);

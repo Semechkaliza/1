@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import java.util.ResourceBundle;
 
 public class DBResourceManager {
-    private static Logger logger=Logger.getLogger(DBResourceManager.class);
         private final static DBResourceManager instance = new DBResourceManager();
 
         private ResourceBundle bundle = ResourceBundle.getBundle("resources/db");

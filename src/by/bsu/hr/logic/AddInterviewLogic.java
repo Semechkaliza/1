@@ -16,12 +16,15 @@ public class AddInterviewLogic {
                                     String type) throws LogicException {
         try{
             InterviewDAO.addInterview(userId,vacancyId,dateSQL,timeSQL,place,type);
-            if(type.equalsIgnoreCase("prev")) InterviewDAO.processProposal(userId,vacancyId);
-            else InterviewDAO.closeInterview(userId,vacancyId,"PREV");
+            if(type.equalsIgnoreCase("prev")){
+                InterviewDAO.processProposal(userId,vacancyId);
+            } else{
+                InterviewDAO.closeInterview(userId,vacancyId,"PREV");
+            }
         } catch (DateTimeParseException | DAOException e) {
             throw new LogicException("Error add interview",e);
         }
-        }
+    }
 
     public static Date getDateSQL(String date) {
      Date dateSQL;
@@ -41,7 +44,7 @@ public class AddInterviewLogic {
         if(time.contains("M")){
             locTime=LocalTime.parse(time,DateTimeFormatter.ofPattern("h:m a"));
         }else{
-            locTime=LocalTime.parse(time,DateTimeFormatter.ofPattern("H.m"));
+            locTime=LocalTime.parse(time,DateTimeFormatter.ofPattern("H:m"));
         }
         timeSQL= Time.valueOf(locTime);
         return timeSQL;

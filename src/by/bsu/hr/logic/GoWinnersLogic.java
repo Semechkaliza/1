@@ -7,7 +7,7 @@ import by.bsu.hr.entity.Winner;
 import java.util.List;
 
 public class GoWinnersLogic {
-    public static List<Winner> getWinners() throws LogicException {
+    public static List<Winner> findWinners() throws LogicException {
         try {
             return UserDAO.findWinners();
         } catch (DAOException e) {

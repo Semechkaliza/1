@@ -8,6 +8,7 @@ public class GoHRProfileCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
         request.setAttribute("user",session.getAttribute("user"));
+        request.setAttribute("lang",session.getAttribute("locale"));
         return PageConstant.HR_PROFILE_PAGE;
     }
 }

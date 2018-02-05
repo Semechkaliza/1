@@ -6,7 +6,7 @@ import by.bsu.hr.entity.Vacancy;
 
 public class OneVacancyLogic {
     public static Vacancy getVacancy(int id) throws LogicException {
-        Vacancy vacancy= null;
+        Vacancy vacancy;
         try {
             vacancy = VacancyDAO.findVacancy(id);
         } catch (DAOException e) {

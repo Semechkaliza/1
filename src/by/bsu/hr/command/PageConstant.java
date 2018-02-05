@@ -20,5 +20,5 @@ public class PageConstant {
     public static final String ADD_INTERVIEW_RESULT_PAGE="/jsp/addInterviewResult.jsp";
     public static final String HR_PREVIEW_FULL_PAGE="/jsp/hrPreviewFull.jsp";
     public static final String HR_TECH_INTERVIEW_FULL_PAGE="/jsp/hrTechInterviewFull.jsp";
-
+    public static final String HR_CHANGE_INFO_PAGE ="/jsp/hrChangeInfo.jsp";
 }

@@ -10,7 +10,6 @@ import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.RU;
 public class EmptyCommand implements ActionCommand {
     @Override public String execute(HttpServletRequest request) {
         request.setAttribute("lang",Locale.getDefault());
-        String page = PageConstant.LOGIN_PAGE;
-        return page;
+        return PageConstant.LOGIN_PAGE;
     }
 }

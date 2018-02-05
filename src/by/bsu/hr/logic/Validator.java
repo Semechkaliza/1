@@ -7,13 +7,13 @@ import java.util.List;
 
 public class Validator {
     public static boolean registrationValid(String login, String pass, String name, String sname, String phone, String email){
-        if(login.isEmpty()||pass.isEmpty()||name.isEmpty()||sname.isEmpty()||phone.isEmpty()||email.isEmpty())
-            return false;
-        else return true;
+        return !login.isEmpty() && !pass.isEmpty() && !name.isEmpty() && !sname.isEmpty() && !phone.isEmpty() && !email.isEmpty();
     }
     public static boolean isUser(HttpSession session){
-       if(((User)session.getAttribute("user")).getRole().equalsIgnoreCase("user"))
-           return true;
-           else return false;
+        return ((User) session.getAttribute("user")).getRole().equalsIgnoreCase("user");
+    }
+
+    public static boolean validVacancy(String vacancy, String company) {
+        return !vacancy.isEmpty() && !company.isEmpty();
     }
 }
