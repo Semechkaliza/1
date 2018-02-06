@@ -30,10 +30,15 @@ public class AddInterviewCommand implements ActionCommand {
         Interview info;
         Date dateSQL;
         Time timeSQL;
-        try{
-           dateSQL=AddInterviewLogic.getDateSQL(date);
-           timeSQL=AddInterviewLogic.getTimeSQL(time);
-        }catch (DateTimeParseException e){
+        if(Validator.dateValid(date)&&Validator.timeValid(time)){
+            try{
+                dateSQL=AddInterviewLogic.getDateSQL(date);
+                timeSQL=AddInterviewLogic.getTimeSQL(time);
+            }catch (DateTimeParseException e){
+                logger.log(Level.INFO,"Error parse date and time");
+                return PageConstant.ERROR_PAGE;
+            }
+        }else {
             try {
                 info = GoAppointPreviewLogic.findInfoToInterview(vacancyId,userId);
             } catch (LogicException e1) {
@@ -46,6 +51,7 @@ public class AddInterviewCommand implements ActionCommand {
             request.setAttribute("lang",session.getAttribute("locale"));
             return PageConstant.APPOINT_PREVIEW_PAGE;
         }
+
         try {
             AddInterviewLogic.addInterview(userId, vacancyId, dateSQL, timeSQL, place, type);
         } catch (LogicException e) {
