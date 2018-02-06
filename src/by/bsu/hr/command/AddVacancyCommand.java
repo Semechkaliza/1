@@ -28,7 +28,7 @@ public class AddVacancyCommand implements ActionCommand {
         String other = request.getParameter("other");
         if (!Validator.validVacancy(vacancy, company)) {
             request.setAttribute("lang", session.getAttribute("locale"));
-            request.setAttribute("message.emptyVacancy", rb.getMessage("message.emptyVacancy"));
+            request.setAttribute("emptyVacancy", rb.getMessage("message.emptyVacancy"));
             return PageConstant.ADD_VACANCY_PAGE;
         } else {
             try {

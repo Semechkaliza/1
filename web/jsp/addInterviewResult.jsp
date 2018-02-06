@@ -56,7 +56,7 @@
     <input type="hidden" name="command" value="add_interview_result" />
     <br/><fmt:message key="mark"/>:<input type="number" name="mark" min="-1" max="10"/><br/>
     <br/><fmt:message key="feedback"/>:<textarea name="feedback" value="" placeholder="feedback"></textarea><br/>
-    ${requestScope.errorFormateMessage}
+    ${requestScope.errorMark}
     <input type="hidden" name="userId" value="${requestScope.info.userId}" />
     <input type="hidden" name="vacancyId" value="${requestScope.info.vacancyId}" />
     <input type="hidden" name="type" value="${requestScope.info.type}" />

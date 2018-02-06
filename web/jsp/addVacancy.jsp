@@ -37,7 +37,7 @@
     <br/><fmt:message key="companyName"/>:<input type="text" name="company"/><br/>
     <br/><fmt:message key="salary"/>:<input type="text" name="salary"/><br/>
     <br/><fmt:message key="other"/>:<textarea name="other"></textarea><br/>
-    ${requestScope.errorFormateMessage}
+    ${requestScope.emptyVacancy}
     <input type="submit" value="<fmt:message key="addVacancy"/>"/>
 </form>
 </body>

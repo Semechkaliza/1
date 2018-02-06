@@ -29,7 +29,7 @@ public class AddProposalCommand implements ActionCommand {
             if(AddProposalLogic.checkProposal(vacancyId,userId)){
                 AddProposalLogic.addProposal(vacancyId,userId);
             }else{
-                request.setAttribute("message.errorAddProposal",rb.getMessage("message.errorAddProposal"));
+                request.setAttribute("errorAddProposal",rb.getMessage("message.errorAddProposal"));
             }
             previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV", (Locale) session.getAttribute("locale"));
             techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));

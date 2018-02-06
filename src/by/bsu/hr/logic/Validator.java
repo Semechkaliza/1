@@ -31,4 +31,10 @@ public class Validator {
         Matcher matcher12=pattern12.matcher(time);
         return (matcher24.matches()||matcher12.matches());
     }
+
+    public static boolean markValid(String mark) {
+        Pattern pattern=Pattern.compile("[0-9]|10");
+        Matcher matcher=pattern.matcher(mark);
+        return matcher.matches();
+    }
 }
