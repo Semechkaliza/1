@@ -70,6 +70,7 @@
     <br/><fmt:message key="login"/> :<input type="text" name="login"/><br/>
     <input type="submit" value="<fmt:message key="addAdmin"/>"/>
 </form>
+${requestScope.errorMessage}
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="go_change_info" />
     <input type="submit" value="<fmt:message key="changeInfo"/>"/>

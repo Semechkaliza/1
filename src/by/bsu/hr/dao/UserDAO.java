@@ -61,7 +61,7 @@ public class UserDAO {
         return res;
     }
 
-    public static boolean checkUser(String login){
+    public static boolean checkUser(String login) throws DAOException {
         Connection cn = null;
         ResultSet rs = null;
         PreparedStatement st = null;
@@ -75,7 +75,7 @@ public class UserDAO {
                 check = false;
             }
         } catch (ConnectionPoolException | SQLException e) {
-            logger.log(Level.ERROR,"Missing check user");
+            throw new DAOException("Error check user", e);
         }finally {
             closeSt(st);
             returnConnectionToPool(cn);
@@ -230,5 +230,8 @@ public class UserDAO {
             closeSt(st3);
             ConnectionPool.returnConnectionToPool(cn);
         }
+    }
+
+    public static void checkLogin(String login) {
     }
 }

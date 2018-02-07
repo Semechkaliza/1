@@ -43,7 +43,6 @@
     <td>${requestScope.user.sname}</td>
 </tr>
 </table>
-${requestScope.errorAddProposal}
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="go_change_info" />
     <input type="submit" value="<fmt:message key="changeInfo"/>"/>
@@ -66,6 +65,7 @@ ${requestScope.errorAddProposal}
 </tr>
     </c:forEach>
 </table>
+${requestScope.errorAddProposal}
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="get_vacancies" />
     <input type="hidden" name="page" value="1" />
