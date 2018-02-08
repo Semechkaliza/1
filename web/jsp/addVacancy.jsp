@@ -11,32 +11,45 @@
     <title>
         <fmt:message key="addVacancy"/>
     </title>
+    <style>
+        <%@include file='../css/final.css' %>
+    </style>
 </head>
 <body>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="go_winners" />
-    <input type="submit" value="<fmt:message key="winners"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="logout" />
-    <input type="submit" value="<fmt:message key="LogOut"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="go_hr_profile" />
-    <input type="submit" value="<fmt:message key="myProfile"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="get_vacancies" />
-    <input type="hidden" name="page" value="1" />
-    <input type="hidden" name="direction" value="" />
-    <input type="submit" value="<fmt:message key="vacancy"/>"/>
-</form>
+<header>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="result" />
+        <label>
+            <input type="submit" value="<fmt:message key="result"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="go_my_profile" />
+        <label>
+            <input type="submit" value="<fmt:message key="myProfile"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="get_vacancies" />
+        <input type="hidden" name="page" value="1" />
+        <input type="hidden" name="direction" value="" />
+        <label>
+            <input type="submit" value="<fmt:message key="vacancy"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="logout" />
+        <label>
+            <input type="submit" value="<fmt:message key="LogOut"/>"/>
+        </label>
+    </form>
+</header>
 <form method="POST" action="controller">
     <input type="hidden" name="command" value="add_vacancy" />
-    <br/><fmt:message key="vacancyName"/>:<input type="text" name="vacancy"/><br/>
-    <br/><fmt:message key="companyName"/>:<input type="text" name="company"/><br/>
-    <br/><fmt:message key="salary"/>:<input type="text" name="salary"/><br/>
-    <br/><fmt:message key="other"/>:<textarea name="other"></textarea><br/>
+    <fmt:message key="vacancyName"/>:<input type="text" name="vacancy"/>
+    <fmt:message key="companyName"/>:<input type="text" name="company"/>
+    <fmt:message key="salary"/>:<input type="text" name="salary"/>
+    <fmt:message key="other"/>:<textarea name="other"></textarea>
     ${requestScope.emptyVacancy}
     <input type="submit" value="<fmt:message key="addVacancy"/>"/>
 </form>

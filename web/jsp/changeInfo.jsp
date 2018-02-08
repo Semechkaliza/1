@@ -9,37 +9,60 @@
 
 <head>
     <title><fmt:message key="changeInfo"/></title>
+    <style>
+        <%@include file='../css/final.css' %>
+    </style>
 </head>
 <body>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="result" />
-    <input type="submit" value="<fmt:message key="result"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="logout" />
-    <input type="submit" value="<fmt:message key="LogOut"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="go_my_profile" />
-    <input type="submit" value="<fmt:message key="myProfile"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="get_vacancies" />
-    <input type="hidden" name="page" value="1" />
-    <input type="hidden" name="direction" value="next" />
-    <input type="submit" value="<fmt:message key="vacancy"/>"/>
-</form>
-<fmt:message key="name"/>
-<form method="POST" action="controller">
-<input type="hidden" name="command" value="change_info"/>
-<input type="text" name="name" value=""/><br/>
-    <fmt:message key="sname"/>
-<input type="text" name="sname" value=""/><br/>
-    <fmt:message key="phone"/>
-<input type="text" name="phone" value=""/><br/>
-    <fmt:message key="email"/>
-<input type="text" name="email" value=""/><br/>
-<input type="submit" value="<fmt:message key="apply"/>"/>
-</form>
+<header>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="result" />
+        <label>
+            <input type="submit" value="<fmt:message key="result"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="go_my_profile" />
+        <label>
+            <input type="submit" value="<fmt:message key="myProfile"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="get_vacancies" />
+        <input type="hidden" name="page" value="1" />
+        <input type="hidden" name="direction" value="" />
+        <label>
+            <input type="submit" value="<fmt:message key="vacancy"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="logout" />
+        <label>
+            <input type="submit" value="<fmt:message key="LogOut"/>"/>
+        </label>
+    </form>
+</header>
+<section class="enterInputs">
+    <form class="formReg" method="POST" action="controller">
+        <input type="hidden" name="command" value="change_info"/>
+        <label>
+            <fmt:message key="name"/>
+            <input type="text" name="name" value=""/>
+        </label>
+        <label>
+            <fmt:message key="sname"/>
+            <input type="text" name="sname" value=""/>
+        </label>
+        <label>
+            <fmt:message key="phone"/>
+            <input type="text" name="phone" value=""/>
+        </label>
+        <label>
+            <fmt:message key="email"/>
+            <input type="text" name="email" value=""/>
+        </label>
+        <input type="submit" class="button" value="<fmt:message key="apply"/>"/>
+    </form>
+</section>
 </body>
 </html>

@@ -12,26 +12,39 @@
     <title>
         <fmt:message key="previews"/>
     </title>
+    <style>
+        <%@include file='../css/final.css' %>
+    </style>
 </head>
 <body>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="go_winners" />
-    <input type="submit" value="<fmt:message key="winners"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="logout" />
-    <input type="submit" value="<fmt:message key="LogOut"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="go_hr_profile" />
-    <input type="submit" value="<fmt:message key="myProfile"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="get_vacancies" />
-    <input type="hidden" name="page" value="1" />
-    <input type="hidden" name="direction" value="" />
-    <input type="submit" value="<fmt:message key="vacancy"/>"/>
-</form>
+<header>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="go_winners" />
+        <label>
+            <input type="submit" value="<fmt:message key="winners"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="logout" />
+        <label>
+            <input type="submit" value="<fmt:message key="LogOut"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="go_hr_profile" />
+        <label>
+            <input type="submit" value="<fmt:message key="myProfile"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="get_vacancies" />
+        <input type="hidden" name="page" value="1" />
+        <input type="hidden" name="direction" value="" />
+        <label>
+            <input type="submit" value="<fmt:message key="vacancy"/>"/>
+        </label>
+    </form>
+</header>
 <table border="1">
     <tr>
         <td><fmt:message key="name"/></td>
@@ -60,7 +73,7 @@
     <input type="hidden" name="userId" value="${requestScope.info.userId}" />
     <input type="hidden" name="vacancyId" value="${requestScope.info.vacancyId}" />
     <input type="hidden" name="type" value="${requestScope.info.type}" />
-    <input type="submit" value="<fmt:message key="apply"/>"/>
+    <input type="submit" class="button btnProfile" value="<fmt:message key="apply"/>"/>
 </form>
 </body>
 </html>

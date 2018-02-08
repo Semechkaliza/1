@@ -5,22 +5,21 @@ var App = {
 		uLogin: document.querySelector("#Login"),
 		uPassword: document.querySelector("#Password"),
 		uPassword2: document.querySelector("#Password2"),
+		uEmail: document.querySelector("#Email"),
+		uPhone: document.querySelector("#Phone"),
+		uName: document.querySelector("#Name"),
+		uSname: document.querySelector("#Sname")
 	},
 	init : function(){
-		var len = App.globals.button_Tab_mas.length;
-		for(var i = 0; i<len; i++){
-			App.globals.button_Tab_mas[i].addEventListener("click", function(e){
-				App.click_on_tubsButton(e.currentTarget);
-			})
-		}
 		App.globals.uLogin.addEventListener("input",function(){
 			var regEx = /^[A-Za-z][A-Za-z0-9_]{4}[A-Za-z0-9_]{0,}$/;
 			var falseLogin = document.querySelector(".falseLogin");
 			var trueLogin = document.querySelector(".trueLogin");
-			if(App.globals.uLogin.value.match(regEx)){
+			if(App.globals.uLogin.value.match(regEx) && App.globals.uLogin.value.length>=5){
 				falseLogin.style.display="none";
 				trueLogin.style.display="flex";
 			}else{
+				console.log(2)
 				falseLogin.style.display="flex";
 				trueLogin.style.display="none";
 			}
@@ -38,8 +37,8 @@ var App = {
 			}
 		})
 		App.globals.uPassword2.addEventListener("input",function(){
-			var falsePassword2 = document.querySelector(".falsePassword2");
-			var truePassword2 = document.querySelector(".truePassword2");
+			var falsePassword = document.querySelector(".falsePassword");
+			var truePassword = document.querySelector(".truePassword");
 			if(App.globals.uPassword.value == App.globals.uPassword2.value){
 				console.log("ee");
 				falsePassword2.style.display="none";
@@ -50,24 +49,34 @@ var App = {
 				truePassword2.style.display="none";
 			}
 		})
-	},
-	click_on_tubsButton : function(click_button){
-		console.log(click_button)
-		var len = App.globals.button_Tab_mas.length;
-		for(var i = 0; i<len; i++){
-			App.globals.content_mas[i].className = App.globals.content_mas[i].className.replace("content content_click", "content");
-		};
-		for(var i = 0; i<len; i++){
-			App.globals.button_Tab_mas[i].className = App.globals.button_Tab_mas[i].className.replace("click_button", "")
-		};
-		for(var i = 0; i<len; i++){
-			if(click_button == App.globals.button_Tab_mas[i]){
-				App.globals.button_Tab_mas[i].classList.toggle("click_button");
-				App.globals.content_mas[i].classList.toggle("content_click");
-				break;
-			}
-		}
+        App.globals.uEmail.addEventListener("input",function(){
+            var regEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            var falseLogin = document.querySelector(".falseEmail");
+            var trueLogin = document.querySelector(".trueEmail");
+            if(App.globals.uEmail.value.match(regEx) && App.globals.uEmail.value.length>=5){
+                falseLogin.style.display="none";
+                trueLogin.style.display="flex";
+            }else{
+                console.log(2)
+                falseLogin.style.display="flex";
+                trueLogin.style.display="none";
+            }
+        })
+        App.globals.uPhone.addEventListener("input",function(){
+            var regEx = /^\+375 \((17|29|33|44)\) [0-9]{3}-[0-9]{2}-[0-9]{2}$/;
+            var falseLogin = document.querySelector(".falsePhone");
+            var trueLogin = document.querySelector(".truePhone");
+            if(App.globals.uPhone.value.match(regEx) && App.globals.uPhone.value.length>=5){
+                falseLogin.style.display="none";
+                trueLogin.style.display="flex";
+            }else{
+                console.log(2)
+                falseLogin.style.display="flex";
+                trueLogin.style.display="none";
+            }
+        })
 	}
+
 }
 
 App.init();

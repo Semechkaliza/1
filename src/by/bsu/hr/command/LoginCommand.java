@@ -26,7 +26,6 @@ public class LoginCommand implements ActionCommand {
     private static final String PARAM_NAME_PASSWORD = "password";
     @Override
     public String execute(HttpServletRequest request) {
-        logger.log(Level.INFO,"Error login");
         String lang=request.getParameter("locale");
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String pass = request.getParameter(PARAM_NAME_PASSWORD);

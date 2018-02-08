@@ -12,26 +12,39 @@
     <title>
         <fmt:message key="vacancyName"/>
     </title>
+    <style>
+        <%@include file='../css/final.css' %>
+    </style>
 </head>
 <body>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="result" />
-    <input type="submit" value="<fmt:message key="result"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="logout" />
-    <input type="submit" value="<fmt:message key="LogOut"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="go_my_profile" />
-    <input type="submit" value="<fmt:message key="myProfile"/>"/>
-</form>
-<form method="POST" action="controller">
-    <input type="hidden" name="command" value="get_vacancies" />
-    <input type="hidden" name="page" value="1" />
-    <input type="hidden" name="direction" value="" />
-    <input type="submit" value="<fmt:message key="vacancy"/>"/>
-</form>
+<header>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="result" />
+        <label>
+            <input type="submit" value="<fmt:message key="result"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="go_my_profile" />
+        <label>
+            <input type="submit" value="<fmt:message key="myProfile"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="get_vacancies" />
+        <input type="hidden" name="page" value="1" />
+        <input type="hidden" name="direction" value="" />
+        <label>
+            <input type="submit" value="<fmt:message key="vacancy"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="logout" />
+        <label>
+            <input type="submit" value="<fmt:message key="LogOut"/>"/>
+        </label>
+    </form>
+</header>
 <hr/>
 <table border="1">
     <tr>
