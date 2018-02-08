@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Command to get the list of all active vacancies
+ */
 public class GetVacanciesCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(CancelProposalCommand.class);
     static final int PAGE_SIZE=2;

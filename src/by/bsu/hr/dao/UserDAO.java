@@ -14,6 +14,9 @@ import java.util.List;
 import static by.bsu.hr.connection.ConnectionPool.closeSt;
 import static by.bsu.hr.connection.ConnectionPool.returnConnectionToPool;
 
+/**
+ * All queries to table users
+ */
 public class UserDAO {
     private static Logger logger=Logger.getLogger(UserDAO.class);
     private static final String FIND_USER_QUERY="SELECT * FROM users WHERE login LIKE ? AND password=md5(?) and ACTIVE=1;";

@@ -16,7 +16,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Logic to User profile command
+ */
 public class UserProfileLogic {
+    /**
+     * @param userId
+     * @return List of Proposal
+     * @throws LogicException
+     */
     public static List<Proposal> getProposals(int userId) throws LogicException {
         try {
             return InterviewDAO.findProposals(userId);
@@ -24,6 +32,14 @@ public class UserProfileLogic {
             throw new LogicException("Error find Proposals",e);
         }
     }
+
+    /**
+     * @param userId
+     * @param type
+     * @param current
+     * @return List of Interview
+     * @throws LogicException
+     */
     public static List<Interview> getFutureInterview(int userId, String type,Locale current) throws LogicException {
         List<Interview> interview= null;
         try {

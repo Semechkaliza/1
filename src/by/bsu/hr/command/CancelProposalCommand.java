@@ -16,6 +16,9 @@ import java.util.Locale;
 
 import static by.bsu.hr.command.PageConstant.USER_PROFILE_PAGE;
 
+/**
+ * Command to cancel proposal to vacancy by user
+ */
 public class CancelProposalCommand implements ActionCommand{
     private static Logger logger=Logger.getLogger(CancelProposalCommand.class);
     @Override

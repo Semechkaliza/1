@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Command to go to page, where admin add results of TI
+ */
 public class GoHRTechInterviewsCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(GoHRTechInterviewsCommand.class);
     @Override

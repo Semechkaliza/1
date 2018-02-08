@@ -2,6 +2,10 @@ package by.bsu.hr.command;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+/**
+ * All resources for localization of messages
+ */
 public class LocaleResourceBundle {
     private static final String BUNDLE_CONSTANT="resources.text";
     public enum  ResourceBundleEnum {

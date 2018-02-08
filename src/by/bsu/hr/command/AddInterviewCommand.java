@@ -13,6 +13,9 @@ import java.sql.Time;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+/**
+ * Command to appoint previews and technical interviews by admin
+ */
 public class AddInterviewCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(AddInterviewCommand.class);
     @Override

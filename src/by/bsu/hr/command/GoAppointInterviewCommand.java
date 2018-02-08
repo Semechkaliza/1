@@ -9,6 +9,9 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Command to go to appint interview page
+ */
 public class GoAppointInterviewCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(CancelProposalCommand.class);
     @Override

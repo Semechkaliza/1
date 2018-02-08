@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Command to go to page, where admin add previews results.
+ */
 public class GoHRPreviewsCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(GoHRPreviewsCommand.class);
     @Override

@@ -14,6 +14,9 @@ import java.util.List;
 import static by.bsu.hr.connection.ConnectionPool.closeSt;
 import static by.bsu.hr.connection.ConnectionPool.returnConnectionToPool;
 
+/**
+ * All queries to interview and interested users tables
+ */
 public class InterviewDAO {
     private static Logger logger=Logger.getLogger(Interview.class);
     private static final String FIND_PROPOSALS_QUERY="SELECT interested_users.id,vacancy,company,interested_users.ACTIVE " +

@@ -20,6 +20,9 @@ import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.EN;
 import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.RU;
 
 
+/**
+ * Command to log in
+ */
 public class LoginCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(LoginCommand.class);
     private static final String PARAM_NAME_LOGIN = "login";
@@ -42,7 +45,7 @@ public class LoginCommand implements ActionCommand {
             session.setAttribute("locale",current);
             session.setAttribute("user",user);
             LocaleResourceBundle.ResourceBundleEnum rb;
-            switch(current.toString()){
+            switch(lang){
                 case "ru": rb=RU;
                     break;
                 case "be": rb=BE;

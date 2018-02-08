@@ -15,6 +15,9 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Command to change personal information about admin and user
+ */
 public class ChangeInfoCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(ChangeInfoCommand.class);
     @Override

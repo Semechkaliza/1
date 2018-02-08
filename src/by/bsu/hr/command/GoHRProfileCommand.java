@@ -3,6 +3,9 @@ package by.bsu.hr.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Command to go to admin's profile
+ */
 public class GoHRProfileCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {

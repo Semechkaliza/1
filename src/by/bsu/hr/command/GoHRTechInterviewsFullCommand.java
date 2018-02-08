@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Command to go to page with TI, where admin decides future way of candidate.
+ */
 public class GoHRTechInterviewsFullCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(GoHRTechInterviewsFullCommand.class);
     @Override

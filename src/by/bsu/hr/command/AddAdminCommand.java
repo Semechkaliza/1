@@ -8,6 +8,9 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Command to make user with role "user" to "admin". All his proposals and interviews will be delete.
+ */
 public class AddAdminCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(AddAdminCommand.class);
     @Override

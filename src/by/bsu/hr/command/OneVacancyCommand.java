@@ -9,6 +9,9 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Command to go to page with full info of one vacancy
+ */
 public class OneVacancyCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(OneVacancyCommand.class);
     @Override

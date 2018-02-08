@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Command to add proposals to vacancies by user.
+ */
 public class AddProposalCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(AddProposalCommand.class);
     @Override

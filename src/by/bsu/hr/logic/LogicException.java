@@ -1,5 +1,8 @@
 package by.bsu.hr.logic;
 
+/**
+ * Exception for logic
+ */
 public class LogicException extends Exception {
     private static final long serialVersionUID = 1L;
 

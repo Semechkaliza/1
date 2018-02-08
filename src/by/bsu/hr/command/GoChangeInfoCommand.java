@@ -5,6 +5,9 @@ import by.bsu.hr.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Command to go to change info page
+ */
 public class GoChangeInfoCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {

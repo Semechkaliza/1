@@ -14,6 +14,9 @@ import java.util.List;
 
 import static by.bsu.hr.command.PageConstant.RESULT_PAGE;
 
+/**
+ * Command to go to page, where user can see results of all his interviews
+ */
 public class ResultCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(ResultCommand.class);
     @Override

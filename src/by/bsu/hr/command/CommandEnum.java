@@ -1,5 +1,8 @@
 package by.bsu.hr.command;
 
+/**
+ * Enum of all commands
+ */
 public enum CommandEnum {
     REGISTRATION {
         {

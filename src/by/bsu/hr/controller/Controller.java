@@ -12,7 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static by.bsu.hr.connection.ConnectionPool.dispose;
 
+
+/**
+ * Main and single servlet
+ */
 @WebServlet("/")
 public class Controller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,4 +39,11 @@ public class Controller extends HttpServlet {
                 response.sendError(404,"page not found");
             }
         }
+
+    @Override
+    public void destroy() {
+        dispose();
+        super.destroy();
+
+    }
 }

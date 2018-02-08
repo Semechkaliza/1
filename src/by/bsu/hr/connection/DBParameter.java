@@ -1,5 +1,8 @@
 package by.bsu.hr.connection;
 
+/**
+ * Parameters to data base
+ */
 public class DBParameter {
     private DBParameter(){}
 

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Command to add mark and feedback to preview and technical interview by admin
+ */
 public class AddInterviewResultCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(AddInterviewResultCommand.class);
     @Override

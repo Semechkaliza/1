@@ -1,7 +1,15 @@
 package by.bsu.hr.command;
 
 import javax.servlet.http.HttpServletRequest;
+
+/**
+ * Pattern Factory to make all commands
+ */
 public class ActionFactory {
+    /**
+     * @param request
+     * @return Command
+     */
     public ActionCommand defineCommand(HttpServletRequest request) {
         ActionCommand current = new EmptyCommand();
         String action = request.getParameter("command");

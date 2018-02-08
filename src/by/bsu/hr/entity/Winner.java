@@ -1,5 +1,8 @@
 package by.bsu.hr.entity;
 
+/**
+ * Winner entity
+ */
 public class Winner {
     private int userId;
     private int vacancyId;

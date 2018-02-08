@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Command to close info about winner after that admin phoned/wrote him.
+ */
 public class HandleWinnerCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(HandleWinnerCommand.class);
     @Override

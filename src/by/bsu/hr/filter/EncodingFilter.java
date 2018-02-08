@@ -5,6 +5,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
+/**
+ * Filter which controls and change coding in request/response
+ */
 public class EncodingFilter implements Filter {
     private String code;
     @Override

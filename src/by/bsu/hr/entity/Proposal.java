@@ -1,5 +1,8 @@
 package by.bsu.hr.entity;
 
+/**
+ * Proposal entity
+ */
 public class Proposal {
     private int id;
     private String vacancy;

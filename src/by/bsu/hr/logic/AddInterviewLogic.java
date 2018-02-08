@@ -11,7 +11,19 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 
+/**
+ * Logic to add interview command
+ */
 public class AddInterviewLogic {
+    /**
+     * @param userId
+     * @param vacancyId
+     * @param dateSQL
+     * @param timeSQL
+     * @param place
+     * @param type
+     * @throws LogicException
+     */
     public static void addInterview(int userId, int vacancyId, Date dateSQL, Time timeSQL, String place,
                                     String type) throws LogicException {
         try{
@@ -26,6 +38,11 @@ public class AddInterviewLogic {
         }
     }
 
+    /**
+     * Parse date from string to Date by 2 patterns(en and ru)
+     * @param date
+     * @return java.sql.Date
+     */
     public static Date getDateSQL(String date) {
      Date dateSQL;
      LocalDate locDate;
@@ -38,6 +55,11 @@ public class AddInterviewLogic {
      return dateSQL;
     }
 
+    /**
+     * Parse string time to Time in 2 patterns (en and ru)
+     * @param time
+     * @return java.sql.Time
+     */
     public static Time getTimeSQL(String time) {
         Time timeSQL;
         LocalTime locTime;

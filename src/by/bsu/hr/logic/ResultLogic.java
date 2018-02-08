@@ -6,7 +6,15 @@ import by.bsu.hr.entity.Interview;
 
 import java.util.List;
 
+/**
+ * Logic to interviews results
+ */
 public class ResultLogic {
+    /**
+     * @param userId
+     * @return List of Interview
+     * @throws LogicException
+     */
     public static List<Interview> getPreviewResult(int userId) throws LogicException {
         List<Interview> resList= null;
         try {
@@ -17,6 +25,11 @@ public class ResultLogic {
         return resList;
     }
 
+    /**
+     * @param userId
+     * @return List of Interview
+     * @throws LogicException
+     */
     public static List<Interview> getInterviewResult(int userId) throws LogicException {
         List<Interview> resList= null;
         try {

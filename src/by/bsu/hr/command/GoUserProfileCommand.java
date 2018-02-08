@@ -16,6 +16,9 @@ import java.util.Locale;
 
 import static by.bsu.hr.command.PageConstant.USER_PROFILE_PAGE;
 
+/**
+ * Command to go to profile by user
+ */
 public class GoUserProfileCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(GoUserProfileCommand.class);
     @Override

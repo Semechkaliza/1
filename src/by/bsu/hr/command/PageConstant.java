@@ -1,5 +1,8 @@
 package by.bsu.hr.command;
 
+/**
+ * All page constants
+ */
 public class PageConstant {
     public static final String LOGIN_PAGE="/jsp/login.jsp";
     public static final String ERROR_PAGE="/jsp/error/error.jsp";

@@ -7,6 +7,9 @@ import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.BE;
 import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.EN;
 import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.RU;
 
+/**
+ * Command to log out
+ */
 public class LogoutCommand implements ActionCommand {
 
     @Override

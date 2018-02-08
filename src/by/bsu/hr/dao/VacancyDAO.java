@@ -13,6 +13,9 @@ import java.util.List;
 
 import static by.bsu.hr.connection.ConnectionPool.closeSt;
 
+/**
+ * All queries to vacancy table
+ */
 public class VacancyDAO {
     private static Logger logger= Logger.getLogger(VacancyDAO.class);
     private static final String ALL_VACANCIES_QUERY = "SELECT id,VACANCY,COMPANY,SALARY,OTHER FROM vacancy where ACTIVE=1 order by id desc limit ?,?";

@@ -15,6 +15,9 @@ import java.util.List;
 
 import static by.bsu.hr.command.GetVacanciesCommand.PAGE_SIZE;
 
+/**
+ * Command to add new vacancy by admin
+ */
 public class AddVacancyCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(AddVacancyCommand.class);
     @Override

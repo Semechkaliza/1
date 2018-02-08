@@ -8,8 +8,16 @@ import by.bsu.hr.entity.User;
 import org.apache.log4j.Logger;
 import java.util.List;
 
+/**
+ * Logic to login command
+ */
 public class LoginLogic {
-    private static Logger logger=Logger.getLogger(LoginLogic.class);
+    /**
+     * @param login
+     * @param pass
+     * @return User
+     * @throws LogicException
+     */
     public static User logIn(String login, String pass) throws LogicException {
         try {
             return UserDAO.findUser(login,pass);

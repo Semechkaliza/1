@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Command to go to admin's page with all proposals.
+ */
 public class GoHRProposalsCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(GoHRProposalsCommand.class);
     @Override

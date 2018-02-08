@@ -15,6 +15,9 @@ import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.BE;
 import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.EN;
 import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.RU;
 
+/**
+ * Command to delete profile
+ */
 public class DeleteUserCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(DeleteUserCommand.class);
     @Override

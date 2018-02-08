@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Command to add candidate to winners by admin
+ */
 public class AddWinnerCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(AddWinnerCommand.class);
     @Override

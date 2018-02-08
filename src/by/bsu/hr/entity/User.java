@@ -1,5 +1,8 @@
 package by.bsu.hr.entity;
 
+/**
+ * User entity
+ */
 public class User {
     private int userId;
     private String login;

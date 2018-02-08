@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Filter which redirect all straight requests to login page
+ */
 @WebFilter(urlPatterns = {"/jsp/*"},initParams = {@WebInitParam(name="INDEX_PATH",value = "/index.jsp")})
 public class PageRedirectSecurityFilter implements Filter {
     private String indexPath;

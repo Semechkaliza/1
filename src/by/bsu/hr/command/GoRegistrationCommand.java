@@ -7,6 +7,9 @@ import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.BE;
 import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.EN;
 import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.RU;
 
+/**
+ * Command to go to registration page
+ */
 public class GoRegistrationCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {

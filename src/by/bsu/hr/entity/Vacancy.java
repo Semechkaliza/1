@@ -1,5 +1,8 @@
 package by.bsu.hr.entity;
 
+/**
+ * Vacancy entity
+ */
 public class Vacancy {
 
     private int vacancyId;

@@ -10,7 +10,9 @@
 
 <head>
     <title><fmt:message key="appoint"/></title>
-</head>
+    <style>
+        <%@include file='../css/final.css' %>
+    </style></head>
 <body>
 <header>
     <form method="POST" action="controller">

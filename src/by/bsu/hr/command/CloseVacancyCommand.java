@@ -15,6 +15,9 @@ import java.util.List;
 
 import static by.bsu.hr.command.GetVacanciesCommand.PAGE_SIZE;
 
+/**
+ * Command to close vacancy by admin
+ */
 public class CloseVacancyCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(CancelProposalCommand.class);
     @Override

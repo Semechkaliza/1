@@ -3,6 +3,9 @@ package by.bsu.hr.entity;
 import java.sql.Time;
 import java.util.Date;
 
+/**
+ * Interview entity
+ */
 public class Interview {
     private String name;
     private String sname;

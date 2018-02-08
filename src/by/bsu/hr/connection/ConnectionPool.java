@@ -13,6 +13,9 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Class with all methods of connection pool
+ */
 public class ConnectionPool {
     private static Logger logger=Logger.getLogger(ConnectionPool.class);
     private static BlockingQueue<Connection> connectionQueue;
@@ -79,11 +82,11 @@ public class ConnectionPool {
         return instance;
     }
 
-    public void dispose() {
+    public static void dispose() {
         clearConnectionQueue();
     }
 
-    private void clearConnectionQueue() {
+    private static void clearConnectionQueue() {
         try {
 
             closeConnectionsQueue(connectionQueue);
@@ -122,14 +125,14 @@ public class ConnectionPool {
             logger.log(Level.INFO, "Error closing the connection.", e);
         }
     }
-    private void closeConnectionsQueue(BlockingQueue<Connection> queue)
+    private static void closeConnectionsQueue(BlockingQueue<Connection> queue)
             throws SQLException, InterruptedException {
         Connection connection;
         for(int i=0;i<poolSize;i++){
             connection=queue.take();
             if (!connection.getAutoCommit()) { connection.commit();
             }
-            ((PooledConnection) connection).reallyClose();
+                ((PooledConnection) connection).reallyClose();
         }
     }
 

@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Command to go to page with all info about winners by admin
+ */
 public class GoWinnersCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(GoWinnersCommand.class);
     @Override

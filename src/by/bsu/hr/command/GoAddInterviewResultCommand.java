@@ -9,6 +9,9 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Command to go to add result of interview page
+ */
 public class GoAddInterviewResultCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(GoAddInterviewResultCommand.class);
     @Override
