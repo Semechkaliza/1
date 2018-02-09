@@ -45,6 +45,12 @@
         </label>
     </form>
 </header>
+<form method="POST" action="controller">
+    <input type="hidden" name="command" value="go_add_vacancy" />
+    <label>
+        <input type="submit" value="<fmt:message key="addVacancy"/>"/>
+    </label>
+</form>
 <h3><fmt:message key="vacancy"/></h3>
 <hr/>
 <table border="1">

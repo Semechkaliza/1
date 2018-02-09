@@ -14,19 +14,20 @@ import java.util.List;
  * Command to go to page, where admin add previews results.
  */
 public class GoHRPreviewsCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(GoHRPreviewsCommand.class);
+    private static Logger logger = Logger.getLogger(GoHRPreviewsCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession(false);
+        HttpSession session = request.getSession(false);
         List<Interview> resList;
         try {
             resList = HRInterviewLogic.findInterviews("PREV");
         } catch (LogicException e) {
-            logger.log(Level.INFO,"Error find previews");
+            logger.log(Level.INFO, "Error find previews");
             return PageConstant.ERROR_PAGE;
         }
-        request.setAttribute("prevList",resList);
-        request.setAttribute("lang",session.getAttribute("locale"));
+        request.setAttribute("prevList", resList);
+        request.setAttribute("lang", session.getAttribute("locale"));
         return PageConstant.HR_PREVIEWS_PAGE;
     }
 }

@@ -35,6 +35,16 @@ header form label input{
 	border-radius:3px;
 	background-color: #f1f0f0;
 }
+body form label input{
+	padding: 5px 20px;
+	cursor: pointer;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 10px;
+	border: 1px solid dodgerblue;
+	border-radius:3px;
+
+	background-color: #f1f0f0;
+}
 .enterInputs{
 	display: flex;
 	justify-content: center;
@@ -84,6 +94,7 @@ header form label input{
 .btnProfile{
 	margin-left: 0;
 	width: 150px;
+	border: 2px solid dodgerblue;
 }
 main{
 	display: flex;

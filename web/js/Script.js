@@ -63,7 +63,7 @@ var App = {
             }
         })
         App.globals.uPhone.addEventListener("input",function(){
-            var regEx = /^\+375 \((17|29|33|44)\) [0-9]{3}-[0-9]{2}-[0-9]{2}$/;
+            var regEx = /^((9|\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
             var falseLogin = document.querySelector(".falsePhone");
             var trueLogin = document.querySelector(".truePhone");
             if(App.globals.uPhone.value.match(regEx) && App.globals.uPhone.value.length>=5){

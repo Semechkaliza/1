@@ -24,22 +24,22 @@ public class GoUserProfileCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);
-        request.setAttribute("user",session.getAttribute("user"));
-        List<Proposal> proposalList;
-        List<Interview> previewList;
-        List<Interview> techList;
-        try {
-            proposalList = UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
-            previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV", (Locale) session.getAttribute("locale"));
-            techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));
-        } catch (LogicException e) {
-            logger.log(Level.INFO,"Error find info to user profile");
-            return PageConstant.ERROR_PAGE;
-        }
-        request.setAttribute("proposalList",proposalList);
-        request.setAttribute("previewList",previewList);
-        request.setAttribute("techList",techList);
-        request.setAttribute("lang",session.getAttribute("locale"));
-        return USER_PROFILE_PAGE;
+       request.setAttribute("user",session.getAttribute("user"));
+            List<Proposal> proposalList;
+            List<Interview> previewList;
+            List<Interview> techList;
+            try {
+                proposalList = UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
+                previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV", (Locale) session.getAttribute("locale"));
+                techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));
+            } catch (LogicException e) {
+                logger.log(Level.INFO,"Error find info to user profile");
+                return PageConstant.ERROR_PAGE;
+            }
+            request.setAttribute("proposalList",proposalList);
+            request.setAttribute("previewList",previewList);
+            request.setAttribute("techList",techList);
+            request.setAttribute("lang",session.getAttribute("locale"));
+            return USER_PROFILE_PAGE;
     }
 }

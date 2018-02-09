@@ -78,4 +78,24 @@ public class Validator {
         Matcher matcher=pattern.matcher(mark);
         return matcher.matches();
     }
+
+    /**
+     * Check correct info in registration
+     * @param login
+     * @param password
+     * @param email
+     * @param phone
+     * @return boolean
+     */
+    public static boolean registrationInputValid(String login, String password, String email, String phone) {
+        Pattern patternLogin=Pattern.compile("^[A-Za-z][A-Za-z0-9_]{4}[A-Za-z0-9_]{0,}$");
+        Pattern patternPass=Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}");
+        Pattern patternEmail=Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+        Pattern patternPhone=Pattern.compile("^((9|\\+3)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$");
+        Matcher matcherLogin=patternLogin.matcher(login);
+        Matcher matcherPass=patternPass.matcher(password);
+        Matcher matcherEmail=patternEmail.matcher(email);
+        Matcher matcherPhone=patternPhone.matcher(phone);
+        return matcherEmail.matches()&&matcherLogin.matches()&&matcherPass.matches()&&matcherPhone.matches();
+    }
 }

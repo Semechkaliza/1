@@ -11,15 +11,13 @@ import javax.servlet.http.HttpSession;
 public class GoChangeInfoCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession(false);
-        User user= (User) session.getAttribute("user");
-        request.setAttribute("lang",session.getAttribute("locale"));
-        if(user.getRole().equalsIgnoreCase("admin")){
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+        request.setAttribute("lang", session.getAttribute("locale"));
+        if (user.getRole().equalsIgnoreCase("admin")) {
             return PageConstant.HR_CHANGE_INFO_PAGE;
-        }else{
+        } else {
             return PageConstant.CHANGE_INFO_PAGE;
         }
-
-
     }
 }
