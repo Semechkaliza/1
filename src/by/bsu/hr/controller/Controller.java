@@ -33,10 +33,6 @@ public class Controller extends HttpServlet {
         page = command.execute(request);
         if (page != null) {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-            //to filter this part
-            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-            response.setHeader("Expires", "0"); // Proxies.
             dispatcher.forward(request, response);
     }
             else {

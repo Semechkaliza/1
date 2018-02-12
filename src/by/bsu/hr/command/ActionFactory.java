@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionFactory {
     /**
-     * @param request
+     * @param request from jsp
      * @return Command
      */
     public ActionCommand defineCommand(HttpServletRequest request) {

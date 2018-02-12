@@ -23,8 +23,9 @@ public class GoUserProfileCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(GoUserProfileCommand.class);
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession(false);
-       request.setAttribute("user",session.getAttribute("user"));
+        HttpSession session=request.getSession(true);
+        if(session.getAttribute("user")!=null){
+            request.setAttribute("user",session.getAttribute("user"));
             List<Proposal> proposalList;
             List<Interview> previewList;
             List<Interview> techList;
@@ -41,5 +42,10 @@ public class GoUserProfileCommand implements ActionCommand {
             request.setAttribute("techList",techList);
             request.setAttribute("lang",session.getAttribute("locale"));
             return USER_PROFILE_PAGE;
-    }
+        }else{
+            request.setAttribute("lang",Locale.getDefault());
+            return PageConstant.LOGIN_PAGE;
+        }
+        }
+
 }

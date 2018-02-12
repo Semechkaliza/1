@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ex" uri="/WEB-INF/custom.tld"%>
 <c:set var="language" value="${requestScope.lang}"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="resources.text"/>
@@ -42,6 +43,8 @@
         </label>
     </form>
 </header>
+<h3><fmt:message key="changeInfo"/></h3>
+<hr/>
 <section class="enterInputs">
     <form class="formReg" method="POST" action="controller">
         <input type="hidden" name="command" value="change_info"/>
@@ -64,5 +67,8 @@
         <input type="submit" class="button" value="<fmt:message key="apply"/>"/>
     </form>
 </section>
+<footer>
+    <ex:Info/>
+</footer>
 </body>
 </html>

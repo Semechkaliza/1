@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class GetVacanciesCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(CancelProposalCommand.class);
-    static final int PAGE_SIZE=2;
+    static final int PAGE_SIZE=10;
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session=request.getSession(false);

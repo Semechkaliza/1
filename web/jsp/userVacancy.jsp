@@ -2,6 +2,7 @@
          pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ex" uri="/WEB-INF/custom.tld"%>
 <c:set var="language" value="${requestScope.lang}"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="resources.text"/>
@@ -82,5 +83,8 @@
         <input type="submit" class="button" value=">>"/>
     </form>
 </section>
+<footer>
+    <ex:Info/>
+</footer>
 </body>
 </html>

@@ -63,6 +63,7 @@ public class InterviewDAO {
             "on interested_users.USERS_ID=users.ID and interested_users.VACANCY_ID=vacancy.ID " +
             "where vacancy.ID=? and users.ID=?;";
     private static final String CLOSE_INTERVIEW_QUERY="update interview set ACTIVE=0  where users_id=? and vacancy_id=? and TYPE=?;";
+    private static final String CHECK_INTERVIEW_QUERY="select VACANCY_ID,USERS_ID from interview where VACANCY_ID=? and USERS_ID=? and type=?;";
     public static List<Proposal> findProposals(int userId) throws DAOException {
         List<Proposal> resList = new ArrayList<>();
         Connection cn = null;
@@ -241,33 +242,6 @@ public class InterviewDAO {
             ConnectionPool.returnConnectionToPool(cn);
         }
         return resList;
-    }
-
-    public static Interview findInfoToAppointPreview(int proposalId) throws DAOException {
-        Connection cn = null;
-        Interview res = new Interview();
-        ResultSet rs;
-        PreparedStatement st = null;
-        try {
-            cn =ConnectionPool.getInstance().takeConnection();
-            st = cn.prepareStatement(FIND_INFO_TO_APPOINT_INTERVIEW_QUERY);
-            st.setInt(1,proposalId);
-            rs=st.executeQuery();
-            if (rs.next()) {
-                    res.setCompany(rs.getString("company"));
-                    res.setVacancy(rs.getString("vacancy"));
-                    res.setName(rs.getString("name"));
-                    res.setSname(rs.getString("sname"));
-                    res.setUserId(rs.getInt("users_id"));
-                    res.setVacancyId(rs.getInt("vacancy_id"));
-            }
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DAOException("Error find info to appointing interview",e);
-        } finally {
-            closeSt(st);
-            ConnectionPool.returnConnectionToPool(cn);
-        }
-        return res;
     }
 
     public static void addInterview(int userId, int vacancyId, java.sql.Date date, Time time, String place, String type) throws DAOException {
@@ -476,5 +450,29 @@ public class InterviewDAO {
             closeSt(st);
             ConnectionPool.returnConnectionToPool(cn);
         }
+    }
+
+    public static boolean checkInterview(int userId, int vacancyId, String type) throws DAOException {
+        Connection cn = null;
+        ResultSet rs;
+        PreparedStatement st = null;
+        boolean check=true;
+        try {
+            cn =ConnectionPool.getInstance().takeConnection();
+            st = cn.prepareStatement(CHECK_INTERVIEW_QUERY);
+            st.setInt(1,vacancyId);
+            st.setInt(2,userId);
+            st.setString(3,type);
+            rs=st.executeQuery();
+            if(rs.next()){
+                check=false;
+            }
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error check interview",e);
+        }finally {
+            closeSt(st);
+            returnConnectionToPool(cn);
+        }
+        return check;
     }
 }

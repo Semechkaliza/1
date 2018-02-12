@@ -25,12 +25,6 @@
         </label>
     </form>
     <form method="POST" action="controller">
-        <input type="hidden" name="command" value="logout" />
-        <label>
-            <input type="submit" value="<fmt:message key="LogOut"/>"/>
-        </label>
-    </form>
-    <form method="POST" action="controller">
         <input type="hidden" name="command" value="go_hr_profile" />
         <label>
             <input type="submit" value="<fmt:message key="myProfile"/>"/>
@@ -41,10 +35,18 @@
         <input type="hidden" name="page" value="1" />
         <input type="hidden" name="direction" value="" />
         <label>
-            <input type="submit"  value="<fmt:message key="vacancy"/>"/>
+            <input type="submit" value="<fmt:message key="vacancy"/>"/>
+        </label>
+    </form>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="logout" />
+        <label>
+            <input type="submit" value="<fmt:message key="LogOut"/>"/>
         </label>
     </form>
 </header>
+<h3><fmt:message key="techInterviews"/></h3>
+<hr/>
 <table border="1">
     <tr>
         <td><fmt:message key="name"/></td>
@@ -74,5 +76,8 @@
 </tr>
     </c:forEach>
 </table>
+<footer>
+    <ex:Info/>
+</footer>
 </body>
 </html>

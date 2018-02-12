@@ -46,6 +46,8 @@
         </label>
     </form>
 </header>
+<h3><fmt:message key="myProfile"/></h3>
+<hr/>
 <main>
     <table border="1">
         <tr>
@@ -88,6 +90,7 @@
         <input type="submit" class="button btnProfile" value="<fmt:message key="addProposal"/>"/>
     </form>
     <h3><fmt:message key="futurePreview"/></h3>
+    <hr/>
     <table border="1">
         <tr>
             <td><fmt:message key="vacancyName"/></td>

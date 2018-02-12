@@ -61,24 +61,48 @@ body form label input{
 	border: 1px solid transparent;
 	border-bottom: 1px solid darkgrey;
 	outline: none;
+	font-size: 16px;
+}
+.Registr{
+	margin-left: 45%;
 }
 .button {
 	font-family: 'Montserrat', sans-serif;
-	font-size: 14px;
+	font-size: 12px;
 	height: 30px;
 	width: 100px;
-	margin-top: 15px;
+	margin-top: 30px;
 	margin-left: 46px;
 	border: 0px;
 	border-radius: 5px;
 	cursor: pointer;
 	outline: none;
 }
+.logo{
+	margin-right:70%;
+}
+h4{
+	margin:5px;
+}
+footer{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 30px;
+	text-align: center;
+	background: #39c2d7;
+	color: white;
+}
+.backTo{
+	margin-top: 15px;
+	margin-left: 43.9%;
+}
 .reg{
 	text-align: center;
-	margin-left: 64%;
-	font-size: 10px;
-	width: 75px;
+	margin-left: 67.5%;
+	font-size: 15px;
+	width: min-content;
 	background-color: transparent;
 	margin-top: 0;
 }
@@ -97,11 +121,22 @@ body form label input{
 	border: 2px solid dodgerblue;
 }
 main{
+	margin-bottom: 35px;
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
 	align-items: center;
 	justify-content: center;
+}
+.addV{
+	margin-right: 47px;
+	width: 160px;
+}
+.addVacancy{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 table {
@@ -110,6 +145,7 @@ table {
 	font-size: 14px;
 	border-collapse: collapse;
 	text-align: center;
+	margin:auto;
 }
 td:first-child {
 	background: #39c2d7;
@@ -118,7 +154,7 @@ td:first-child {
 }
 .errorMes{
 	position: absolute;
-	margin-top: 55px;
+	margin-top: 6%;
 }
 td {
 	padding:10px;
@@ -137,51 +173,72 @@ td {
 }
 .btnLeftRight{
 	display: flex;
+	margin-left: 37%;
 }
 .btnRoot{
 	margin-left: 0;
 	width: 250px;
 }
+.inputLogin{
+	border: 1px solid transparent;
+	border-bottom: 1px solid darkgrey;
+	outline: none;
+	font-size: 16px;
+}
 .trueLogin{
 	display: none;
+	font-size: 10px;
 }
 .falseLogin{
 	display: none;
+	font-size: 10px;
 }
 .truePassword{
 	display:none;
+	font-size: 10px;
 }
 .falsePassword{
 	display: none;
+	font-size: 10px;
 }
 .truePassword2{
 	display:none;
+	font-size: 10px;
 }
 .falsePassword2{
 	display: none;
+	font-size: 10px;
 }
 .trueEmail{
 	display: none;
+	font-size: 10px;
 }
 .falseEmail{
 	display:none;
+	font-size: 10px;
 }
 .truePhone{
 	display: none;
+	font-size: 10px;
 }
 .falsePhone{
 	display: none;
+	font-size: 10px;
 }
 .trueName{
 	display: none;
+	font-size: 10px;
 }
 .falseName{
 	display: none;
+	font-size: 10px;
 }
 .trueSname{
 	display: none;
+	font-size: 10px;
 }
 .falseSname{
 	display: none;
+	font-size: 10px;
 }
 

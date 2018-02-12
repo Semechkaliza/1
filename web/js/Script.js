@@ -8,10 +8,14 @@ var App = {
 		uEmail: document.querySelector("#Email"),
 		uPhone: document.querySelector("#Phone"),
 		uName: document.querySelector("#Name"),
-		uSname: document.querySelector("#Sname")
+		uSname: document.querySelector("#Sname"),
+		errorMes : document.querySelector(".errorMes")
 	},
 	init : function(){
 		App.globals.uLogin.addEventListener("input",function(){
+			if(App.globals.errorMes !=null) {
+                App.globals.errorMes.style.display = "none";
+            }
 			var regEx = /^[A-Za-z][A-Za-z0-9_]{4}[A-Za-z0-9_]{0,}$/;
 			var falseLogin = document.querySelector(".falseLogin");
 			var trueLogin = document.querySelector(".trueLogin");
@@ -25,6 +29,9 @@ var App = {
 			}
 		})
 		App.globals.uPassword.addEventListener("input",function(){
+            if(App.globals.errorMes !=null) {
+                App.globals.errorMes.style.display = "none";
+            }
 			var regEx = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}/g;
 			var falsePassword = document.querySelector(".falsePassword");
 			var truePassword = document.querySelector(".truePassword");
