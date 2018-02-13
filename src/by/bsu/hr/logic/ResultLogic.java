@@ -16,11 +16,11 @@ public class ResultLogic {
      * @throws LogicException
      */
     public static List<Interview> getPreviewResult(int userId) throws LogicException {
-        List<Interview> resList= null;
+        List<Interview> resList = null;
         try {
-            resList = InterviewDAO.findInterviewResult(userId,"PREV");
+            resList = InterviewDAO.findInterviewResult(userId, "PREV");
         } catch (DAOException e) {
-            throw new LogicException("Error fnd results",e);
+            throw new LogicException("Error fnd results", e);
         }
         return resList;
     }
@@ -31,11 +31,11 @@ public class ResultLogic {
      * @throws LogicException
      */
     public static List<Interview> getInterviewResult(int userId) throws LogicException {
-        List<Interview> resList= null;
+        List<Interview> resList = null;
         try {
-            resList = InterviewDAO.findInterviewResult(userId,"TECH");
+            resList = InterviewDAO.findInterviewResult(userId, "TECH");
         } catch (DAOException e) {
-            throw new LogicException("Error fnd results",e);
+            throw new LogicException("Error fnd results", e);
         }
         return resList;
     }

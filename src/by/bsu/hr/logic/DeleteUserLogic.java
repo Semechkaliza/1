@@ -13,11 +13,11 @@ public class DeleteUserLogic {
      */
     public static void deleteUser(int userId) throws LogicException {
         try {
-            if(userId!=1){
+            if (userId != 1) {
                 UserDAO.deleteUser(userId);
             }
         } catch (DAOException e) {
-            throw new LogicException("Error delete user",e);
+            throw new LogicException("Error delete user", e);
         }
     }
 }

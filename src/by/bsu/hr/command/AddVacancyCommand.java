@@ -1,6 +1,5 @@
 package by.bsu.hr.command;
 
-import by.bsu.hr.entity.Interview;
 import by.bsu.hr.entity.Vacancy;
 import by.bsu.hr.logic.AddVacancyLogic;
 import by.bsu.hr.logic.GetVacanciesLogic;
@@ -20,11 +19,12 @@ import static by.bsu.hr.command.GetVacanciesCommand.PAGE_SIZE;
  * Command to add new vacancy by admin
  */
 public class AddVacancyCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(AddVacancyCommand.class);
+    private static Logger logger = Logger.getLogger(AddVacancyCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if(session.getAttribute("user")!=null){
+        if (session.getAttribute("user") != null) {
             LocaleResourceBundle.ResourceBundleEnum rb = (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
             List<Vacancy> resList;
             String vacancy = request.getParameter("vacancy");
@@ -52,10 +52,10 @@ public class AddVacancyCommand implements ActionCommand {
                 request.setAttribute("lang", session.getAttribute("locale"));
                 return PageConstant.HR_VACANCY_PAGE;
             }
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

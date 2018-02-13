@@ -18,7 +18,7 @@ public class OneVacancyLogic {
         try {
             vacancy = VacancyDAO.findVacancy(id);
         } catch (DAOException e) {
-            throw new LogicException("Error find vacancies",e);
+            throw new LogicException("Error find vacancies", e);
         }
         return vacancy;
     }

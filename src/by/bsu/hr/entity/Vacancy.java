@@ -31,6 +31,7 @@ public class Vacancy {
     public void setVacancyId(int vacancyId) {
         this.vacancyId = vacancyId;
     }
+
     public boolean isActive() {
         return active;
     }
@@ -38,6 +39,7 @@ public class Vacancy {
     public void setActive(boolean active) {
         this.active = active;
     }
+
     public String getCompany() {
         return company;
     }

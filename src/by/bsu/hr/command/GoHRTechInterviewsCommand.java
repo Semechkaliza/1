@@ -15,25 +15,26 @@ import java.util.Locale;
  * Command to go to page, where admin add results of TI
  */
 public class GoHRTechInterviewsCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(GoHRTechInterviewsCommand.class);
+    private static Logger logger = Logger.getLogger(GoHRTechInterviewsCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession();
-        if(session.getAttribute("user")!=null){
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") != null) {
             List<Interview> resList;
             try {
                 resList = HRInterviewLogic.findInterviews("TECH");
             } catch (LogicException e) {
-                logger.log(Level.INFO,"Error find technical interviews");
+                logger.log(Level.INFO, "Error find technical interviews");
                 return PageConstant.ERROR_PAGE;
             }
-            request.setAttribute("prevList",resList);
-            request.setAttribute("lang",session.getAttribute("locale"));
+            request.setAttribute("prevList", resList);
+            request.setAttribute("lang", session.getAttribute("locale"));
             return PageConstant.HR_TECH_INTERVIEWS_PAGE;
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

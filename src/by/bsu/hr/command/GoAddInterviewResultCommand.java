@@ -14,28 +14,29 @@ import java.util.Locale;
  * Command to go to add result of interview page
  */
 public class GoAddInterviewResultCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(GoAddInterviewResultCommand.class);
+    private static Logger logger = Logger.getLogger(GoAddInterviewResultCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession(true);
-        if(session.getAttribute("user")!=null){
-            int userId= Integer.parseInt(request.getParameter("userId"));
-            int vacancyId= Integer.parseInt(request.getParameter("vacancyId"));
-            String type=request.getParameter("type");
+        HttpSession session = request.getSession(true);
+        if (session.getAttribute("user") != null) {
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            int vacancyId = Integer.parseInt(request.getParameter("vacancyId"));
+            String type = request.getParameter("type");
             Interview info;
             try {
-                info = GoAddInterviewResultLogic.findInterviewInfo(userId,vacancyId,type);
+                info = GoAddInterviewResultLogic.findInterviewInfo(userId, vacancyId, type);
             } catch (LogicException e) {
-                logger.log(Level.INFO,"Error find info about interview");
+                logger.log(Level.INFO, "Error find info about interview");
                 return PageConstant.ERROR_PAGE;
             }
-            request.setAttribute("info",info);
-            request.setAttribute("lang",session.getAttribute("locale"));
+            request.setAttribute("info", info);
+            request.setAttribute("lang", session.getAttribute("locale"));
             return PageConstant.ADD_INTERVIEW_RESULT_PAGE;
-        }else {
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

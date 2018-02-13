@@ -15,11 +15,11 @@ public class ChangeInfoLogic {
      * @param id
      * @throws LogicException
      */
-    public static void updateInfo(String name, String sname, String phone, String email,int id) throws LogicException {
+    public static void updateInfo(String name, String sname, String phone, String email, int id) throws LogicException {
         try {
-            UserDAO.updateInfo(name,sname,phone,email,id);
+            UserDAO.updateInfo(name, sname, phone, email, id);
         } catch (DAOException e) {
-            throw new LogicException("Error update info",e);
+            throw new LogicException("Error update info", e);
         }
     }
 }

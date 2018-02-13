@@ -18,11 +18,12 @@ import java.util.Locale;
  * Command to appoint previews and technical interviews by admin
  */
 public class AddInterviewCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(AddInterviewCommand.class);
+    private static Logger logger = Logger.getLogger(AddInterviewCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if(session.getAttribute("user")!=null){
+        if (session.getAttribute("user") != null) {
             LocaleResourceBundle.ResourceBundleEnum rb = (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
             int userId = Integer.parseInt(request.getParameter("userId"));
             int vacancyId = Integer.parseInt(request.getParameter("vacancyId"));
@@ -35,54 +36,54 @@ public class AddInterviewCommand implements ActionCommand {
             Interview info;
             Date dateSQL;
             Time timeSQL;
-            if(Validator.dateValid(date)&&Validator.timeValid(time)){
-                try{
-                    dateSQL=AddInterviewLogic.getDateSQL(date);
-                    timeSQL=AddInterviewLogic.getTimeSQL(time);
-                }catch (DateTimeParseException e){
-                    logger.log(Level.INFO,"Error parse date and time");
+            if (Validator.dateValid(date) && Validator.timeValid(time)) {
+                try {
+                    dateSQL = AddInterviewLogic.getDateSQL(date);
+                    timeSQL = AddInterviewLogic.getTimeSQL(time);
+                } catch (DateTimeParseException e) {
+                    logger.log(Level.INFO, "Error parse date and time");
                     return PageConstant.ERROR_PAGE;
                 }
-            }else {
+            } else {
                 try {
-                    info = GoAppointPreviewLogic.findInfoToInterview(vacancyId,userId);
+                    info = GoAppointPreviewLogic.findInfoToInterview(vacancyId, userId);
                 } catch (LogicException e1) {
-                    logger.log(Level.INFO,"Error find info about interview");
+                    logger.log(Level.INFO, "Error find info about interview");
                     return PageConstant.ERROR_PAGE;
                 }
                 info.setType(type);
-                request.setAttribute("info",info);
-                request.setAttribute("errorParse",rb.getMessage("errorParse"));
-                request.setAttribute("lang",session.getAttribute("locale"));
+                request.setAttribute("info", info);
+                request.setAttribute("errorParse", rb.getMessage("errorParse"));
+                request.setAttribute("lang", session.getAttribute("locale"));
                 return PageConstant.APPOINT_PREVIEW_PAGE;
             }
 
             try {
                 AddInterviewLogic.addInterview(userId, vacancyId, dateSQL, timeSQL, place, type);
             } catch (LogicException e) {
-                logger.log(Level.INFO,"Error add interview");
+                logger.log(Level.INFO, "Error add interview");
                 return PageConstant.ERROR_PAGE;
             }
             try {
                 if (type.equalsIgnoreCase("PREV")) {
                     resList = HRProposalsLogic.getProposals();
                     request.setAttribute("propList", resList);
-                    request.setAttribute("lang",session.getAttribute("locale"));
+                    request.setAttribute("lang", session.getAttribute("locale"));
                     return PageConstant.HR_PROPOSALS_PAGE;
                 } else {
                     prevList = HRInterviewLogic.findFullInterviews("PREV");
                     request.setAttribute("prevList", prevList);
-                    request.setAttribute("lang",session.getAttribute("locale"));
+                    request.setAttribute("lang", session.getAttribute("locale"));
                     return PageConstant.HR_PREVIEW_FULL_PAGE;
                 }
-            }catch (LogicException e){
-                logger.log(Level.INFO,"Error find all interviews");
+            } catch (LogicException e) {
+                logger.log(Level.INFO, "Error find all interviews");
                 return PageConstant.ERROR_PAGE;
             }
-        }else {
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Locale;
 
-import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.BE;
-import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.EN;
-import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.RU;
+import static by.bsu.hr.command.LocaleResourceBundle.ResourceBundleEnum.*;
 
 
 /**
@@ -78,7 +76,7 @@ public class RegistrationCommand implements ActionCommand {
                     return PageConstant.REGISTRATION_PAGE;
                 }
 
-            }else{
+            } else {
                 request.setAttribute("errorLoginPassMessage", rb.getMessage("message.NotValidInfo"));
                 request.setAttribute("lang", Locale.getDefault());
                 return PageConstant.REGISTRATION_PAGE;

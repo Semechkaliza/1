@@ -75,29 +75,29 @@ public enum CommandEnum {
             this.command = new OneVacancyCommand();
         }
     },
-    GO_WINNERS {
+    GO_APPROVED {
         {
-            this.command = new GoWinnersCommand();
+            this.command = new GoApprovedCommand();
         }
     },
     ADD_ADMIN {
         {
-            this.command=new AddAdminCommand();
+            this.command = new AddAdminCommand();
         }
     },
     GO_ADD_VACANCY {
         {
-            this.command=new GoAddVacancyCommand();
+            this.command = new GoAddVacancyCommand();
         }
     },
     ADD_VACANCY {
         {
-            this.command=new AddVacancyCommand();
+            this.command = new AddVacancyCommand();
         }
     },
     CLOSE_VACANCY {
         {
-            this.command=new CloseVacancyCommand();
+            this.command = new CloseVacancyCommand();
         }
     },
     GO_HR_PROPOSALS {
@@ -130,14 +130,14 @@ public enum CommandEnum {
             this.command = new CloseInterviewCommand();
         }
     },
-    ADD_WINNER {
+    ADD_APPROVED {
         {
-            this.command = new AddWinnerCommand();
+            this.command = new AddApprovedCommand();
         }
     },
-    HANDLE_WINNER {
+    HANDLE_APPROVED {
         {
-            this.command = new HandleWinnerCommand();
+            this.command = new HandleApprovedCommand();
         }
     },
     ADD_INTERVIEW {
@@ -150,21 +150,24 @@ public enum CommandEnum {
             this.command = new GoAppointInterviewCommand();
         }
     },
-    GO_ADD_INTERVIEW_RESULT{
+    GO_ADD_INTERVIEW_RESULT {
         {
             this.command = new GoAddInterviewResultCommand();
         }
     },
-    ADD_INTERVIEW_RESULT{
+    ADD_INTERVIEW_RESULT {
         {
             this.command = new AddInterviewResultCommand();
         }
     },
-    GO_HR_PROFILE{
+    GO_HR_PROFILE {
         {
-            this.command=new GoHRProfileCommand();
+            this.command = new GoHRProfileCommand();
         }
-};
+    };
     ActionCommand command;
-    public ActionCommand getCurrentCommand() { return command; }
+
+    public ActionCommand getCurrentCommand() {
+        return command;
+    }
 }

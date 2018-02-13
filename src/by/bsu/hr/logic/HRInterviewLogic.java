@@ -12,6 +12,7 @@ import java.util.List;
 public class HRInterviewLogic {
     /**
      * Return all interviews with type=String type and without info about date,time,place
+     *
      * @param type
      * @return List of Interview
      * @throws LogicException
@@ -20,12 +21,13 @@ public class HRInterviewLogic {
         try {
             return InterviewDAO.findHRInterviews(type);
         } catch (DAOException e) {
-            throw new LogicException("Error find interviews",e);
+            throw new LogicException("Error find interviews", e);
         }
     }
 
     /**
      * Return all interviews with type=String type and without results
+     *
      * @param type
      * @return List of Interview
      * @throws LogicException
@@ -34,7 +36,7 @@ public class HRInterviewLogic {
         try {
             return InterviewDAO.findHRFullInterviews(type);
         } catch (DAOException e) {
-            throw new LogicException("Error find full interviews",e);
+            throw new LogicException("Error find full interviews", e);
         }
     }
 }

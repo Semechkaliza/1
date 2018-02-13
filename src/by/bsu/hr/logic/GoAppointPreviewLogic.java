@@ -17,9 +17,9 @@ public class GoAppointPreviewLogic {
      */
     public static Interview findInfoToInterview(int vacancyId, int userId) throws LogicException {
         try {
-            return InterviewDAO.findInfoToAppointInterview(vacancyId,userId);
+            return InterviewDAO.findInfoToAppointInterview(vacancyId, userId);
         } catch (DAOException e) {
-            throw new LogicException("Error find info",e);
-            }
+            throw new LogicException("Error find info", e);
+        }
     }
 }

@@ -20,7 +20,7 @@ public class GoHRPreviewsCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if(session.getAttribute("user")!=null){
+        if (session.getAttribute("user") != null) {
             List<Interview> resList;
             try {
                 resList = HRInterviewLogic.findInterviews("PREV");
@@ -31,10 +31,10 @@ public class GoHRPreviewsCommand implements ActionCommand {
             request.setAttribute("prevList", resList);
             request.setAttribute("lang", session.getAttribute("locale"));
             return PageConstant.HR_PREVIEWS_PAGE;
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

@@ -6,14 +6,21 @@ package by.bsu.hr.logic;
 public class LogicException extends Exception {
     private static final long serialVersionUID = 1L;
 
-    public LogicException(String message, Exception e){
+    public LogicException(String message, Exception e) {
         super(message, e);
     }
-    public LogicException(String message){
+
+    public LogicException(String message) {
         super(message);
     }
-    public LogicException(Exception e){
+
+    public LogicException(Exception e) {
         super(e);
     }
-    public LogicException(){super();};
+
+    public LogicException() {
+        super();
+    }
+
+    ;
 }

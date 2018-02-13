@@ -11,22 +11,23 @@ import java.io.IOException;
 /**
  * Filter which redirect all straight requests to login page
  */
-@WebFilter(urlPatterns = {"/jsp/*"},initParams = {@WebInitParam(name="INDEX_PATH",value = "/index.jsp")})
+@WebFilter(urlPatterns = {"/jsp/*"}, initParams = {@WebInitParam(name = "INDEX_PATH", value = "/index.jsp")})
 public class PageRedirectSecurityFilter implements Filter {
     private String indexPath;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        indexPath=filterConfig.getInitParameter("INDEX_PATH");
+        indexPath = filterConfig.getInitParameter("INDEX_PATH");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
-        HttpServletResponse httpResponse=(HttpServletResponse) servletResponse;
-        httpResponse.sendRedirect(httpRequest.getContextPath()+indexPath);
-        HttpSession session=((HttpServletRequest) servletRequest).getSession(false);
+        HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+        httpResponse.sendRedirect(httpRequest.getContextPath() + indexPath);
+        HttpSession session = ((HttpServletRequest) servletRequest).getSession(false);
         session.invalidate();
-        filterChain.doFilter(servletRequest,servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

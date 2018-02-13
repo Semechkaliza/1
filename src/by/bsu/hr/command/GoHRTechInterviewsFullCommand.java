@@ -15,25 +15,26 @@ import java.util.Locale;
  * Command to go to page with TI, where admin decides future way of candidate.
  */
 public class GoHRTechInterviewsFullCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(GoHRTechInterviewsFullCommand.class);
+    private static Logger logger = Logger.getLogger(GoHRTechInterviewsFullCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession();
-        if(session.getAttribute("user")!=null){
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") != null) {
             List<Interview> resList;
             try {
                 resList = HRInterviewLogic.findFullInterviews("TECH");
             } catch (LogicException e) {
-                logger.log(Level.INFO,"Error find technical interviews without results");
+                logger.log(Level.INFO, "Error find technical interviews without results");
                 return PageConstant.ERROR_PAGE;
             }
-            request.setAttribute("prevList",resList);
-            request.setAttribute("lang",session.getAttribute("locale"));
+            request.setAttribute("prevList", resList);
+            request.setAttribute("lang", session.getAttribute("locale"));
             return PageConstant.HR_TECH_INTERVIEW_FULL_PAGE;
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

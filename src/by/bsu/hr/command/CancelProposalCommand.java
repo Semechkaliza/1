@@ -19,34 +19,35 @@ import static by.bsu.hr.command.PageConstant.USER_PROFILE_PAGE;
 /**
  * Command to cancel proposal to vacancy by user
  */
-public class CancelProposalCommand implements ActionCommand{
-    private static Logger logger=Logger.getLogger(CancelProposalCommand.class);
+public class CancelProposalCommand implements ActionCommand {
+    private static Logger logger = Logger.getLogger(CancelProposalCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession();
-        if(session.getAttribute("user")!=null){
-            request.setAttribute("user",session.getAttribute("user"));
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") != null) {
+            request.setAttribute("user", session.getAttribute("user"));
             List<Proposal> proposalList;
             List<Interview> previewList;
             List<Interview> techList;
             try {
                 CancelProposalLogic.cancelProposal(Integer.parseInt(request.getParameter("id")));
-                previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV", (Locale) session.getAttribute("locale"));
-                techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));
-                proposalList = UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
+                previewList = UserProfileLogic.getFutureInterview(((User) session.getAttribute("user")).getUserId(), "PREV", (Locale) session.getAttribute("locale"));
+                techList = UserProfileLogic.getFutureInterview(((User) session.getAttribute("user")).getUserId(), "TECH", (Locale) session.getAttribute("locale"));
+                proposalList = UserProfileLogic.getProposals(((User) session.getAttribute("user")).getUserId());
             } catch (LogicException e) {
-                logger.log(Level.INFO,"Error cancel proposal");
+                logger.log(Level.INFO, "Error cancel proposal");
                 return PageConstant.ERROR_PAGE;
             }
-            request.setAttribute("proposalList",proposalList);
-            request.setAttribute("previewList",previewList);
-            request.setAttribute("techList",techList);
-            request.setAttribute("lang",session.getAttribute("locale"));
+            request.setAttribute("proposalList", proposalList);
+            request.setAttribute("previewList", previewList);
+            request.setAttribute("techList", techList);
+            request.setAttribute("lang", session.getAttribute("locale"));
             return USER_PROFILE_PAGE;
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

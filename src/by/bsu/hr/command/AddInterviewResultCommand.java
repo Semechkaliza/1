@@ -14,48 +14,49 @@ import java.util.Locale;
  * Command to add mark and feedback to preview and technical interview by admin
  */
 public class AddInterviewResultCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(AddInterviewResultCommand.class);
+    private static Logger logger = Logger.getLogger(AddInterviewResultCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession();
-        if(session.getAttribute("user")!=null){
-            LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
-            int userId= Integer.parseInt(request.getParameter("userId"));
-            int vacancyId= Integer.parseInt(request.getParameter("vacancyId"));
-            String type=request.getParameter("type");
-            String markStr=request.getParameter("mark");
-            String feedback=request.getParameter("feedback");
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") != null) {
+            LocaleResourceBundle.ResourceBundleEnum rb = (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            int vacancyId = Integer.parseInt(request.getParameter("vacancyId"));
+            String type = request.getParameter("type");
+            String markStr = request.getParameter("mark");
+            String feedback = request.getParameter("feedback");
             List<Interview> resList;
-            if(Validator.markValid(markStr)){
-                int mark= Integer.parseInt(markStr);
+            if (Validator.markValid(markStr)) {
+                int mark = Integer.parseInt(markStr);
                 try {
-                    AddInterviewResultLogic.addResult(userId,vacancyId,type,mark,feedback);
+                    AddInterviewResultLogic.addResult(userId, vacancyId, type, mark, feedback);
                     resList = HRInterviewLogic.findInterviews(type);
-                } catch ( LogicException e) {
-                    logger.log(Level.INFO,"Error add interview result");
+                } catch (LogicException e) {
+                    logger.log(Level.INFO, "Error add interview result");
                     return PageConstant.ERROR_PAGE;
                 }
-            }else{
+            } else {
                 Interview info;
                 try {
-                    info = GoAddInterviewResultLogic.findInterviewInfo(userId,vacancyId,type);
+                    info = GoAddInterviewResultLogic.findInterviewInfo(userId, vacancyId, type);
                 } catch (LogicException e) {
-                    logger.log(Level.INFO,"Error find info about interview");
+                    logger.log(Level.INFO, "Error find info about interview");
                     return PageConstant.ERROR_PAGE;
                 }
-                request.setAttribute("errorMark",rb.getMessage("message.errorMark"));
-                request.setAttribute("info",info);
-                request.setAttribute("lang",session.getAttribute("locale"));
+                request.setAttribute("errorMark", rb.getMessage("message.errorMark"));
+                request.setAttribute("info", info);
+                request.setAttribute("lang", session.getAttribute("locale"));
                 return PageConstant.ADD_INTERVIEW_RESULT_PAGE;
             }
-            request.setAttribute("prevList",resList);
-            request.setAttribute("lang",session.getAttribute("locale"));
-            if(type.equalsIgnoreCase("PREV")) return PageConstant.HR_PREVIEWS_PAGE;
+            request.setAttribute("prevList", resList);
+            request.setAttribute("lang", session.getAttribute("locale"));
+            if (type.equalsIgnoreCase("PREV")) return PageConstant.HR_PREVIEWS_PAGE;
             else return PageConstant.HR_TECH_INTERVIEWS_PAGE;
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

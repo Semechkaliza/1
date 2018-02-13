@@ -15,25 +15,26 @@ import java.util.Locale;
  * Command to go to admin's page with all proposals.
  */
 public class GoHRProposalsCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(GoHRProposalsCommand.class);
+    private static Logger logger = Logger.getLogger(GoHRProposalsCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession();
-        if(session.getAttribute("user")!=null){
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") != null) {
             List<Proposal> resList;
             try {
                 resList = HRProposalsLogic.getProposals();
             } catch (LogicException e) {
-                logger.log(Level.INFO,"Error find proposals");
+                logger.log(Level.INFO, "Error find proposals");
                 return PageConstant.ERROR_PAGE;
             }
-            request.setAttribute("propList",resList);
-            request.setAttribute("lang",session.getAttribute("locale"));
+            request.setAttribute("propList", resList);
+            request.setAttribute("lang", session.getAttribute("locale"));
             return PageConstant.HR_PROPOSALS_PAGE;
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

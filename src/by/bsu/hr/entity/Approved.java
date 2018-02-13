@@ -1,9 +1,9 @@
 package by.bsu.hr.entity;
 
 /**
- * Winner entity
+ * Approved entity
  */
-public class Winner {
+public class Approved {
     private int userId;
     private int vacancyId;
     private String name;
@@ -15,7 +15,7 @@ public class Winner {
 
     @Override
     public String toString() {
-        return "Winner{" +
+        return "Approved{" +
                 "userId='" + userId + '\'' +
                 ", vacancyId='" + vacancyId + '\'' +
                 ", name='" + name + '\'' +

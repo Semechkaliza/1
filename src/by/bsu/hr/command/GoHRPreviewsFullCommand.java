@@ -15,25 +15,26 @@ import java.util.Locale;
  * Command to go to page with previews, where admin decides future way of candidate.
  */
 public class GoHRPreviewsFullCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(GoHRPreviewsFullCommand.class);
+    private static Logger logger = Logger.getLogger(GoHRPreviewsFullCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession();
-        if(session.getAttribute("user")!=null){
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") != null) {
             List<Interview> resList;
             try {
                 resList = HRInterviewLogic.findFullInterviews("PREV");
             } catch (LogicException e) {
-                logger.log(Level.INFO,"Error find previews without results");
+                logger.log(Level.INFO, "Error find previews without results");
                 return PageConstant.ERROR_PAGE;
             }
-            request.setAttribute("prevList",resList);
-            request.setAttribute("lang",session.getAttribute("locale"));
+            request.setAttribute("prevList", resList);
+            request.setAttribute("lang", session.getAttribute("locale"));
             return PageConstant.HR_PREVIEW_FULL_PAGE;
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

@@ -1,34 +1,36 @@
 package by.bsu.hr.command;
 
-import by.bsu.hr.entity.User;
-import by.bsu.hr.logic.DeleteUserLogic;
+import by.bsu.hr.entity.Approved;
+import by.bsu.hr.logic.GoApprovedLogic;
 import by.bsu.hr.logic.LogicException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Locale;
 
 /**
- * Command to delete profile
+ * Command to go to page with all info about approved by admin
  */
-public class DeleteUserCommand implements ActionCommand {
-    private static Logger logger = Logger.getLogger(DeleteUserCommand.class);
+public class GoApprovedCommand implements ActionCommand {
+    private static Logger logger = Logger.getLogger(GoApprovedCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (session.getAttribute("user") != null) {
+            List<Approved> resList;
             try {
-                DeleteUserLogic.deleteUser(((User) session.getAttribute("user")).getUserId());
+                resList = GoApprovedLogic.findApproved();
             } catch (LogicException e) {
-                logger.log(Level.INFO, "Error delete user");
+                logger.log(Level.INFO, "Error find approved");
                 return PageConstant.ERROR_PAGE;
             }
-            request.setAttribute("lang", Locale.getDefault());
-            session.invalidate();
-            return PageConstant.LOGIN_PAGE;
+            request.setAttribute("winList", resList);
+            request.setAttribute("lang", session.getAttribute("locale"));
+            return PageConstant.HR_APPROVED_PAGE;
         } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;

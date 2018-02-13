@@ -19,70 +19,71 @@ import java.util.Locale;
  * Command to change personal information about admin and user
  */
 public class ChangeInfoCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(ChangeInfoCommand.class);
+    private static Logger logger = Logger.getLogger(ChangeInfoCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession();
-        if(session.getAttribute("user")!=null){
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") != null) {
             String name;
-            if(!request.getParameter("name").isEmpty()){
-                name=request.getParameter("name");
-                ((User)session.getAttribute("user")).setName(name);
-            }else{
-                name=((User)session.getAttribute("user")).getName();
+            if (!request.getParameter("name").isEmpty()) {
+                name = request.getParameter("name");
+                ((User) session.getAttribute("user")).setName(name);
+            } else {
+                name = ((User) session.getAttribute("user")).getName();
             }
             String sname;
-            if(!request.getParameter("sname").isEmpty()){
-                sname=request.getParameter("sname");
-                ((User)session.getAttribute("user")).setSname(sname);
-            }else{
-                sname=((User)session.getAttribute("user")).getSname();
+            if (!request.getParameter("sname").isEmpty()) {
+                sname = request.getParameter("sname");
+                ((User) session.getAttribute("user")).setSname(sname);
+            } else {
+                sname = ((User) session.getAttribute("user")).getSname();
             }
             String phone;
-            if(!request.getParameter("phone").isEmpty()){
-                phone=request.getParameter("phone");
-                ((User)session.getAttribute("user")).setPhone(phone);
-            }else{
-                phone=((User)session.getAttribute("user")).getPhone();
+            if (!request.getParameter("phone").isEmpty()) {
+                phone = request.getParameter("phone");
+                ((User) session.getAttribute("user")).setPhone(phone);
+            } else {
+                phone = ((User) session.getAttribute("user")).getPhone();
             }
             String email;
-            if(!request.getParameter("email").isEmpty()){
-                email=request.getParameter("email");
-                ((User)session.getAttribute("user")).setEmail(email);
-            }else{
-                email=((User)session.getAttribute("user")).getEmail();
+            if (!request.getParameter("email").isEmpty()) {
+                email = request.getParameter("email");
+                ((User) session.getAttribute("user")).setEmail(email);
+            } else {
+                email = ((User) session.getAttribute("user")).getEmail();
             }
-            int id=((User)session.getAttribute("user")).getUserId();
+            int id = ((User) session.getAttribute("user")).getUserId();
             try {
-                ChangeInfoLogic.updateInfo(name,sname,phone,email,id);
+                ChangeInfoLogic.updateInfo(name, sname, phone, email, id);
             } catch (LogicException e) {
                 e.printStackTrace();
             }
             request.setAttribute("user", session.getAttribute("user"));
-            request.setAttribute("lang",session.getAttribute("locale"));
-            if(Validator.isUser(session)){
+            request.setAttribute("lang", session.getAttribute("locale"));
+            if (Validator.isUser(session)) {
                 List<Proposal> proposalList;
                 List<Interview> previewList;
                 List<Interview> techList;
                 try {
-                    previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV", (Locale) session.getAttribute("locale"));
-                    techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));
-                    proposalList = UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
+                    previewList = UserProfileLogic.getFutureInterview(((User) session.getAttribute("user")).getUserId(), "PREV", (Locale) session.getAttribute("locale"));
+                    techList = UserProfileLogic.getFutureInterview(((User) session.getAttribute("user")).getUserId(), "TECH", (Locale) session.getAttribute("locale"));
+                    proposalList = UserProfileLogic.getProposals(((User) session.getAttribute("user")).getUserId());
                 } catch (LogicException e) {
-                    logger.log(Level.INFO,"Error change info");
+                    logger.log(Level.INFO, "Error change info");
                     return PageConstant.ERROR_PAGE;
                 }
-                request.setAttribute("proposalList",proposalList);
-                request.setAttribute("previewList",previewList);
-                request.setAttribute("techList",techList);
+                request.setAttribute("proposalList", proposalList);
+                request.setAttribute("previewList", previewList);
+                request.setAttribute("techList", techList);
                 return PageConstant.USER_PROFILE_PAGE;
-            }else{
+            } else {
                 return PageConstant.HR_PROFILE_PAGE;
             }
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

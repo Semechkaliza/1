@@ -1,6 +1,7 @@
 package by.bsu.hr.command;
 
 import by.bsu.hr.entity.Interview;
+import by.bsu.hr.logic.AddApprovedLogic;
 import by.bsu.hr.logic.CloseInterviewLogic;
 import by.bsu.hr.logic.HRInterviewLogic;
 import by.bsu.hr.logic.LogicException;
@@ -13,10 +14,10 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Command to close preview and TI by admin after decision-making
+ * Command to add candidate to approved by admin
  */
-public class CloseInterviewCommand implements ActionCommand {
-    private static Logger logger = Logger.getLogger(CancelProposalCommand.class);
+public class AddApprovedCommand implements ActionCommand {
+    private static Logger logger = Logger.getLogger(AddApprovedCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -27,10 +28,11 @@ public class CloseInterviewCommand implements ActionCommand {
             String type = request.getParameter("type");
             List<Interview> resList;
             try {
+                AddApprovedLogic.addApproved(userId, vacancyId);
                 CloseInterviewLogic.closeInterview(userId, vacancyId, type);
                 resList = HRInterviewLogic.findFullInterviews(type);
             } catch (LogicException e) {
-                logger.log(Level.INFO, "Error close interview");
+                logger.log(Level.INFO, "Error add approved");
                 return PageConstant.ERROR_PAGE;
             }
             request.setAttribute("prevList", resList);

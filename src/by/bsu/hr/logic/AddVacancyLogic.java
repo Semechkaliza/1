@@ -16,9 +16,9 @@ public class AddVacancyLogic {
      */
     public static void addVacancy(String vacancy, String company, String salary, String other) throws LogicException {
         try {
-            VacancyDAO.addVacancy(vacancy,company,salary,other);
+            VacancyDAO.addVacancy(vacancy, company, salary, other);
         } catch (DAOException e) {
-            throw new LogicException("Error add proposal",e);
+            throw new LogicException("Error add proposal", e);
         }
     }
 }

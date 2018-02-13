@@ -18,40 +18,41 @@ import java.util.Locale;
  * Command to add proposals to vacancies by user.
  */
 public class AddProposalCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(AddProposalCommand.class);
+    private static Logger logger = Logger.getLogger(AddProposalCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession();
-        if(session.getAttribute("user")!=null){
-            LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
-            int vacancyId= Integer.parseInt(request.getParameter("id"));
-            int userId=((User)session.getAttribute("user")).getUserId();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") != null) {
+            LocaleResourceBundle.ResourceBundleEnum rb = (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
+            int vacancyId = Integer.parseInt(request.getParameter("id"));
+            int userId = ((User) session.getAttribute("user")).getUserId();
             List<Proposal> proposalList;
             List<Interview> previewList;
             List<Interview> techList;
             try {
-                if(AddProposalLogic.checkProposal(vacancyId,userId)){
-                    AddProposalLogic.addProposal(vacancyId,userId);
-                }else{
-                    request.setAttribute("errorAddProposal",rb.getMessage("message.errorAddProposal"));
+                if (AddProposalLogic.checkProposal(vacancyId, userId)) {
+                    AddProposalLogic.addProposal(vacancyId, userId);
+                } else {
+                    request.setAttribute("errorAddProposal", rb.getMessage("message.errorAddProposal"));
                 }
-                previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV", (Locale) session.getAttribute("locale"));
-                techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));
-                proposalList = UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
+                previewList = UserProfileLogic.getFutureInterview(((User) session.getAttribute("user")).getUserId(), "PREV", (Locale) session.getAttribute("locale"));
+                techList = UserProfileLogic.getFutureInterview(((User) session.getAttribute("user")).getUserId(), "TECH", (Locale) session.getAttribute("locale"));
+                proposalList = UserProfileLogic.getProposals(((User) session.getAttribute("user")).getUserId());
             } catch (LogicException e) {
-                logger.log(Level.INFO,"Error add proposal");
+                logger.log(Level.INFO, "Error add proposal");
                 return PageConstant.ERROR_PAGE;
             }
-            request.setAttribute("proposalList",proposalList);
-            request.setAttribute("user",session.getAttribute("user"));
-            request.setAttribute("previewList",previewList);
-            request.setAttribute("techList",techList);
-            request.setAttribute("lang",session.getAttribute("locale"));
+            request.setAttribute("proposalList", proposalList);
+            request.setAttribute("user", session.getAttribute("user"));
+            request.setAttribute("previewList", previewList);
+            request.setAttribute("techList", techList);
+            request.setAttribute("lang", session.getAttribute("locale"));
             return PageConstant.USER_PROFILE_PAGE;
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

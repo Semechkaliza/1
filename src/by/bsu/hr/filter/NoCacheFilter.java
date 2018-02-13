@@ -5,6 +5,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Filter which stop all caching
+ */
 @WebFilter(urlPatterns = {"/*"})
 public class NoCacheFilter implements Filter {
 

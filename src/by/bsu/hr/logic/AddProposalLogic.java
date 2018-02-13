@@ -9,30 +9,32 @@ import by.bsu.hr.dao.InterviewDAO;
 public class AddProposalLogic {
     /**
      * Method to add proposal
+     *
      * @param vacancyId
      * @param userId
      * @throws LogicException
      */
-    public static void addProposal(int vacancyId,int userId) throws LogicException {
+    public static void addProposal(int vacancyId, int userId) throws LogicException {
         try {
             InterviewDAO.addProposal(vacancyId, userId);
         } catch (DAOException e) {
-            throw new LogicException("Error add proposal",e);
+            throw new LogicException("Error add proposal", e);
         }
     }
 
     /**
      * Check, if user has already add proposal for this vacancy
+     *
      * @param vacancyId
      * @param userId
      * @return boolean
      * @throws LogicException
      */
-    public static boolean checkProposal(int vacancyId,int userId) throws LogicException {
+    public static boolean checkProposal(int vacancyId, int userId) throws LogicException {
         try {
-            return InterviewDAO.checkProposal(vacancyId,userId);
+            return InterviewDAO.checkProposal(vacancyId, userId);
         } catch (DAOException e) {
-            throw new LogicException("Error check proposal",e);
+            throw new LogicException("Error check proposal", e);
         }
     }
 }

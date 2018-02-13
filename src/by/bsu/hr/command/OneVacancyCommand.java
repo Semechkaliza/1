@@ -14,25 +14,26 @@ import java.util.Locale;
  * Command to go to page with full info of one vacancy
  */
 public class OneVacancyCommand implements ActionCommand {
-    private static Logger logger=Logger.getLogger(OneVacancyCommand.class);
+    private static Logger logger = Logger.getLogger(OneVacancyCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession();
-        if(session.getAttribute("user")!=null){
-            int id= Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") != null) {
+            int id = Integer.parseInt(request.getParameter("id"));
             Vacancy vac;
             try {
                 vac = OneVacancyLogic.getVacancy(id);
             } catch (LogicException e) {
-                logger.log(Level.INFO,"Error find vacancy");
+                logger.log(Level.INFO, "Error find vacancy");
                 return PageConstant.ERROR_PAGE;
             }
-            request.setAttribute("lang",session.getAttribute("locale"));
+            request.setAttribute("lang", session.getAttribute("locale"));
             request.setAttribute("oneVacancy", vac);
             return PageConstant.ONE_VACANCY_PAGE;
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 }

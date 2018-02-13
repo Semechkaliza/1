@@ -15,7 +15,7 @@ public class CloseVacancyLogic {
         try {
             VacancyDAO.closeVacancy(vacancyId);
         } catch (DAOException e) {
-            throw new LogicException("Error close vacancy",e);
+            throw new LogicException("Error close vacancy", e);
         }
     }
 }

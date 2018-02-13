@@ -16,10 +16,10 @@ public class AddInterviewResultLogic {
      * @throws LogicException
      */
     public static void addResult(int userId, int vacancyId, String type, int mark, String feedback) throws LogicException {
-            try {
-                InterviewDAO.addIntrviewResult(userId,vacancyId,type,mark,feedback);
-            } catch (DAOException e) {
-                throw new LogicException("Error add interview result",e);
-            }
+        try {
+            InterviewDAO.addIntrviewResult(userId, vacancyId, type, mark, feedback);
+        } catch (DAOException e) {
+            throw new LogicException("Error add interview result", e);
+        }
     }
 }

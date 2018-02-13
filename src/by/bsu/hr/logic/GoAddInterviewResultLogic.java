@@ -17,9 +17,9 @@ public class GoAddInterviewResultLogic {
      */
     public static Interview findInterviewInfo(int userId, int vacancyId, String type) throws LogicException {
         try {
-            return InterviewDAO.findInfoToFinishInterview(userId,vacancyId,type);
+            return InterviewDAO.findInfoToFinishInterview(userId, vacancyId, type);
         } catch (DAOException e) {
-            throw new LogicException("Error find info",e);
+            throw new LogicException("Error find info", e);
         }
     }
 }

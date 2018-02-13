@@ -18,7 +18,7 @@ public class HRProposalsLogic {
         try {
             return InterviewDAO.findHRProposals();
         } catch (DAOException e) {
-            throw new LogicException("Error find proposals",e);
+            throw new LogicException("Error find proposals", e);
         }
     }
 }

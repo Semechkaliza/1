@@ -9,6 +9,7 @@ import by.bsu.hr.dao.UserDAO;
 public class AddAdminLogic {
     /**
      * Add new admin
+     *
      * @param login
      * @throws LogicException
      */
@@ -16,21 +17,22 @@ public class AddAdminLogic {
         try {
             UserDAO.addAdmin(login);
         } catch (DAOException e) {
-            throw new LogicException("Error add admin",e);
+            throw new LogicException("Error add admin", e);
         }
     }
 
     /**
      * Check, if there is active user with such login
+     *
      * @param login
      * @return boolean
      * @throws LogicException
      */
     public static boolean checkLogin(String login) throws LogicException {
         try {
-           return !UserDAO.checkUser(login);
+            return !UserDAO.checkUser(login);
         } catch (DAOException e) {
-            throw new LogicException("Error check user",e);
+            throw new LogicException("Error check user", e);
         }
     }
 }

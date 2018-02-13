@@ -13,7 +13,7 @@ public class GoChangeInfoCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if(session.getAttribute("user")!=null){
+        if (session.getAttribute("user") != null) {
             User user = (User) session.getAttribute("user");
             request.setAttribute("lang", session.getAttribute("locale"));
             if (user.getRole().equalsIgnoreCase("admin")) {
@@ -21,10 +21,10 @@ public class GoChangeInfoCommand implements ActionCommand {
             } else {
                 return PageConstant.CHANGE_INFO_PAGE;
             }
-        }else{
+        } else {
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.LOGIN_PAGE;
         }
-        }
+    }
 
 }

@@ -28,6 +28,7 @@ public class User {
                 ", active=" + active +
                 '}';
     }
+
     public int getUserId() {
         return userId;
     }
