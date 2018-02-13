@@ -19,6 +19,9 @@
 <body>
 <header>
     <form method="POST" action="controller">
+        <div class="logo">
+            <h3>HR-system</h3>
+        </div>
         <input type="hidden" name="command" value="go_winners" />
         <label>
             <input type="submit" value="<fmt:message key="winners"/>"/>
@@ -77,7 +80,7 @@
     </c:forEach>
 </table>
 <footer>
-    <ex:Info/>
+    <h4><ex:Info/></h4>
 </footer>
 </body>
 </html>

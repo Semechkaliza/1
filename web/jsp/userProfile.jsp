@@ -20,6 +20,9 @@
 <body>
 <header>
     <form method="POST" action="controller">
+        <div class="logo">
+            <h3>HR-system</h3>
+        </div>
         <input type="hidden" name="command" value="result" />
         <label>
             <input type="submit" value="<fmt:message key="result"/>"/>
@@ -136,7 +139,7 @@
 </main>
 <hr/>
 <footer>
-    <ex:Info/>
+    <h4><ex:Info/></h4>
 </footer>
 </body>
 </html>

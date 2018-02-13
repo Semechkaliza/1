@@ -22,15 +22,21 @@ public class DeleteUserCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(DeleteUserCommand.class);
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession(false);
-        try {
-            DeleteUserLogic.deleteUser(((User)session.getAttribute("user")).getUserId());
-        } catch (LogicException e) {
-            logger.log(Level.INFO,"Error delete user");
-            return PageConstant.ERROR_PAGE;
+        HttpSession session=request.getSession();
+        if(session.getAttribute("user")!=null){
+            try {
+                DeleteUserLogic.deleteUser(((User)session.getAttribute("user")).getUserId());
+            } catch (LogicException e) {
+                logger.log(Level.INFO,"Error delete user");
+                return PageConstant.ERROR_PAGE;
+            }
+            request.setAttribute("lang",Locale.getDefault());
+            session.invalidate();
+            return PageConstant.LOGIN_PAGE;
+        }else{
+            request.setAttribute("lang", Locale.getDefault());
+            return PageConstant.LOGIN_PAGE;
         }
-        request.setAttribute("lang",Locale.getDefault());
-        session.invalidate();
-        return PageConstant.LOGIN_PAGE;
-    }
+        }
+
 }

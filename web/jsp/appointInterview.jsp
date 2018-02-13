@@ -17,6 +17,9 @@
 <body>
 <header>
     <form method="POST" action="controller">
+        <div class="logo">
+            <h3>HR-system</h3>
+        </div>
         <input type="hidden" name="command" value="go_winners" />
         <label>
             <input type="submit" value="<fmt:message key="winners"/>"/>
@@ -60,22 +63,23 @@
         <td>${requestScope.info.company}</td>
     </tr>
     </table>
-    <form method="POST" action="controller">
+    <form method="POST" action="controller" class="addIntForm">
         <input type="hidden" name="command" value="add_interview" />
         <br/><fmt:message key="date"/>:<input type="text" name="date" value="" placeholder="<fmt:message key="dateFormat"/>"/><br/>
         <br/><fmt:message key="time"/>:<input type="text" name="time" value="" placeholder="<fmt:message key="timeFormat"/>"/><br/>
         <br/><fmt:message key="place"/>:<input type="text" name="place" value=""/><br/>
-        ${requestScope.errorFormateMessage}
         <input type="hidden" name="userId" value="${requestScope.info.userId}" />
         <input type="hidden" name="vacancyId" value="${requestScope.info.vacancyId}" />
         <input type="hidden" name="type" value="${requestScope.info.type}" />
         <input type="submit" class="button btnProfile" value="<fmt:message key="appoint"/>"/>
-        ${requestScope.errorParse}
-    </form>
+        </form>
+    <br>
+    ${requestScope.errorParse}
+    <br/>
 </main>
 
 <footer>
-    <ex:Info/>
+    <h4><ex:Info/></h4>
 </footer>
 </body>
 </html>

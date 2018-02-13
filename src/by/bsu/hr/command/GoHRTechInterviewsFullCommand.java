@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Command to go to page with TI, where admin decides future way of candidate.
@@ -17,16 +18,22 @@ public class GoHRTechInterviewsFullCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(GoHRTechInterviewsFullCommand.class);
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession(false);
-        List<Interview> resList;
-        try {
-            resList = HRInterviewLogic.findFullInterviews("TECH");
-        } catch (LogicException e) {
-            logger.log(Level.INFO,"Error find technical interviews without results");
-           return PageConstant.ERROR_PAGE;
+        HttpSession session=request.getSession();
+        if(session.getAttribute("user")!=null){
+            List<Interview> resList;
+            try {
+                resList = HRInterviewLogic.findFullInterviews("TECH");
+            } catch (LogicException e) {
+                logger.log(Level.INFO,"Error find technical interviews without results");
+                return PageConstant.ERROR_PAGE;
+            }
+            request.setAttribute("prevList",resList);
+            request.setAttribute("lang",session.getAttribute("locale"));
+            return PageConstant.HR_TECH_INTERVIEW_FULL_PAGE;
+        }else{
+            request.setAttribute("lang", Locale.getDefault());
+            return PageConstant.LOGIN_PAGE;
         }
-        request.setAttribute("prevList",resList);
-        request.setAttribute("lang",session.getAttribute("locale"));
-        return PageConstant.HR_TECH_INTERVIEW_FULL_PAGE;
-    }
+        }
+
 }

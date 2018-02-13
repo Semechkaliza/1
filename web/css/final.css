@@ -40,7 +40,7 @@ body form label input{
 	cursor: pointer;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 10px;
-	border: 1px solid dodgerblue;
+	border: 1px solid #39c2d7;
 	border-radius:3px;
 
 	background-color: #f1f0f0;
@@ -79,6 +79,9 @@ body form label input{
 	outline: none;
 }
 .logo{
+	margin-right:60%;
+}
+.logoLoc{
 	margin-right:70%;
 }
 h4{
@@ -92,7 +95,7 @@ footer{
 	height: 30px;
 	text-align: center;
 	background: #39c2d7;
-	color: white;
+	color: black;
 }
 .backTo{
 	margin-top: 15px;
@@ -118,7 +121,7 @@ footer{
 .btnProfile{
 	margin-left: 0;
 	width: 150px;
-	border: 2px solid dodgerblue;
+	border: 1px solid #39c2d7;
 }
 main{
 	margin-bottom: 35px;

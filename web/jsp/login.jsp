@@ -20,7 +20,7 @@
 
 <form method="POST" action="controller">
     <header>
-        <div class="logo">
+        <div class="logoLoc">
             <h3>HR-system</h3>
         </div>
          <input type="hidden" value="locale"/>

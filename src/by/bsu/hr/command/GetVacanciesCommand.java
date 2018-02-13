@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Command to get the list of all active vacancies
@@ -19,49 +20,55 @@ public class GetVacanciesCommand implements ActionCommand {
     static final int PAGE_SIZE=10;
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
-        List<Vacancy> resList;
-        int fromId;
-        int page= Integer.parseInt(request.getParameter("page"));
-        String direction=request.getParameter("direction");
-        switch (direction){
-            case "next":{
-                page++;
-                break;
-            }
-            case "prev":{
-                if(page!=1){
-                    page--;
+        HttpSession session=request.getSession();
+        if(session.getAttribute("user")!=null){
+            LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
+            List<Vacancy> resList;
+            int fromId;
+            int page= Integer.parseInt(request.getParameter("page"));
+            String direction=request.getParameter("direction");
+            switch (direction){
+                case "next":{
+                    page++;
+                    break;
+                }
+                case "prev":{
+                    if(page!=1){
+                        page--;
+                    }
                 }
             }
-        }
-        try {
-            fromId=(page-1)*PAGE_SIZE;
-            resList = GetVacanciesLogic.getAllVacancies(fromId,PAGE_SIZE);
-            if(resList.isEmpty()){
-                if(page!=1){
-                    page--;
-                    fromId=(page-1)*PAGE_SIZE;
-                    resList=GetVacanciesLogic.getAllVacancies(fromId,PAGE_SIZE);
-                    request.setAttribute("vacanciesList", resList);
+            try {
+                fromId=(page-1)*PAGE_SIZE;
+                resList = GetVacanciesLogic.getAllVacancies(fromId,PAGE_SIZE);
+                if(resList.isEmpty()){
+                    if(page!=1){
+                        page--;
+                        fromId=(page-1)*PAGE_SIZE;
+                        resList=GetVacanciesLogic.getAllVacancies(fromId,PAGE_SIZE);
+                        request.setAttribute("vacanciesList", resList);
+                    }else{
+                        request.setAttribute("emptyVacanciesList",rb.getMessage("message.emptyVacanciesList"));
+                    }
                 }else{
-                    request.setAttribute("emptyVacanciesList",rb.getMessage("message.emptyVacanciesList"));
+                    request.setAttribute("vacanciesList", resList);
                 }
-            }else{
-                request.setAttribute("vacanciesList", resList);
+            } catch (LogicException e) {
+                logger.log(Level.INFO,"Error get vacancies");
+                return PageConstant.ERROR_PAGE;
             }
-        } catch (LogicException e) {
-            logger.log(Level.INFO,"Error get vacancies");
-           return PageConstant.ERROR_PAGE;
+            request.setAttribute("page",page);
+            User user= (User) session.getAttribute("user");
+            request.setAttribute("lang",session.getAttribute("locale"));
+            if(user.getRole().equalsIgnoreCase("ADMIN")){
+                return PageConstant.HR_VACANCY_PAGE;
+            }else {
+                return PageConstant.VACANCY_PAGE;
+            }
+        }else{
+            request.setAttribute("lang", Locale.getDefault());
+            return PageConstant.LOGIN_PAGE;
         }
-        request.setAttribute("page",page);
-        User user= (User) session.getAttribute("user");
-        request.setAttribute("lang",session.getAttribute("locale"));
-        if(user.getRole().equalsIgnoreCase("ADMIN")){
-            return PageConstant.HR_VACANCY_PAGE;
-        }else {
-            return PageConstant.VACANCY_PAGE;
         }
-    }
+
 }

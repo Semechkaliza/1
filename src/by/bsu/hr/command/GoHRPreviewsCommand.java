@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Command to go to page, where admin add previews results.
@@ -18,16 +19,22 @@ public class GoHRPreviewsCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        List<Interview> resList;
-        try {
-            resList = HRInterviewLogic.findInterviews("PREV");
-        } catch (LogicException e) {
-            logger.log(Level.INFO, "Error find previews");
-            return PageConstant.ERROR_PAGE;
+        HttpSession session = request.getSession();
+        if(session.getAttribute("user")!=null){
+            List<Interview> resList;
+            try {
+                resList = HRInterviewLogic.findInterviews("PREV");
+            } catch (LogicException e) {
+                logger.log(Level.INFO, "Error find previews");
+                return PageConstant.ERROR_PAGE;
+            }
+            request.setAttribute("prevList", resList);
+            request.setAttribute("lang", session.getAttribute("locale"));
+            return PageConstant.HR_PREVIEWS_PAGE;
+        }else{
+            request.setAttribute("lang", Locale.getDefault());
+            return PageConstant.LOGIN_PAGE;
         }
-        request.setAttribute("prevList", resList);
-        request.setAttribute("lang", session.getAttribute("locale"));
-        return PageConstant.HR_PREVIEWS_PAGE;
-    }
+        }
+
 }

@@ -24,7 +24,6 @@ public class RegistrationCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        System.out.println("0");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String name = request.getParameter("name");
@@ -44,13 +43,10 @@ public class RegistrationCommand implements ActionCommand {
                 break;
         }
         if (Validator.registrationValid(login, password, name, sname, phone, email)) {
-            System.out.println("1");
             if (Validator.registrationInputValid(login, password, email, phone)) {
-                System.out.println("2");
                 User user;
                 try {
                     user = RegistrationLogic.registration(login, password, name, sname, phone, email);
-                    System.out.println("3");
                 } catch (LogicException e) {
                     logger.log(Level.INFO, "Error registration");
                     return PageConstant.ERROR_PAGE;
@@ -70,7 +66,6 @@ public class RegistrationCommand implements ActionCommand {
                             rb = EN;
                             break;
                     }
-                    System.out.println("4");
                     session.setAttribute("locale", curr);
                     session.setAttribute("rb", rb);
                     session.setAttribute("user", user);
@@ -78,20 +73,17 @@ public class RegistrationCommand implements ActionCommand {
                     request.setAttribute("lang", session.getAttribute("locale"));
                     return PageConstant.USER_PROFILE_PAGE;
                 } else {
-                    System.out.println("5");
                     request.setAttribute("errorLoginPassMessage", rb.getMessage("message.RepetitiveUser"));
                     request.setAttribute("lang", Locale.getDefault());
                     return PageConstant.REGISTRATION_PAGE;
                 }
 
             }else{
-                System.out.println("6");
                 request.setAttribute("errorLoginPassMessage", rb.getMessage("message.NotValidInfo"));
                 request.setAttribute("lang", Locale.getDefault());
                 return PageConstant.REGISTRATION_PAGE;
             }
         } else {
-            System.out.println("7");
             request.setAttribute("errorLoginPassMessage", rb.getMessage("message.NotAllInfo"));
             request.setAttribute("lang", Locale.getDefault());
             return PageConstant.REGISTRATION_PAGE;

@@ -23,25 +23,30 @@ public class CancelProposalCommand implements ActionCommand{
     private static Logger logger=Logger.getLogger(CancelProposalCommand.class);
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession(false);
-        LocaleResourceBundle.ResourceBundleEnum rb= (LocaleResourceBundle.ResourceBundleEnum) session.getAttribute("rb");
-        request.setAttribute("user",session.getAttribute("user"));
-        List<Proposal> proposalList;
-        List<Interview> previewList;
-        List<Interview> techList;
-        try {
-            CancelProposalLogic.cancelProposal(Integer.parseInt(request.getParameter("id")));
-            previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV", (Locale) session.getAttribute("locale"));
-            techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));
-            proposalList = UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
-        } catch (LogicException e) {
-            logger.log(Level.INFO,"Error cancel proposal");
-            return PageConstant.ERROR_PAGE;
+        HttpSession session=request.getSession();
+        if(session.getAttribute("user")!=null){
+            request.setAttribute("user",session.getAttribute("user"));
+            List<Proposal> proposalList;
+            List<Interview> previewList;
+            List<Interview> techList;
+            try {
+                CancelProposalLogic.cancelProposal(Integer.parseInt(request.getParameter("id")));
+                previewList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"PREV", (Locale) session.getAttribute("locale"));
+                techList= UserProfileLogic.getFutureInterview(((User)session.getAttribute("user")).getUserId(),"TECH",(Locale)session.getAttribute("locale"));
+                proposalList = UserProfileLogic.getProposals(((User)session.getAttribute("user")).getUserId());
+            } catch (LogicException e) {
+                logger.log(Level.INFO,"Error cancel proposal");
+                return PageConstant.ERROR_PAGE;
+            }
+            request.setAttribute("proposalList",proposalList);
+            request.setAttribute("previewList",previewList);
+            request.setAttribute("techList",techList);
+            request.setAttribute("lang",session.getAttribute("locale"));
+            return USER_PROFILE_PAGE;
+        }else{
+            request.setAttribute("lang", Locale.getDefault());
+            return PageConstant.LOGIN_PAGE;
         }
-        request.setAttribute("proposalList",proposalList);
-        request.setAttribute("previewList",previewList);
-        request.setAttribute("techList",techList);
-        request.setAttribute("lang",session.getAttribute("locale"));
-        return USER_PROFILE_PAGE;
-    }
+        }
+
 }

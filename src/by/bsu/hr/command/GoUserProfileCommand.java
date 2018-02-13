@@ -23,7 +23,7 @@ public class GoUserProfileCommand implements ActionCommand {
     private static Logger logger=Logger.getLogger(GoUserProfileCommand.class);
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session=request.getSession(true);
+        HttpSession session=request.getSession();
         if(session.getAttribute("user")!=null){
             request.setAttribute("user",session.getAttribute("user"));
             List<Proposal> proposalList;

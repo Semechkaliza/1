@@ -20,6 +20,9 @@
 <body>
 <header>
     <form method="POST" action="controller">
+        <div class="logo">
+            <h3>HR-system</h3>
+        </div>
         <input type="hidden" name="command" value="go_winners" />
         <label>
             <input type="submit" value="<fmt:message key="winners"/>"/>
@@ -71,17 +74,18 @@
     </tr>
     </table><form method="POST" action="controller">
     <input type="hidden" name="command" value="add_interview_result" />
-    <br/><fmt:message key="mark"/>:<input type="number" name="mark" min="-1" max="10"/><br/>
+    <br/><fmt:message key="mark"/>:<input type="number" name="mark" min="0" max="10"/><br/>
     <br/><fmt:message key="feedback"/>:<textarea name="feedback" value="" placeholder="feedback"></textarea><br/>
-    ${requestScope.errorMark}
     <input type="hidden" name="userId" value="${requestScope.info.userId}" />
     <input type="hidden" name="vacancyId" value="${requestScope.info.vacancyId}" />
     <input type="hidden" name="type" value="${requestScope.info.type}" />
     <input type="submit" class="button btnProfile" value="<fmt:message key="apply"/>"/>
 </form>
+    <br/>
+    ${requestScope.errorMark}
 </main>
 <footer>
-    <ex:Info/>
+    <h4><ex:Info/></h4>
 </footer>
 </body>
 </html>

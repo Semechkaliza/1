@@ -20,6 +20,9 @@
 <body>
 <form method="POST" action="controller">
         <header>
+            <div class="logoLoc">
+                <h3>HR-system</h3>
+            </div>
             <input type="hidden" value="locale"/>
             <label class="lng">
                 <input name="locale" type="radio" value="ru">
@@ -87,7 +90,7 @@
 </form>
 <script type="text/javascript"><%@include file="../js/Script.js" %></script>
 <footer>
-    <ex:Info/>
+    <h4><ex:Info/></h4>
 </footer>
 </body>
 </html>
