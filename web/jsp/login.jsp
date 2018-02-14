@@ -41,14 +41,10 @@
         <label>
             <fmt:message key="login"/>:<br/>
             <input type="text" id="Login" class="formInput" name="login" value=""/><br/>
-            <span class="trueLogin"><fmt:message key="yes"/></span>
-            <span class="falseLogin"><fmt:message key="no"/></span>
         </label>
         <label>
             <fmt:message key="password"/>:<br/>
             <input type="password" id="Password" class="formInput" name="password" value=""/><br/>
-            <span class="truePassword"><fmt:message key="yes"/></span>
-            <span class="falsePassword"><fmt:message key="no"/></span>
         </label>
         <span class="errorMes">${errorLoginPassMessage}</span>
         <span class="errorMes">${wrongAction}</span>

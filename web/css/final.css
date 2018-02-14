@@ -214,7 +214,10 @@ td {
     margin-left: 0;
     width: 250px;
 }
-
+.changeError{
+    margin-left: 43%;
+    margin-top: 1%;
+}
 .inputLogin {
     border: 1px solid transparent;
     border-bottom: 1px solid darkgrey;

@@ -94,11 +94,33 @@ public class Validator {
         Pattern patternLogin = Pattern.compile("^[A-Za-z][A-Za-z0-9_]{4}[A-Za-z0-9_]{0,}$");
         Pattern patternPass = Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}");
         Pattern patternEmail = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
-        Pattern patternPhone = Pattern.compile("^((9|\\+3)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$");
+        Pattern patternPhone = Pattern.compile("^(\\+375|80)(29|25|44|33)(\\d{3})(\\d{2})(\\d{2})$");
         Matcher matcherLogin = patternLogin.matcher(login);
         Matcher matcherPass = patternPass.matcher(password);
         Matcher matcherEmail = patternEmail.matcher(email);
         Matcher matcherPhone = patternPhone.matcher(phone);
         return matcherEmail.matches() && matcherLogin.matches() && matcherPass.matches() && matcherPhone.matches();
+    }
+    /**
+     * Check correct input phone
+     *
+     * @param phone
+     * @return boolean
+     */
+    public static boolean validPhone(String phone) {
+        Pattern patternPhone = Pattern.compile("^(\\+375|80)(29|25|44|33)(\\d{3})(\\d{2})(\\d{2})$");
+        Matcher matcherPhone = patternPhone.matcher(phone);
+        return matcherPhone.matches();
+    }
+    /**
+     * Check correct input email
+     *
+     * @param email
+     * @return boolean
+     */
+    public static boolean validEmail(String email) {
+        Pattern patternEmail = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+        Matcher matcherEmail = patternEmail.matcher(email);
+        return matcherEmail.matches();
     }
 }

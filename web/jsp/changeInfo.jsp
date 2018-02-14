@@ -70,6 +70,9 @@
         <input type="submit" class="button" value="<fmt:message key="apply"/>"/>
     </form>
 </section>
+<div class="changeError">
+${requestScope.errorMessage}
+</div>
 <footer>
     <h4><ex:Info/></h4>
 </footer>
