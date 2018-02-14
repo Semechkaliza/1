@@ -2,6 +2,9 @@ package by.bsu.hr.controller;
 
 import by.bsu.hr.command.ActionCommand;
 import by.bsu.hr.command.ActionFactory;
+import by.bsu.hr.command.OneVacancyCommand;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +22,7 @@ import static by.bsu.hr.connection.ConnectionPool.dispose;
  */
 @WebServlet("/")
 public class Controller extends HttpServlet {
+    private static Logger logger = Logger.getLogger(Controller.class);
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -28,7 +32,9 @@ public class Controller extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String page = null;
+        logger.log(Level.ERROR, "Error find vacancy");
+        logger.log(Level.DEBUG, "Error find vacancy");
+        String page;
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
         page = command.execute(request);
