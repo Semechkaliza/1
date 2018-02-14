@@ -16,7 +16,7 @@ import java.util.Locale;
  * Command to get the list of all active vacancies
  */
 public class GetVacanciesCommand implements ActionCommand {
-    static final int PAGE_SIZE = 10;
+    static final int PAGE_SIZE = 5;
     private static Logger logger = Logger.getLogger(CancelProposalCommand.class);
 
     @Override

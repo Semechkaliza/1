@@ -19,10 +19,16 @@
 </head>
 <body>
 <header>
+    <div class="logo">
+        <h3>HR-system</h3>
+    </div>
+    <div>
+        <span>${requestScope.user.name}</span>
+    </div>
+    <div>
+        <span>${requestScope.user.sname}</span>
+    </div>
     <form method="POST" action="controller">
-        <div class="logo">
-            <h3>HR-system</h3>
-        </div>
         <input type="hidden" name="command" value="result"/>
         <label>
             <input type="submit" value="<fmt:message key="result"/>"/>
@@ -52,22 +58,6 @@
 <h3 class="Registr"><fmt:message key="myProfile"/></h3>
 <hr/>
 <main>
-    <table border="1">
-        <tr>
-            <td><fmt:message key="login"/></td>
-            <td><fmt:message key="name"/></td>
-            <td><fmt:message key="sname"/></td>
-        </tr>
-        <tr>
-            <td>${requestScope.user.login}</td>
-            <td>${requestScope.user.name}</td>
-            <td>${requestScope.user.sname}</td>
-        </tr>
-    </table>
-    <form method="POST" action="controller">
-        <input type="hidden" name="command" value="go_change_info"/>
-        <input type="submit" class="button btnProfile" value="<fmt:message key="changeInfo"/>"/>
-    </form>
     <h3><fmt:message key="myProposal"/></h3>
     <table border="1">
         <tr>
@@ -138,6 +128,10 @@
         </tr>
         </c:forEach>
     </table>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="go_change_info"/>
+        <input type="submit" class="button btnProfile" value="<fmt:message key="changeInfo"/>"/>
+    </form>
     <form method="POST" action="controller">
         <input type="hidden" name="command" value="delete_user"/>
         <input type="submit" class="button btnProfile" value="<fmt:message key="deleteProfile"/>"/>

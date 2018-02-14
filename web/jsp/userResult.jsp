@@ -17,10 +17,10 @@
 </head>
 <body>
 <header>
+    <div class="logo">
+        <h3>HR-system</h3>
+    </div>
     <form method="POST" action="controller">
-        <div class="logo">
-            <h3>HR-system</h3>
-        </div>
         <input type="hidden" name="command" value="result"/>
         <label>
             <input type="submit" value="<fmt:message key="result"/>"/>
@@ -47,7 +47,7 @@
         </label>
     </form>
 </header>
-<h3 class="Registr"><fmt:message key="PrevResults"/></h3>
+<h3 class="Result"><fmt:message key="PrevResults"/></h3>
 <hr/>
 <table border="1">
     <tr>
@@ -73,7 +73,7 @@
 
     </c:forEach>
 </table>
-<h3><fmt:message key="TIResults"/></h3>
+<h3 class="Result"><fmt:message key="TIResults"/></h3>
 <hr/>
 <table border="1">
     <tr>

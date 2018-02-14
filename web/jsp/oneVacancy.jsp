@@ -19,10 +19,10 @@
 </head>
 <body>
 <header>
+    <div class="logo">
+        <h3>HR-system</h3>
+    </div>
     <form method="POST" action="controller">
-        <div class="logo">
-            <h3>HR-system</h3>
-        </div>
         <input type="hidden" name="command" value="result"/>
         <label>
             <input type="submit" value="<fmt:message key="result"/>"/>
@@ -66,7 +66,7 @@
         <td>
             <form method="POST" action="controller">
                 <input type="hidden" name="command" value="add_proposal"/>
-                <input type="hidden" name="id" value=${requestScope.oneVacancy.vacancyId}/>
+                <input type="hidden" name="id" value="${requestScope.oneVacancy.vacancyId}"/>
                 <input type="submit" class="button btnProfile" value="<fmt:message key="addProposal"/>"/>
             </form>
         </td>

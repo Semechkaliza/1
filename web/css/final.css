@@ -16,6 +16,10 @@ header {
     align-items: center;
 }
 
+header div {
+    margin: 5px;
+}
+
 header label {
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
@@ -87,7 +91,11 @@ body form label input {
 }
 
 .logo {
-    margin-right: 60%;
+    margin-right: 40%;
+}
+
+.Result {
+    margin-left: 34%;
 }
 
 .logoLoc {
@@ -130,13 +138,12 @@ footer {
 .btnReg {
     width: 150px;
     border-radius: 9px;
-    margin: 0 auto;
-    margin-top: 15px;
+    margin: 15px auto 0;
 }
 
 .btnProfile {
     margin-left: 0;
-    width: 150px;
+    width: 100%;
     border: 1px solid #39c2d7;
 }
 
@@ -201,7 +208,6 @@ td {
 
 .btnLeftRight {
     display: flex;
-    margin-left: 37%;
 }
 
 .btnRoot {
